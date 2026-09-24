@@ -708,3 +708,5 @@ footer a.sponsor{display:inline-flex;align-items:center;gap:6px;text-decoration:
 footer a.sponsor svg{color:#db61a2}
 footer a.sponsor:hover{background:rgba(219,97,162,.2);transform:translateY(-1px);color:var(--text)}
 footer{padding:13px 0 16px}
+.sup a{display:inline-flex;border-radius:7px;transition:transform .15s ease,box-shadow .15s ease}
+.sup a:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px var(--accent)}

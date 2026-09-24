@@ -77,14 +77,14 @@ These lessons and diagrams are free. If they helped you, you can support the wor
 ## Sponsorship
 
 <p align="left">
-  <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" width="120">
+  <a href="https://www.jetbrains.com/"><img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" width="120" alt="JetBrains"></a>
 </p>
 
 This project is supported by JetBrains. I use JetBrains tools every day for CUDA development, experiments and documentation.
 
 <p align="left">
-  <img src="manning.png" width="140">
-  <img src="manning.jpeg" width="98">
+  <a href="https://www.manning.com/"><img src="manning.png" width="140" alt="Manning Publications"></a>
+  <a href="https://www.manning.com/"><img src="manning.jpeg" width="98" alt="Manning Publications"></a>
 </p>
 
 This project is also supported by Manning Publications. Their technical books help me go deeper into CUDA, GPU systems and parallel computing. Special thanks to Manning for providing *CUDA for Deep Learning* by Elliot Arledge.
