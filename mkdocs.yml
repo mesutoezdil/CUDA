@@ -1,7 +1,7 @@
 site_name: Systematic CUDA Learning
 site_description: Learning CUDA properly, from fundamentals to real-world GPU systems.
-repo_url: https://github.com/mesutoezdil/Systematic-CUDA-Learning
-site_url: https://mesutoezdil.github.io/Systematic-CUDA-Learning/
+repo_url: https://github.com/mesutoezdil/cuda
+site_url: https://mesutoezdil.github.io/cuda/
 docs_dir: docs
 site_dir: public
 
