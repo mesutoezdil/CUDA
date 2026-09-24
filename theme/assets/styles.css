@@ -616,3 +616,22 @@ html[data-mode="light"] .term .dg-grid::before{background:var(--panel)}
 .callout-t::before{content:"i";display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;background:var(--cool);color:var(--bg);font-size:.66rem;font-weight:700;letter-spacing:0}
 .callout.tip .callout-t{color:var(--accent)}.callout.tip .callout-t::before{content:"✓";background:var(--accent)}
 .callout.warning .callout-t{color:#e3b341}.callout.warning .callout-t::before{content:"!";background:#e3b341}
+
+/* Narrow screens: long inline code and links wrap, lane diagrams shrink instead of overflowing. */
+.prose :not(pre)>code,.prose a{overflow-wrap:anywhere}
+.dg-lanes i{flex:0 1 44px;min-width:0}
+@media (max-width:560px){.dg-lanes span{width:64px}.dg-lanes i{font-size:.5rem;height:24px}}
+.dg-lanes,.dg-check{grid-template-columns:minmax(0,1fr)}
+.dg-check li{grid-template-columns:34px minmax(0,1fr)}
+.prose p,.prose li{overflow-wrap:break-word}
+.prose code.nw{white-space:nowrap}
+nav .short{display:none}
+@media (max-width:700px){
+  .nav-sections{display:flex;gap:14px;justify-self:end}
+  nav .long,nav .gh{display:none}
+  nav .short{display:inline}
+  nav .wrap{gap:12px}
+  .facts li+li::before{display:none}
+  .facts{gap:4px 18px}
+}
+@media (max-width:560px){.dg-gantt div{grid-template-columns:48px repeat(14,minmax(0,1fr));gap:2px}.dg-gantt{overflow:visible}}

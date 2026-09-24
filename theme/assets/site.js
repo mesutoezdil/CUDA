@@ -48,6 +48,8 @@ document.querySelectorAll(".prose .language-text code").forEach(function(c){
   }).join("\n");
 });
 
+document.querySelectorAll(".prose :not(pre) > code").forEach(function(c){ if (c.textContent.length < 30) { c.classList.add("nw"); } });
+
 // GitHub alert syntax (> [!NOTE], > [!TIP], > [!WARNING]) becomes titled callouts.
 // Markdown merges back-to-back quotes, so each marked paragraph starts its own box.
 document.querySelectorAll(".prose blockquote").forEach(function(q){

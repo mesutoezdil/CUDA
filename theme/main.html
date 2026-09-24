@@ -21,11 +21,11 @@
     <a class="brand" href="{{ nav.homepage.url|url }}"><img src="{{ 'assets/logo.svg'|url }}" alt=""> {{ config.site_name }}</a>
     <div class="nav-sections">
       {% for sec in nav if sec.children %}
-      <a class="link{% if sec.active %} on{% endif %}" href="{{ sec.children[0].url|url }}">{{ sec.title }}</a>
+      <a class="link{% if sec.active %} on{% endif %}" href="{{ sec.children[0].url|url }}"><span class="long">{{ sec.title }}</span><span class="short">{{ sec.title.split(" ")[0] }}</span></a>
       {% endfor %}
     </div>
     <div class="nav-right">
-      <a class="link" href="{{ config.repo_url }}">GitHub ↗</a>
+      <a class="link gh" href="{{ config.repo_url }}">GitHub ↗</a>
       <button class="mode-btn" id="mode-toggle" type="button">light</button>
     </div>
   </div>
