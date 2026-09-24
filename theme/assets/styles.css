@@ -703,3 +703,8 @@ nav .wrap{height:62px}
   nav .gh{display:inline-grid}
 }
 @media (max-width:420px){.nav-sections a.link i{display:none}}
+footer a.sponsor{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--text);border:1px solid rgba(219,97,162,.5);
+  background:rgba(219,97,162,.1);border-radius:999px;padding:4px 12px;font-family:var(--mono);font-size:.8rem;transition:background .15s ease,transform .15s ease}
+footer a.sponsor svg{color:#db61a2}
+footer a.sponsor:hover{background:rgba(219,97,162,.2);transform:translateY(-1px);color:var(--text)}
+footer{padding:13px 0 16px}

@@ -1,6 +1,7 @@
 ![Supported by JetBrains](https://img.shields.io/badge/Supported%20by-JetBrains-000000?logo=jetbrains&logoColor=white)
 ![Supported by Manning Publications](https://img.shields.io/badge/Supported%20by-Manning%20Publications-8B0000)
 ![Pull Shark](https://img.shields.io/badge/Pull%20Shark-x2-0075ca)
+[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-db61a2?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/mesutoezdil)
 
 # CUDA, step by step
 
@@ -68,6 +69,10 @@ Inside a lesson you can use:
 
 - Diagram tags on their own line, for example `<cuda-launch blocks="2" threads="64" fn="test01"></cuda-launch>`. All tags are defined in `theme/assets/site.js` and `theme/assets/gpu.js`. GitHub does not show them, only the website does.
 - A `## Glossary` section at the end, as a list of `- term: definition` lines. The site turns it into term cards.
+
+## Support this project
+
+These lessons and diagrams are free. If they helped you, you can support the work on **[GitHub Sponsors](https://github.com/sponsors/mesutoezdil)**. Every sponsorship, even a small one, keeps new lessons coming.
 
 ## Sponsorship
 
