@@ -51,21 +51,6 @@
   </div>
 </section>
 
-{% for sec in nav if sec.children %}
-<section{% if loop.index is even %} class="band"{% endif %}>
-  <div class="wrap">
-    <p class="eyebrow"><b>Step {{ loop.index }}</b></p>
-    <h2>{{ sec.title }}</h2>
-    <p class="lede">{% if loop.first %}What a GPU is and how to set up a machine for CUDA.{% else %}Write, compile and run your first CUDA programs.{% endif %}</p>
-    <div class="lessons">
-      {% for p in sec.children %}
-      <a class="lesson" href="{{ p.url|url }}"><span class="num">{{ p.title[:2] }}</span><b>{{ p.title[3:] }}</b></a>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-{% endfor %}
-
 <section class="sponsors">
   <div class="wrap">
     <p class="eyebrow">Supported by</p>

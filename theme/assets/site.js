@@ -323,7 +323,7 @@ customElements.define("printf-order", class extends HTMLElement {
       setTimeout(function(){ e.target.classList.add("revealed"); }, Math.min((e.target.dataset.revealIndex || 0) * 45, 260));
     });
   }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
-  document.querySelectorAll("section:not(.hero) > .wrap > *, .lessons > *").forEach(function(el, i){
+  document.querySelectorAll("section:not(.hero) > .wrap > *").forEach(function(el, i){
     if (el.getBoundingClientRect().top < innerHeight) { return; }
     el.dataset.revealIndex = i % 8;
     el.classList.add("reveal");
