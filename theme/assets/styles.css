@@ -635,3 +635,6 @@ nav .short{display:none}
   .facts{gap:4px 18px}
 }
 @media (max-width:560px){.dg-gantt div{grid-template-columns:48px repeat(14,minmax(0,1fr));gap:2px}.dg-gantt{overflow:visible}}
+.hero h1{max-width:none;white-space:nowrap;font-size:clamp(1.3rem,5.4vw,4.2rem)}
+.hero .lede{max-width:none}
+.hero .cta{margin-bottom:32px}

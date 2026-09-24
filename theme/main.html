@@ -37,13 +37,10 @@
   <div class="cores" aria-hidden="true">{% for i in range(64) %}<i></i>{% endfor %}</div>
   <div class="wrap">
     <h1>Learn <span class="accent">CUDA</span> step by step</h1>
-    <p class="lede">First learn how a GPU works. Then write CUDA code. Short lessons in plain English, with pictures you can play with.</p>
+    <p class="lede">Learn how a GPU works, then write CUDA code with short plain-English lessons and pictures you can play with.</p>
     <div class="cta">
       <a class="btn primary" href="{{ nav.items[1].children[0].url|url }}">Start learning →</a>
     </div>
-    <ul class="facts">
-      {% for sec in nav if sec.children %}<li><b>{{ sec.children|length }}</b> {{ sec.title }} lessons</li>{% endfor %}
-    </ul>
     <div class="frame term">
       <div class="termbar"><i></i><i></i><i></i><span class="mono">try it · move the sliders</span></div>
       <div class="termbody"><cuda-launch blocks="2" threads="96" fn="printIDs"></cuda-launch></div>
