@@ -48,13 +48,15 @@ Volta introduces the second generation of NVLink. NVLink connects GPUs to each o
 
 Volta increases both the number of links and their speed. This makes multi-GPU systems much more efficient.
 
-In 2026, large AI systems based on Hopper and Blackwell depend on this idea even more. Volta was one of the first steps in that direction.
+> [!NOTE]
+> In 2026, large AI systems based on Hopper and Blackwell depend on this idea even more. Volta was one of the first steps in that direction.
 
 ## Transistor Count
 
 The transistor count shows how much hardware is inside a GPU. The V100 has around 21 billion transistors.
 
-Hopper reaches around 80 billion transistors. Blackwell goes further with more complex designs.
+> [!NOTE]
+> Hopper reaches around 80 billion transistors. Blackwell goes further with more complex designs.
 
 This growth is not only about size. It reflects new units, new memory systems and more advanced execution models.
 
@@ -75,4 +77,5 @@ Looking back from 2026, Volta is more than a strong GPU of its time. It is the p
 
 Reading the V100 white paper helps you understand why GPUs look the way they do today.
 
-An example: https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf
+> [!TIP]
+> An example: https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf

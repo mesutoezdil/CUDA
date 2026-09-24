@@ -29,7 +29,10 @@ Ampere brought more powerful and efficient Tensor Cores, higher memory bandwidth
 
 ### Hopper → CC 9.x
 
-Hopper was another major step. It introduced new execution models and pushed AI performance forward. Hopper needs CUDA toolkit 11.8 or higher. A lower version gives a compatibility error.
+Hopper was another major step. It introduced new execution models and pushed AI performance forward.
+
+> [!WARNING]
+> Hopper needs CUDA toolkit 11.8 or higher. A lower version gives a compatibility error.
 
 ### Blackwell → CC 10.0 (B200/GB200) and 12.0 (RTX PRO / RTX 50 series)
 
@@ -44,7 +47,7 @@ The official CUDA documentation has tables that map features to compute capabili
 - FP8 Tensor Cores arrive with CC 8.9 (Ada Lovelace) and 9.0 (Hopper)
 - NVFP4 requires CC 10.0 or higher
 
-A missing feature is missing completely. If your GPU has no Tensor Cores, you cannot use them. There is no software workaround and no emulation. The hardware either has the unit or it does not.
+A missing feature is missing completely, because features are hardware units. If your GPU has no Tensor Cores, you cannot use them. There is no software workaround and no emulation. The hardware either has the unit or it does not.
 
 So before writing performance-sensitive CUDA code, ask "Does my GPU support what I need?" This comes before "Is my GPU fast enough?"
 
@@ -72,7 +75,10 @@ The workflow is always the same:
 
 CUDA code does not run directly on the GPU. It compiles to PTX first. PTX is a low-level intermediate language, similar to an assembly language for NVIDIA GPUs.
 
-Some PTX instructions need hardware units that exist only from a certain compute capability onward. Warp shuffle functions are one example. They let threads in a warp share data without using shared or global memory. Warp shuffle exists since CC 3.0 (Kepler).
+Some PTX instructions need hardware units that exist only from a certain compute capability onward. Warp shuffle functions are one example.
+
+> [!NOTE]
+> Warp shuffle functions let threads in a warp share data without using shared or global memory. Warp shuffle exists since CC 3.0 (Kepler).
 
 If your GPU is below the minimum, these instructions cannot run. The hardware for them is not on the chip.
 

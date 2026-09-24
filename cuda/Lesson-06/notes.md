@@ -2,8 +2,8 @@
 
 This lesson shows how to compile and run a CUDA program on Linux. It also shows why a kernel can print nothing when `cudaDeviceSynchronize()` is missing.
 
-- Video environment: Windows 11 + WSL2 (Ubuntu), CUDA 11.5.
-- Your environment: native Linux (Ubuntu 24), CUDA 13.0, NVIDIA L40S (46 GB, Ada Lovelace, sm_89).
+> [!NOTE]
+> The video uses Windows 11 + WSL2 (Ubuntu) with CUDA 11.5. This page uses native Linux (Ubuntu 24), CUDA 13.0, and an NVIDIA L40S (46 GB, Ada Lovelace, sm_89). The compile commands are the same in both versions.
 
 ## Source file: `project001.cu`
 
@@ -33,11 +33,22 @@ int main()
 
 The launch uses 2 blocks with 64 threads each, so 128 threads in total. Each block has 64 / 32 = 2 warps.
 
+- The three `#include` lines bring in the CUDA runtime functions, the built-in variables like `blockIdx` and `threadIdx`, and `printf`.
+- `__global__` marks `test01` as a kernel. The CPU launches it and the GPU runs it.
+- `threadIdx.x / 32` gives the warp ID, because a warp is 32 threads. Threads 0-31 get 0 and threads 32-63 get 1.
+- `test01 <<<2, 64>>> ();` launches the kernel with 2 blocks of 64 threads.
+- `cudaDeviceSynchronize();` makes the CPU wait for the GPU. The section on synchronization below shows why this line matters.
+
 ## Step 1: verify nvcc
+
+First check that the CUDA compiler is installed and see which version it is. If this command fails, nothing else in this lesson will work.
 
 ```bash
 nvcc --version
 ```
+
+- `nvcc` is the CUDA compiler.
+- `--version` prints the compiler version and exits. It does not compile anything.
 
 Output on this machine:
 
@@ -49,15 +60,22 @@ Cuda compilation tools, release 13.0, V13.0.88
 Build cuda_13.0.r13.0/compiler.36424714_0
 ```
 
-The video uses CUDA 11.5. The compile commands are the same in both versions.
+The important line is `release 13.0, V13.0.88`. It says this is CUDA 13.0. The other lines are the tool name, the copyright, and the build date and ID of the compiler.
 
 ## Step 2: compile
 
-`-o project001` sets the name of the output program. An existing file with that name is overwritten. Without `-o`, the name is `a.out`. Always using `-o` avoids confusion.
+Now turn the source file into a program the machine can run.
 
 ```bash
 nvcc -o project001 project001.cu
 ```
+
+- `nvcc` compiles both the CPU code and the GPU code in the `.cu` file.
+- `-o project001` sets the name of the output program. Without `-o`, the name is `a.out`. Always using `-o` avoids confusion.
+- `project001.cu` is the source file.
+
+> [!WARNING]
+> If a file named `project001` already exists, `-o project001` overwrites it without asking.
 
 Check that the program file exists:
 
@@ -65,21 +83,32 @@ Check that the program file exists:
 ls -lh project001
 ```
 
+- `ls` lists files.
+- `-l` shows the long format with permissions, owner, size, and date.
+- `-h` shows the size in a human-readable unit, like `K` or `M`.
+
 ```
 -rwxrwxr-x 1 ubuntu ubuntu 966K Jun  9 21:58 project001
 ```
 
+The line starts with `-`, so it is a normal file. The `x` letters in `rwxrwxr-x` mean the file can be run. `ubuntu ubuntu` is the owner and group. `966K` is the size of the program. Then come the date and time it was built and its name. If the compile had failed, `ls` would report that the file does not exist.
+
 ## Step 3: run
+
+Run the program you just built.
 
 ```bash
 ./project001
 ```
 
+- `./` means "in the current folder". Linux does not look in the current folder for programs by default, so you have to say it.
+- `project001` is the program name you set with `-o`.
+
 ## The synchronization problem
 
 At the kernel launch line, the CPU sends the kernel to the GPU. It does not wait. It goes straight to the next line. If that line is `return 0`, the program ends before the GPU prints anything.
 
-In the video (CUDA 11.5, WSL2), output sometimes appeared and sometimes did not, depending on timing. On this machine (CUDA 13.0, L40S, native Ubuntu), the program without `cudaDeviceSynchronize()` never printed anything:
+To see this, remove the `cudaDeviceSynchronize();` line, compile again, and run the program three times. On this machine the program never printed anything:
 
 ```bash
 $ ./project001
@@ -90,20 +119,28 @@ $ ./project001
 $
 ```
 
-None of the three runs printed anything. The kernel did run on the GPU. But the program ended before the GPU's print buffer was flushed (written out to the terminal).
+The `$` is the shell prompt. It is not part of the command. After each `./project001` the next line is an empty prompt, so none of the three runs printed anything. The kernel did run on the GPU. But the program ended before the GPU's print buffer was flushed (written out to the terminal).
+
+> [!NOTE]
+> In the video (CUDA 11.5, WSL2), output sometimes appeared and sometimes did not, depending on timing. On this machine (CUDA 13.0, L40S, native Ubuntu) it never appeared.
 
 `cudaDeviceSynchronize()` makes the CPU wait at that line until all GPU threads finish. When it returns, the print buffer is flushed and all output is on the terminal. Every run then prints the full output.
+
+Put the line back, then compile and run again:
 
 ```bash
 nvcc -o project001 project001.cu
 ./project001
 ```
 
+- The first line rebuilds the program, so the change in the source file is included. Running the old program would still show the old behavior.
+- The second line runs the new program.
+
 <kernel-sync cmd="./project001" out="The block ID is 0 --- The thread ID is 0 --- The warp ID 0|The block ID is 0 --- The thread ID is 1 --- The warp ID 0|... 128 lines in total"></kernel-sync>
 
 ## Output
 
-Full output with `cudaDeviceSynchronize()` and `<<<2, 64>>>` (128 lines):
+This is the full output of `./project001` with `cudaDeviceSynchronize()` and `<<<2, 64>>>` (128 lines). Each line comes from one GPU thread.
 
 ```
 The block ID is 0 --- The thread ID is 0 --- The warp ID 0
@@ -236,6 +273,12 @@ The block ID is 1 --- The thread ID is 62 --- The warp ID 1
 The block ID is 1 --- The thread ID is 63 --- The warp ID 1
 ```
 
+How to read it:
+
+- There are 128 lines because 2 blocks × 64 threads = 128 threads, and each thread calls `printf` once.
+- The thread ID goes from 0 to 63 in block 0 and then starts at 0 again in block 1. `threadIdx.x` counts inside a block, not across the whole launch.
+- The warp ID is 0 for threads 0-31 and 1 for threads 32-63, because `threadIdx.x / 32` is integer division. Since the thread ID restarts in each block, the warp ID does too.
+
 On this machine, block 0 printed before block 1 in both runs. A second run gave the same 128 lines in the same order. Block order is still not guaranteed on other runs or machines.
 
 ## Compilation error debugging
@@ -245,6 +288,8 @@ To see how the compiler reports errors, remove the `;` at the end of `warp_ID_Va
 ```bash
 nvcc -o project001 project001.cu
 ```
+
+This is the same compile command as before. This time it fails, so no new program is written.
 
 Output on this machine:
 
@@ -256,9 +301,19 @@ project001.cu(9): error: expected a ";"
 1 error detected in the compilation of "project001.cu".
 ```
 
+How to read it:
+
+- `project001.cu(9)` is the file name and the line number, in brackets.
+- `error: expected a ";"` says what the compiler was looking for.
+- The next line repeats the source line, and the `^` marks the spot where the compiler noticed the problem.
+- The last line counts the errors in the file.
+
 The error points to the `printf` line, not the line where the semicolon is missing. The compiler only sees the problem when it reaches the next word, which is on the `printf` line. So always check the line just before the one the compiler reports.
 
-This capture was made before the two comment lines were added to the kernel, so it says line 9. With the file shown above, the semicolon is missing on line 10 and the error points to line 11. Put the semicolon back, compile again, and check that the build has no errors.
+> [!NOTE]
+> This capture was made before the two comment lines were added to the kernel, so it says line 9. With the file shown above, the semicolon is missing on line 10 and the error points to line 11.
+
+Put the semicolon back, compile again, and check that the build has no errors.
 
 ## L40S-specific notes
 
@@ -275,16 +330,25 @@ On the L40S, it is best to name the GPU architecture when you compile. Without `
 nvcc -arch=sm_89 -o project001 project001.cu
 ```
 
+- `-arch=sm_89` builds for compute capability 8.9, the L40S.
+- `-o project001` and `project001.cu` are the same as before.
+
 Check that this toolkit supports sm_89:
 
 ```bash
 nvcc --help | grep sm_89
 ```
 
+- `nvcc --help` prints all compiler options and their allowed values.
+- `|` sends that text to the next command instead of the screen.
+- `grep sm_89` keeps only the lines that contain `sm_89`.
+
 ```
         'sm_75','sm_80','sm_86','sm_87','sm_88','sm_89','sm_90','sm_90a'.
         'sm_86','sm_87','sm_88','sm_89','sm_90','sm_90a'.
 ```
+
+Each line is part of a list of allowed values in the help text. `grep` prints every line that matches, so `sm_89` shows up twice. Any match means this toolkit can build for the L40S. If there were no output, `-arch=sm_89` would not work with this nvcc.
 
 ## Summary
 

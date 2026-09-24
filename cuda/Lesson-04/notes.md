@@ -22,7 +22,10 @@ Every kernel has five read-only built-in variables: `gridDim`, `blockDim`, `bloc
 
 ## warpSize
 
-`warpSize` is the number of threads per warp. It is 32 on every current GPU. It is a variable and not a fixed constant because NVIDIA may change it in a future architecture. Writing 32 works today. Reading `warpSize` stays correct if it ever changes.
+`warpSize` is the number of threads per warp. It is 32 on every current GPU. It is a variable and not a fixed constant because NVIDIA may change it in a future architecture.
+
+> [!TIP]
+> Writing 32 works today. Reading `warpSize` stays correct if it ever changes.
 
 ## Hardware limits
 
@@ -41,6 +44,8 @@ Before running a kernel, the driver checks the launch configuration against hard
 `blockDim.x * blockDim.y * blockDim.z` must not be more than 1024, even if each single value is within its limit. This is the same 1024 threads-per-block limit from Lesson 02.
 
 ## Code
+
+This program launches one kernel that prints all five built-in variables from every thread, so you can see which values change and which stay the same.
 
 ```c
 #include "cuda_runtime.h"
@@ -65,14 +70,27 @@ int main()
 }
 ```
 
+- The two CUDA headers declare the runtime functions (such as `cudaDeviceSynchronize`) and the built-in variables. `stdio.h` provides `printf`.
+- `__global__` marks `printBuiltins` as a kernel. It runs on the GPU and is launched from the CPU.
+- The `printf` inside the kernel runs once per thread. Each `%d` is filled with one field, in the order listed below the format string.
+- `printBuiltins<<<2, 4>>>()` launches 2 blocks of 4 threads, so 8 threads run the kernel and print 8 lines.
+- `cudaDeviceSynchronize()` makes the CPU wait until the kernel is done. A kernel launch returns right away, so without this wait `main` could end before the GPU output appears.
+
 ## Compile and run
+
+Compile the source file into a program, then run it to see the printed values.
 
 ```bash
 nvcc first_kernel.cu -o first_kernel
 ./first_kernel
 ```
 
-The output has 8 lines. The order of blocks, and of threads inside each block, can change between runs.
+- `nvcc` is the CUDA compiler.
+- `first_kernel.cu` is the source file with the code above.
+- `-o first_kernel` names the program `first_kernel`. Without it the name is `a.out`.
+- `./first_kernel` runs the program from the current folder.
+
+The program prints the output below. It has 8 lines, one per thread.
 
 ```
 gridDim=(2,1,1)  blockDim=(4,1,1)  blockIdx=(1,0,0)  threadIdx=(0,0,0)  warpSize=32
@@ -85,7 +103,9 @@ gridDim=(2,1,1)  blockDim=(4,1,1)  blockIdx=(0,0,0)  threadIdx=(2,0,0)  warpSize
 gridDim=(2,1,1)  blockDim=(4,1,1)  blockIdx=(0,0,0)  threadIdx=(3,0,0)  warpSize=32
 ```
 
-`gridDim` and `blockDim` are the same on every line. `blockIdx` changes per block. `threadIdx` changes per thread. `warpSize` is always 32.
+`gridDim` and `blockDim` are the same on every line because the launch configuration is the same for all threads. `blockIdx` changes per block. `threadIdx` changes per thread and restarts at 0 in the second block. The `.y` and `.z` sizes are 1 and the `.y` and `.z` indices are 0 because `<<<2, 4>>>` used plain numbers. `warpSize` is always 32.
+
+Block 1 printed before block 0 here. The GPU runs blocks independently and in no fixed order, so the order of blocks, and of threads inside each block, can change between runs.
 
 ## Visual
 

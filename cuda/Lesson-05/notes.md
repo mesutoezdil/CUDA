@@ -24,10 +24,13 @@ All four run on the same GPU hardware.
 
 ## Hardware capabilities
 
-- Tensor Cores are units inside each SM built for matrix math. The SM is the physical processor blocks run on (Lesson 02). Lesson 03 listed FP32 cores per SM. Tensor Cores are separate from those, and much faster for FP16 and FP8 matrix work.
+- Tensor Cores are units inside each SM built for matrix math. They are separate from the FP32 cores, and much faster for FP16 and FP8 matrix work.
 - MIG splits one GPU into up to seven independent parts. Each part acts like its own GPU.
 - Dynamic Parallelism lets a running kernel launch another kernel from the GPU, without going back to the CPU. In Lesson 00, the CPU launched kernels. Dynamic Parallelism moves that step onto the GPU.
 - GPU Direct lets GPUs send data to each other or to a network card directly, without going through system memory.
+
+> [!NOTE]
+> The SM is the physical processor blocks run on (Lesson 02). Lesson 03 listed the FP32 cores per SM.
 
 ## AI framework layer
 

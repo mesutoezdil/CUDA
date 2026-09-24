@@ -50,11 +50,14 @@ The toolkit comes with sample programs. They show how memory is managed, how ker
 The toolkit is now closely tied to GPU architecture. Each new architecture brings new hardware features, and the toolkit adds support for them.
 
 - CUDA 12.x and 13.x are needed to fully support Hopper and Blackwell. They add new instructions, new precision formats and more advanced execution features.
-- Support for older architectures is slowly removed. Maxwell, Pascal and even Volta are no longer the main target of new releases.
 
 CUDA no longer tries to support everything equally. It aims to use modern hardware fully.
 
-The toolkit is also no longer one fixed package. The compiler, libraries and profiling tools now change more independently. This shows how complex the ecosystem has become. CUDA today is a whole platform.
+> [!WARNING]
+> Support for older architectures is slowly removed. Maxwell, Pascal and even Volta are no longer the main target of new releases.
+
+> [!NOTE]
+> The toolkit is also no longer one fixed package. The compiler, libraries and profiling tools now change more independently. This shows how complex the ecosystem has become. CUDA today is a whole platform.
 
 ## Summary
 

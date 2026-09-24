@@ -24,11 +24,17 @@ CLion sits on top of the toolkit. It does not replace or hide it. It gives you a
 
 ## Visual Studio on Windows
 
-On Windows, you may still need parts of Visual Studio installed, even if you do not use it. The CUDA toolchain uses the Microsoft compiler in the background. So Visual Studio is a dependency, not your workspace. You install it once and then forget it. All your real work happens in CLion.
+> [!NOTE]
+> On Windows, you may still need parts of Visual Studio installed, even if you do not use it. The CUDA toolchain uses the Microsoft compiler in the background. So Visual Studio is a dependency, not your workspace. You install it once and then forget it.
+
+All your real work happens in CLion.
 
 ## The GPU driver
 
-CUDA depends on the GPU driver. If the driver is too old, you can get problems that are hard to explain. Code may compile but not run correctly. Some features may not be available. In 2026, architectures change fast, so keeping the driver up to date is part of the setup.
+CUDA depends on the GPU driver. In 2026, architectures change fast, so keeping the driver up to date is part of the setup.
+
+> [!WARNING]
+> If the driver is too old, you can get problems that are hard to explain. Code may compile but not run correctly. Some features may not be available.
 
 ## The workflow
 

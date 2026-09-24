@@ -54,8 +54,11 @@ Nvidia uses different names depending on where the GPU is used:
 
 - Tegra is for mobile and embedded systems.  
 - GeForce is for consumer GPUs.  
-- RTX, which replaced the Quadro brand, is for professional workloads.  
-- Data Center GPUs are for servers. They used the "Tesla" name in the past, but that name is mostly gone. Today we see models like A100, H100 and newer ones.  
+- RTX is for professional workloads.  
+- Data Center GPUs are for servers. Today we see models like A100, H100 and newer ones.  
+
+> [!NOTE]
+> You may still see two older names. Quadro was the old brand for professional GPUs, and RTX replaced it. Data center GPUs used the "Tesla" name in the past, but that name is mostly gone.
 
 This shows a shift from general compute to AI and cloud infrastructure.
 

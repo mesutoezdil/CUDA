@@ -14,7 +14,7 @@ WSL (Windows Subsystem for Linux) runs a real Linux environment inside Windows. 
 
 Open a terminal on Windows and run one command: `wsl --install`
 
-As of 2026, always use WSL2. WSL1 has lower compatibility and no useful GPU acceleration. WSL2 is built for modern workloads and is the base for CUDA on Windows. Without WSL2, many GPU features will not work as expected.
+As of 2026, always use WSL2, because WSL1 has lower compatibility and no useful GPU acceleration. WSL2 is built for modern workloads and is the base for CUDA on Windows. Without WSL2, many GPU features will not work as expected.
 
 ## First start
 
@@ -24,7 +24,10 @@ When you start your Linux distribution the first time, you create a username and
 
 With WSL2, Linux can use the GPU through the Windows driver. CUDA apps run inside WSL almost like on a native Linux system. So you can develop in Linux and still use Windows as your main system.
 
-The GPU driver is installed on the Windows side, not inside WSL. WSL uses the driver of the host system. It does not need its own NVIDIA driver. Installing a Linux GPU driver inside WSL usually causes conflicts, so do not do it. Keep this separation in mind for a stable setup.
+The GPU driver is installed on the Windows side, not inside WSL. WSL uses the driver of the host system. It does not need its own NVIDIA driver. Keep this separation in mind for a stable setup.
+
+> [!WARNING]
+> Installing a Linux GPU driver inside WSL usually causes conflicts, so do not do it.
 
 <wsl-layers></wsl-layers>
 
@@ -42,4 +45,5 @@ Still, keep your expectations realistic. WSL has several layers. A problem can c
 
 WSL is a practical bridge. You stay in Windows and use Linux-based GPU tools in a way close to real production systems. It is one of the most natural ways to start.
 
-This was just for general info. The name “windows” will not be used in this repo under any circumstances.
+> [!NOTE]
+> This was just for general info. The name “windows” will not be used in this repo under any circumstances.

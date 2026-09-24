@@ -10,7 +10,8 @@ A white paper is an official technical document about a GPU. It can feel heavy a
 
 Take the chip name and add "white paper". For example: `GA100 white paper` or `H100 white paper`
 
-Not every result is useful. Blog posts, summaries and comparisons can help, but they are not enough. Always look for the official PDF.
+> [!TIP]
+> Not every result is useful. Blog posts, summaries and comparisons can help, but they are not enough. Always look for the official PDF.
 
 ## A Consistent Structure
 

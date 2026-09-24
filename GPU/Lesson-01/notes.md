@@ -4,7 +4,10 @@ This lesson gives the background of how GPUs grew into powerful compute platform
 
 ## The Early Days
 
-Nvidia was founded in the early 90s, around the same time as many of today's big tech companies. It released its first product within a short time.
+Nvidia was founded in the early 90s. It released its first product within a short time.
+
+> [!NOTE]
+> Nvidia started around the same time as many of today's big tech companies.
 
 That early hardware was very basic compared to today:
 

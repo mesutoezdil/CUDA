@@ -605,3 +605,14 @@ html[data-mode="light"] .term .dg-grid::before{background:var(--panel)}
 @keyframes grow{from{width:0}}
 @media (max-width:640px){.dg-ccp{grid-template-columns:1fr 1fr}}
 .o-num{color:#56d364}.o-dim{color:#586069}.o-note{color:#e3b341}
+
+/* Note / Hint / Watch out callouts. */
+.prose blockquote.callout{color:var(--text);border:1px solid var(--border);border-left:3px solid var(--cool);border-radius:10px;
+  background:rgba(88,166,255,.06);padding:12px 16px;margin:1.2em 0;font-size:.95rem}
+.prose blockquote.callout.tip{border-left-color:var(--accent);background:var(--accent-wash)}
+.prose blockquote.callout.warning{border-left-color:#e3b341;background:rgba(227,179,65,.07)}
+.prose blockquote.callout p{margin:0 0 .5em}.prose blockquote.callout p:last-child{margin:0}
+.callout-t{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cool);margin-bottom:6px}
+.callout-t::before{content:"i";display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;background:var(--cool);color:var(--bg);font-size:.66rem;font-weight:700;letter-spacing:0}
+.callout.tip .callout-t{color:var(--accent)}.callout.tip .callout-t::before{content:"✓";background:var(--accent)}
+.callout.warning .callout-t{color:#e3b341}.callout.warning .callout-t::before{content:"!";background:#e3b341}

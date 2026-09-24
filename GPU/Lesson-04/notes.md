@@ -21,7 +21,10 @@ Chip names link a chip to its architecture. For example:
 - GF100 → Fermi  
 - GA100 → Ampere  
 
-The prefix shows the architecture. This pattern still holds in modern GPUs around 2026.
+The prefix shows the architecture.
+
+> [!NOTE]
+> This naming pattern still holds in modern GPUs around 2026.
 
 ## The GPU
 
@@ -66,7 +69,8 @@ This makes the GPU simpler, more compact and better suited for scale.
 
 ## Checking the Chip Online
 
-Spec sites like TechPowerUp make this clear. Search for "A100 TechPowerUp" and you will see the chip name → GA100. Follow that link to see the chip itself, with no cooling and no extras.
+> [!TIP]
+> Spec sites like TechPowerUp make this clear. Search for "A100 TechPowerUp" and you will see the chip name → GA100. Follow that link to see the chip itself, with no cooling and no extras.
 
 ## The Difference in Short
 

@@ -27,7 +27,10 @@ There are two kinds of modern GPUs:
 
 Both kinds can have many cores and sometimes similar architectures. The big difference is memory.
 
-Data center GPUs use "HBM memory" (HBM3, HBM3e, and soon HBM4). HBM is extremely fast and sits very close to the GPU chip. It can deliver huge amounts of data very quickly.
+Data center GPUs use "HBM memory". HBM is extremely fast and sits very close to the GPU chip. It can deliver huge amounts of data very quickly.
+
+> [!NOTE]
+> HBM comes in versions such as HBM3 and HBM3e, and HBM4 is coming soon.
 
 Consumer GPUs usually use GDDR6 or GDDR6X memory. This is fast, but not as fast as HBM.
 

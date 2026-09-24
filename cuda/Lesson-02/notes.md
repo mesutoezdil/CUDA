@@ -8,7 +8,10 @@ A block must fit on one streaming multiprocessor (SM). An SM has a fixed number 
 
 ## Streaming Multiprocessors (SMs)
 
-An SM is the physical processing unit inside the GPU. Each SM has CUDA cores, a register file, shared memory, L1 cache, and warp schedulers. A mid-range GPU like the RTX 3080 has 68 SMs. At launch, the driver spreads blocks across the free SMs. One SM can run one or more blocks, depending on how many resources each block needs.
+An SM is the physical processing unit inside the GPU. Each SM has CUDA cores, a register file, shared memory, L1 cache, and warp schedulers. At launch, the driver spreads blocks across the free SMs. One SM can run one or more blocks, depending on how many resources each block needs.
+
+> [!NOTE]
+> The SM count depends on the GPU. A mid-range GPU like the RTX 3080 has 68 SMs.
 
 ## Thread IDs with multiple blocks
 
@@ -32,7 +35,10 @@ global_id = blockIdx.x * blockDim.x + threadIdx.x
 // printIDs<<<1, 2048>>>();  exceeds 1024 thread-per-block limit
 ```
 
-This line compiles without error. The driver checks the 1024 limit at runtime, not the compiler. At launch, the driver sees the invalid config and drops the whole kernel call. There is no output, no crash, and no error message. Call `cudaGetLastError()` after the kernel to catch it. Uncomment the line, run it, and compare the output.
+This line compiles without error. The driver checks the 1024 limit at runtime, not the compiler. At launch, the driver sees the invalid config and drops the whole kernel call. There is no output, no crash, and no error message. Call `cudaGetLastError()` after the kernel to catch it.
+
+> [!TIP]
+> Uncomment the line, run it, and compare the output.
 
 ## Block scheduling
 
@@ -59,14 +65,25 @@ int main()
 }
 ```
 
+- The commented line is the invalid launch from the section above. It stays commented out so the program works.
+- `printIDs<<<2, 1024>>>();` starts 2 blocks of 1024 threads each. This stays inside the limit and still runs 2048 threads.
+- The rest is the same as in Lesson 00 and Lesson 01.
+
 ## Compile and run
+
+The first command compiles the code into a program. The second command runs it.
 
 ```bash
 nvcc first_kernel.cu -o first_kernel
 ./first_kernel
 ```
 
-The output has 2048 lines. `blockIdx.x` is 0 or 1. `threadIdx.x` goes from 0 to 1023. Lines appear in any order.
+- `nvcc` is the CUDA compiler. It builds the CPU part and the GPU part of the file.
+- `first_kernel.cu` is the source file with the code above. CUDA source files end in `.cu`.
+- `-o first_kernel` names the program `first_kernel`. Without it the name is `a.out`.
+- `./first_kernel` runs the program. The `./` tells the shell to look in the current folder.
+
+The program prints 2048 lines, one per thread. Here are the first few:
 
 ```
 Block ID: 0  ===  Thread ID: 0
@@ -75,6 +92,11 @@ Block ID: 0  ===  Thread ID: 1
 Block ID: 1  ===  Thread ID: 1
 ...
 ```
+
+- The `...` stands for the rest of the 2048 lines.
+- `Block ID` is 0 or 1, because there are two blocks.
+- Every `Thread ID` from 0 to 1023 shows up twice, once in each block. Thread IDs restart at 0 in every block.
+- The lines of Block 0 and Block 1 mix, and the order changes between runs. The two blocks can run at the same time on different SMs, as explained in Block scheduling.
 
 ## Visual
 

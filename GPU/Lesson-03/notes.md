@@ -21,18 +21,21 @@ Compare two GPUs:
 - RTX 3090  
 - A100  
 
-First, look at the chip name. For example, A100 → GA100. Chip design comes later. For now, just read the name.
+First, look at the chip name. For example, A100 → GA100.
+
+> [!NOTE]
+> Chip design comes in a later lesson. For now, just read the name.
 
 Next, look at the number of cores:
 
 - A100 → around 7,000 cores  
 - RTX 3090 → more than 10,000 cores  
 
-This does not mean the RTX 3090 is always stronger.
+This does not mean the RTX 3090 is always stronger, because the core count does not show every kind of core.
 
 ## Core Counts
 
-A number like "6192 cores" usually counts only single-precision cores. These cores handle standard floating-point math. The number does not include all cores in the GPU.
+A number like "6,912 cores" (the A100) usually counts only single-precision cores. These cores handle standard floating-point math. The number does not include all cores in the GPU.
 
 Modern GPUs have other types of cores too, for example:
 

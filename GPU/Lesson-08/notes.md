@@ -17,13 +17,14 @@ The A100 also uses Ampere. Both GPUs share the same architecture, but they serve
 - The architecture tells you how the GPU is built.
 - The category tells you where it is used.
 
-Older materials often call the data center category "Tesla". Newer Nvidia terms (around 2026) are Data Center GPU or AI GPU.
+> [!NOTE]
+> Older materials often call the data center category "Tesla". Newer Nvidia terms (around 2026) are Data Center GPU or AI GPU.
 
 So the RTX 3090 and the A100 are both Ampere, but they are made for different worlds. The RTX 3090 is optimized for gaming and everyday use. The A100 is built for AI workloads, cloud infrastructure and large-scale systems.
 
 ## Do Not Compare Only Core Counts
 
-Core counts like 7000 or 10000 look convincing, but they mislead. They usually count only one type of core, often single-precision units. They do not cover everything inside the GPU.
+Core counts like 7000 or 10000 look convincing, but they mislead. The reason is that they usually count only one type of core, often single-precision units. They do not cover everything inside the GPU.
 
 Modern GPUs have different types of compute units, especially newer architectures like Hopper and Blackwell. Core count alone does not tell the full story.
 
@@ -38,7 +39,8 @@ This gives a simple shortcut:
 - Large visible cooling means the GPU is most likely for consumer use.
 - A compact module without fans probably means a data center GPU.
 
-This is not a strict rule, but it works often.
+> [!TIP]
+> This is not a strict rule, but it works often.
 
 <spec-reader></spec-reader>
 

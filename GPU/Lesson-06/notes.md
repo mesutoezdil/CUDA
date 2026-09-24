@@ -72,7 +72,8 @@ Rubin is not just a concept. It is already entering real systems and cloud envir
 
 ### Rubin Ultra and Beyond
 
-Nvidia's roadmap continues. Rubin Ultra is expected to push things further. After that, Feynman is on the roadmap.
+> [!NOTE]
+> Nvidia's roadmap continues. Rubin Ultra is expected to push things further. After that, Feynman is on the roadmap.
 
 The direction stays the same. Everything moves toward larger, more specialized AI systems.
 
@@ -96,7 +97,8 @@ A GPU can look very powerful on paper but perform poorly on a specific task. Ano
 
 ## Naming Changed Too
 
-Older data center GPUs were often labeled "Tesla". Newer ones are called Data Center GPUs.
+> [!NOTE]
+> Older data center GPUs were often labeled "Tesla". Newer ones are called Data Center GPUs.
 
 This shows a change in focus, from generic compute to AI and cloud systems.
 

@@ -18,7 +18,10 @@ Each thread runs on its own. Threads do not wait for each other or work together
 
 ## Warps
 
-The GPU runs threads in groups of 32 called warps. The hardware schedules warps, not blocks. When you launch 4 threads, the GPU makes a full warp of 32 lanes but uses only 4 of them. If threads in a warp take different sides of an if/else, the GPU runs the paths one after the other. This is called warp divergence. Here the 4 threads do the same thing, so there is no divergence.
+The GPU runs threads in groups of 32 called warps. The hardware schedules warps, not blocks. When you launch 4 threads, the GPU makes a full warp of 32 lanes but uses only 4 of them. Here the 4 threads do the same thing, so they all stay on the same path.
+
+> [!NOTE]
+> If threads in a warp take different sides of an if/else, the GPU runs the paths one after the other. This is called warp divergence. It does not happen in this lesson.
 
 ## Why the output order changes
 
@@ -46,14 +49,23 @@ int main()
 }
 ```
 
+This is the Lesson 00 code with one change. The launch line is now `printIDs<<<1, 4>>>();`, so four threads run the kernel.
+
 ## Compile and run
+
+The first command compiles the code into a program. The second command runs it.
 
 ```bash
 nvcc first_kernel.cu -o first_kernel
 ./first_kernel
 ```
 
-Output (4 lines, `blockIdx.x` always 0, `threadIdx.x` 0-3 in some order):
+- `nvcc` is the CUDA compiler. It builds the CPU part and the GPU part of the file.
+- `first_kernel.cu` is the source file with the code above. CUDA source files end in `.cu`.
+- `-o first_kernel` names the program `first_kernel`. Without it the name is `a.out`.
+- `./first_kernel` runs the program. The `./` tells the shell to look in the current folder.
+
+The program prints 4 lines, one per thread:
 
 ```
 Block ID: 0  ===  Thread ID: 2
@@ -61,6 +73,11 @@ Block ID: 0  ===  Thread ID: 0
 Block ID: 0  ===  Thread ID: 3
 Block ID: 0  ===  Thread ID: 1
 ```
+
+- There are 4 lines because 4 threads run and each prints once.
+- `Block ID` is always 0 because there is only one block.
+- Each `Thread ID` from 0 to 3 shows up exactly once, because each thread has its own `threadIdx.x`.
+- The order here is 2, 0, 3, 1, but your run may show another order. The threads write to the printf buffer in no fixed order, as explained above.
 
 ## Visual
 

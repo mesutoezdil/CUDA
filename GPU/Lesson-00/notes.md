@@ -36,7 +36,8 @@ This copy can become a bottleneck, so it needs care.
 
 A cache is a small, very fast memory close to the processor. Both CPUs and GPUs have caches, but they use them differently.
 
-CPUs rely on several cache levels: L1, L2 and L3. These are small but very fast.
+> [!NOTE]
+> CPUs rely on several cache levels: L1, L2 and L3. These are small but very fast.
 
 GPUs also have cache. They add one more thing called shared memory. Threads inside the GPU use it to work together and share data. Shared memory is one of the key tools for GPU optimization.
 

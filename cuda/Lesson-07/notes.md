@@ -1,6 +1,9 @@
 # Lesson 07: Warp IDs
 
-This lesson covers warps, the third level of the CUDA hierarchy. Lesson-01 and Lesson-02 covered block and thread IDs. Here you learn how a thread finds its own warp inside the kernel. Machine: NVIDIA L40S, CUDA 13.0, Ubuntu 24.
+This lesson covers warps, the third level of the CUDA hierarchy. Lesson-01 and Lesson-02 covered block and thread IDs. Here you learn how a thread finds its own warp inside the kernel.
+
+> [!NOTE]
+> All outputs on this page come from an NVIDIA L40S with CUDA 13.0 on Ubuntu 24.
 
 ## CUDA Hierarchy
 
@@ -10,12 +13,13 @@ The software levels in CUDA are:
 
 You choose the number of blocks and threads per block with `<<<num_blocks, threads_per_block>>>` (see Lesson-01, Lesson-02). The warp size is always 32 on NVIDIA GPUs. It is fixed in the hardware and cannot be changed. The warp is the real scheduling unit on the GPU. The GPU does not run threads one by one. It runs them in groups of 32.
 
-Warp limits depend on the hardware. These values were measured on the L40S with `cudaGetDeviceProperties`:
-
-- Max warps per block: 32 (max 1024 threads / 32, applies to all GPUs)
-- Max concurrent warps per SM: 48
-- SM count: 142
-- Max concurrent warps across the entire GPU: 6,816
+> [!NOTE]
+> Warp limits depend on the hardware. These values were measured on the L40S with `cudaGetDeviceProperties`:
+>
+> - Max warps per block: 32 (max 1024 threads / 32, applies to all GPUs)
+> - Max concurrent warps per SM: 48
+> - SM count: 142
+> - Max concurrent warps across the entire GPU: 6,816
 
 ## warp_id Is Not a Built-in Variable
 
@@ -25,7 +29,7 @@ Warp limits depend on the hardware. These values were measured on the L40S with 
 int warp_id = threadIdx.x / 32;
 ```
 
-In a block of 128 threads:
+Both sides are whole numbers, so `/` is integer division and the remainder is dropped. That is why every group of 32 threads gets the same result. In a block of 128 threads:
 
 - threads 0-31 → warp 0
 - threads 32-63 → warp 1
@@ -36,7 +40,7 @@ That is 128 / 32 = 4 warps.
 
 ## What Happens with 1024 Threads
 
-With 1 block of 1024 threads (`<<<1, 1024>>>`), warp IDs go from 0 to 31. This is correct, because 1024 / 32 = 32 warps. Each warp ID has exactly 32 threads:
+With 1 block of 1024 threads (`<<<1, 1024>>>`), warp IDs go from 0 to 31. This is correct, because 1024 / 32 = 32 warps. Each warp ID has exactly 32 threads. The program printed this (shortened):
 
 ```
 Block ID: 0 --- Thread ID:    0 --- Warp ID:  0
@@ -50,7 +54,9 @@ Block ID: 0 --- Thread ID:  992 --- Warp ID: 31
 Block ID: 0 --- Thread ID: 1023 --- Warp ID: 31
 ```
 
-Checked on the machine: warps 0-31, exactly 32 threads each, 1024 lines in total.
+Each `...` stands for lines that were left out. The block ID is always 0 because there is only one block. The warp ID changes from 0 to 1 between thread 31 and thread 32, because 32 / 32 = 1. The last warp starts at thread 992, because 992 / 32 = 31. Thread 1023 is the last thread, and 1023 / 32 is still 31.
+
+Checked on the machine: warps 0-31, exactly 32 threads each, 1024 lines in total. This count of output lines per warp ID shows it:
 
 ```
 32 warp 0
@@ -58,6 +64,8 @@ Checked on the machine: warps 0-31, exactly 32 threads each, 1024 lines in total
 ...
 32 warp 31
 ```
+
+Each line gives a count, then the warp ID. Every count is 32 because each warp holds exactly 32 threads. There are 32 such lines, and 32 × 32 = 1024.
 
 ## Warp ID Resets Per Block
 
@@ -131,7 +139,7 @@ int main()
 
 ## Compile and Run
 
-Both files are in the `code/` directory:
+Both files are in the `code/` directory. Compile each one into its own program and run it, so you can compare the two launch configs:
 
 ```bash
 # 1 block, 128 threads -> 4 warps
@@ -143,9 +151,16 @@ nvcc -arch=sm_89 -o warp_ids_2blocks warp_ids_2blocks.cu
 ./warp_ids_2blocks
 ```
 
+- Lines that start with `#` are comments. The shell ignores them.
+- `nvcc` is the CUDA compiler.
+- `-arch=sm_89` builds for compute capability 8.9, the L40S. Code built for the right architecture can use all of its features.
+- `-o warp_ids` names the program `warp_ids`. Without it the name is `a.out`, and the second compile would overwrite the first program.
+- `warp_ids.cu` is the source file.
+- `./warp_ids` runs the program from the current folder.
+
 ## Output: `<<<1, 128>>>`
 
-128 lines, 4 warps. This is real L40S output. Thread order is not guaranteed, so the listing below is sorted.
+This is the output of `./warp_ids`. There are 128 lines, one per thread, and 4 warps. This is real L40S output. Thread order is not guaranteed, so the listing below is sorted.
 
 ```
 Block ID: 0 --- Thread ID:  0 --- Warp ID: 0
@@ -165,9 +180,11 @@ Block ID: 0 --- Thread ID: 96 --- Warp ID: 3
 Block ID: 0 --- Thread ID: 127 --- Warp ID: 3
 ```
 
+The block ID is always 0 because there is only one block. The warp ID goes up by one at threads 32, 64, and 96, because each of those is a new multiple of 32. Each `...` stands for lines that were left out.
+
 ## Output: `<<<2, 64>>>`
 
-128 lines, 2 blocks, 2 warps per block. The warp ID resets in each block.
+This is the output of `./warp_ids_2blocks`. There are 128 lines, 2 blocks, and 2 warps per block. The warp ID resets in each block.
 
 ```
 Block ID: 0 --- Thread ID:  0 --- Warp ID: 0
@@ -184,8 +201,7 @@ Block ID: 1 --- Thread ID: 32 --- Warp ID: 1
 Block ID: 1 --- Thread ID: 63 --- Warp ID: 1
 ```
 
-Block 1 shows warp_id 0 again because warp IDs start at zero in every block. There is no global warp number for the whole GPU.
-
+The thread ID only goes up to 63 because each block has 64 threads. Block 1 shows warp_id 0 again because `threadIdx.x` starts at zero in every block, and the warp ID is computed from it. There is no global warp number for the whole GPU. The `<- resets to zero` mark was added by hand. The program does not print it.
 ## Visual
 
 <cuda-launch blocks="1" threads="128" fn="test01"></cuda-launch>

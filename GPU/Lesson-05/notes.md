@@ -29,7 +29,10 @@ So the difference is about purpose, not only performance. Some architectures tar
 
 ## A Visual Clue
 
-This is not a strict rule, but it helps. Data center GPUs often look very plain, with no visible fans. They live inside servers, where cooling comes from airflow, racks and the whole system.
+> [!NOTE]
+> The look of a card is a helpful clue, not a strict rule.
+
+Data center GPUs often look very plain, with no visible fans. They live inside servers, where cooling comes from airflow, racks and the whole system.
 
 Consumer GPUs have large cooling systems and several fans. They run inside a normal PC case, so they must handle their own heat.
 

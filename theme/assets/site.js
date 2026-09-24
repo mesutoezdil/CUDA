@@ -44,8 +44,26 @@ document.querySelectorAll(".prose .highlight:not(.language-text)").forEach(funct
 document.querySelectorAll(".prose .language-text code").forEach(function(c){
   c.innerHTML = c.innerHTML.split("\n").map(function(l){
     return /^\s*\.\.\.\s*$/.test(l) ? '<span class="o-dim">' + l + "</span>"
-      : l.replace(/(&lt;-.*)$/, '<span class="o-note">$1</span>').replace(/\b\d+\b(?![^<]*>)/g, '<span class="o-num">$&</span>');
+      : l.replace(/(&lt;-.*)$/, '<span class="o-note">$1</span>').replace(/\b\d+\b(?![^<]*>)/g, function(n){ return /ID|Idx|Dim|warpSize/.test(l) ? '<span class="o-num">' + n + "</span>" : n; });
   }).join("\n");
+});
+
+// GitHub alert syntax (> [!NOTE], > [!TIP], > [!WARNING]) becomes titled callouts.
+// Markdown merges back-to-back quotes, so each marked paragraph starts its own box.
+document.querySelectorAll(".prose blockquote").forEach(function(q){
+  var cur = null, names = { NOTE: "Note", TIP: "Hint", WARNING: "Watch out" };
+  [].slice.call(q.children).forEach(function(k){
+    var m = k.tagName === "P" && k.innerHTML.match(/^\s*\[!(NOTE|TIP|WARNING)\]\s*(<br>)?\s*/);
+    if (m) {
+      cur = document.createElement("blockquote");
+      cur.className = "callout " + m[1].toLowerCase();
+      cur.innerHTML = '<b class="callout-t">' + names[m[1]] + "</b>";
+      k.innerHTML = k.innerHTML.slice(m[0].length);
+      q.parentNode.insertBefore(cur, q);
+    }
+    if (cur) { cur.appendChild(k); }
+  });
+  if (cur && !q.children.length) { q.remove(); }
 });
 
 // Every block is drawn as rows of 32 lanes, one row per warp, so a launch that

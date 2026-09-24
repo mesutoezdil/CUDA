@@ -10,7 +10,10 @@ The format is major.minor, for example 9.0 for Hopper. A new major version is a 
 
 ## GPU generations
 
-The table covers data center GPUs from Pascal to Blackwell. The specs come from the NVIDIA CUDA Programming Guide, Blackwell Tuning Guide, and Hopper Tuning Guide (CUDA Toolkit 13.2, 2025-2026).
+The table covers data center GPUs from Pascal to Blackwell.
+
+> [!NOTE]
+> The specs come from the NVIDIA CUDA Programming Guide, Blackwell Tuning Guide, and Hopper Tuning Guide (CUDA Toolkit 13.2, 2025-2026).
 
 | Spec                   | P100 (CC 6.0)     | V100 (CC 7.0)     | A100 (CC 8.0)     | H100 (CC 9.0)     | B100 (CC 10.0)    |
 |------------------------|-------------------|-------------------|-------------------|-------------------|-------------------|
@@ -28,15 +31,21 @@ The table covers data center GPUs from Pascal to Blackwell. The specs come from 
 | FP32 Cores / SM        | 64                | 64                | 64                | 128               | 128               |
 | Shared Memory / SM     | 64 KB             | up to 96 KB       | up to 164 KB      | up to 228 KB      | up to 228 KB      |
 
-H100 and B100 have the same per-SM thread and memory limits. Blackwell is faster than Hopper because of more SMs (148 on B200 vs 132 on H100 SXM5), 5th generation Tensor Cores, HBM3e bandwidth, and NVLink 5.0. The per-SM thread and register counts did not change.
+H100 and B100 have the same per-SM thread and memory limits. The per-SM thread and register counts did not change.
+
+> [!NOTE]
+> Blackwell is still faster than Hopper because of more SMs (148 on B200 vs 132 on H100 SXM5), 5th generation Tensor Cores, HBM3e bandwidth, and NVLink 5.0.
 
 ## Threads per warp
 
-A warp is a group of 32 threads that the GPU runs together (Lesson-01). The number 32 is fixed by the hardware and is part of the compute capability spec. The GPU never schedules single threads. It always schedules whole warps of 32. This has not changed since Fermi (CC 2.0).
+A warp is a group of 32 threads that the GPU runs together (Lesson-01). The number 32 is fixed by the hardware and is part of the compute capability spec. The GPU never schedules single threads. It always schedules whole warps of 32.
+
+> [!NOTE]
+> The warp size of 32 has not changed since the first CUDA GPUs (CC 1.0).
 
 ## Warps and threads per SM
 
-An SM is the physical processor that blocks run on (Lesson-02). Each SM can hold up to 64 active warps, which is 2048 threads. When some warps wait for memory, the warp scheduler can pick other warps. More active warps keep the execution units busy.
+An SM is the physical processor that blocks run on (Lesson-02). Each SM can hold up to 64 active warps, which is 2048 threads. When some warps wait for memory, the warp scheduler can pick other warps. More active warps keep the execution units busy, because there is more often a warp that is ready to run.
 
 ## Thread block size limit
 
