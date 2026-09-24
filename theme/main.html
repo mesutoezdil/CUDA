@@ -40,10 +40,6 @@
     <p class="lede">Learn how a GPU works, then write CUDA code with short plain-English lessons and pictures you can play with.</p>
     <div class="cta">
       <a class="btn primary" href="{{ nav.items[1].children[0].url|url }}">Start learning →</a>
-      <div class="sup"><span>Supported by</span>
-        <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" alt="JetBrains">
-        <img src="{{ 'manning.png'|url }}" alt="Manning Publications">
-      </div>
     </div>
     <div class="frame term">
       <div class="termbar"><i></i><i></i><i></i><span class="mono">try it · move the sliders</span></div>
@@ -78,6 +74,10 @@
 <footer>
   <div class="wrap row">
     <span>{{ config.site_name }} · learning CUDA properly</span>
+    {% if page.is_homepage %}<div class="sup"><span>Supported by</span>
+      <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" alt="JetBrains">
+      <img src="{{ 'manning.png'|url }}" alt="Manning Publications">
+    </div>{% endif %}
     <a href="{{ config.repo_url }}">Source on GitHub ↗</a>
   </div>
 </footer>
