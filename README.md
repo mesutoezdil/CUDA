@@ -2,54 +2,72 @@
 ![Supported by Manning Publications](https://img.shields.io/badge/Supported%20by-Manning%20Publications-8B0000)
 ![Pull Shark](https://img.shields.io/badge/Pull%20Shark-x2-0075ca)
 
-# Systematic CUDA Learning
+# CUDA, step by step
 
-> Learning CUDA properly: from fundamentals to real-world GPU systems.
+**Read it as a website → [mesutoezdil.github.io/CUDA](https://mesutoezdil.github.io/CUDA/)**
 
-This repo documents my journey of learning CUDA from scratch.
+Learn how a GPU works, then write CUDA code. Short lessons in plain English, with interactive diagrams you can play with.
 
-Just real understanding, built step by step.
+This repo documents my own path of learning CUDA from scratch. It builds intuition for how GPUs really work before writing code, and connects CUDA to real systems such as Kubernetes and AI workloads. Every lesson tries to answer one question: "Do I actually understand what is happening?"
 
-This repo is different.
+## What is inside
 
-It focuses on:
-- understanding how GPUs actually work  
-- building intuition before writing code  
-- connecting CUDA to real-world systems (Kubernetes, AI workloads, etc.)
+| Track | Folder | Lessons | What you learn |
+|---|---|---|---|
+| 01 GPU Fundamentals | [`GPU/`](GPU) | 16 | What a GPU is, architectures and chips, memory bandwidth, compute capability, white papers, and how to set up a machine for CUDA |
+| 02 CUDA Practice | [`cuda/`](cuda) | 8 | Your first kernels, blocks and threads, built-in variables, warps, and compiling on Linux, with real output from an NVIDIA L40S |
 
-## Repo Structure
+Every lesson is one `notes.md` file. Each lesson has:
 
-The project is split into two main parts:
+- plain-English explanations, with the reason behind every step
+- code, commands and real program output, each explained line by line
+- Note and Hint boxes for side information
+- a glossary of the terms it uses
+- interactive diagrams on the website (launch configurations, warps, memory bandwidth, the nvcc pipeline and more)
 
-### GPU/
+## The website
 
-This is where everything starts.
+The site is built from this repo with [MkDocs](https://www.mkdocs.org/) and a custom theme. Every push to `main` rebuilds it and publishes it on GitHub Pages.
 
-It covers the fundamentals:
+| Path | What it does |
+|---|---|
+| `mkdocs.yml` | Site settings and the lesson menu |
+| `theme/main.html` | The page layout |
+| `theme/assets/styles.css` | The whole design, dark and light |
+| `theme/assets/site.js` | Page behavior and the CUDA diagrams |
+| `theme/assets/gpu.js` | The GPU diagrams |
+| `.github/workflows/pages.yml` | Builds and publishes the site |
 
-- GPU architecture  
-- memory model  
-- compute capability  
-- performance fundamentals  
-- hardware evolution (up to 2026 architectures)
+### Run it locally
 
-Each section is structured step by step.
+```bash
+pip install "mkdocs<2" pymdown-extensions pygments
+mkdir -p docs && cp -r GPU cuda manning.png manning.jpeg docs/ && cp README.md docs/index.md
+mkdocs serve
+```
 
-Each folder contains: notes (clear explanations), visual summaries and structured learning progression.  
+Then open http://127.0.0.1:8000/CUDA/. The build copies the lessons into `docs/`, so run the copy line again after you edit a lesson.
 
-### CUDA/
+### Add a lesson
 
-This is where theory turns into practice.
+1. Create `GPU/Lesson-NN/notes.md` or `cuda/Lesson-NN/notes.md`.
+2. Add one line for it under `nav` in `mkdocs.yml`, for example `- "08 Shared Memory": cuda/Lesson-08/notes.md`. The two digits at the start become the lesson number on the site.
+3. Push to `main`. The site updates by itself.
 
-## What makes this different
+Inside a lesson you can use:
 
-- No noise, no fluff  
-- No blind copy from docs  
-- Built like an engineer, not a tutorial  
+- Note and Hint boxes, written the GitHub way:
 
-Everything here is written to answer one question:
+  ```markdown
+  > [!NOTE]
+  > Side information.
 
-> “Do I actually understand what’s happening?”
+  > [!TIP]
+  > A practical hint.
+  ```
+
+- Diagram tags on their own line, for example `<cuda-launch blocks="2" threads="64" fn="test01"></cuda-launch>`. All tags are defined in `theme/assets/site.js` and `theme/assets/gpu.js`. GitHub does not show them, only the website does.
+- A `## Glossary` section at the end, as a list of `- term: definition` lines. The site turns it into term cards.
 
 ## Sponsorship
 
@@ -57,13 +75,11 @@ Everything here is written to answer one question:
   <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" width="120">
 </p>
 
-This project is supported by JetBrains. JetBrains provides professional developer tools that I actively use for CUDA development, experimentation, and documentation.
+This project is supported by JetBrains. I use JetBrains tools every day for CUDA development, experiments and documentation.
 
 <p align="left">
   <img src="manning.png" width="140">
   <img src="manning.jpeg" width="98">
 </p>
 
-This project is also supported by Manning Publishing. They provide high-quality technical books that I use to deepen my understanding of CUDA, GPU systems, and parallel computing.
-
-Special thanks to Manning Publishing for providing *CUDA for Deep Learning* (by Elliot Arledge).
+This project is also supported by Manning Publications. Their technical books help me go deeper into CUDA, GPU systems and parallel computing. Special thanks to Manning for providing *CUDA for Deep Learning* by Elliot Arledge.
