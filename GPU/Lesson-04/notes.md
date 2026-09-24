@@ -140,6 +140,8 @@ So instead of adding fans on the GPU:
 
 The GPU becomes simpler, more compact, and more optimized for scale.
 
+<chip-vs-gpu></chip-vs-gpu>
+
 ## One Small Habit That Helped Me
 
 To really understand this, I started checking specs online.

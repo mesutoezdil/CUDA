@@ -128,6 +128,8 @@ At this point, it is clear: The direction is not changing.
 
 Everything is moving toward larger, more specialized AI systems.
 
+<arch-timeline focus="Volta"></arch-timeline>
+
 ## What I Learned About Performance
 
 At the beginning, I tried to compare GPUs using simple numbers.

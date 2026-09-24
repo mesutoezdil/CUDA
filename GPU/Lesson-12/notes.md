@@ -18,6 +18,8 @@ This is where your CUDA code gets translated into something the GPU can execute.
 
 The process is not direct. Your high-level CUDA code is first transformed into an intermediate representation, usually PTX, and then into machine code that matches a specific GPU architecture.
 
+<nvcc-pipeline></nvcc-pipeline>
+
 This step is more important today than it used to be.
 
 As of 2026, different GPU architectures such as Ampere, Hopper, and Blackwell introduce different instructions, data types, and execution models. Because of this, compiling for the correct architecture is no longer optional.

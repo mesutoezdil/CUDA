@@ -102,6 +102,8 @@ If it looks more like a compact module without fans, it is probably meant for da
 
 Of course, this is not a strict rule, but it works surprisingly often.
 
+<spec-reader></spec-reader>
+
 After going through this process a few times, everything became much clearer.
 
 I stopped trying to understand every number.

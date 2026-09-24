@@ -62,6 +62,8 @@ At this point, GPUs are no longer just compute devices.
 
 They are infrastructure for AI systems.
 
+<arch-timeline focus="Pascal"></arch-timeline>
+
 When reading a white paper, one section matters more than anything else:
 
 The Streaming Multiprocessor (SM).
@@ -96,6 +98,8 @@ First, new features are introduced. Then the SM design is explained. Then perfor
 This consistency is intentional.
 
 It makes it easier to follow the evolution across generations.
+
+<whitepaper-map></whitepaper-map>
 
 In practice, reading white papers is not about memorizing numbers.
 

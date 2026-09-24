@@ -41,6 +41,8 @@ The key idea is simple: A GPU is only fast if it can get data fast enough. Other
 
 This situation is often called a "memory bottleneck".
 
+<bandwidth-sim></bandwidth-sim>
+
 Now let’s connect this idea to real GPUs.
 
 If you look at modern GPUs, there is a clear difference between two worlds.
@@ -86,6 +88,8 @@ Even if the road is wide, slow movement still causes delays.
 Memory technology is where modern GPUs really differ.
 
 HBM is like a high-speed highway built specifically for data, while GDDR is more general-purpose.
+
+<bandwidth-calc></bandwidth-calc>
 
 When you combine all of this, one thing becomes clear: GPU performance is not just about cores.  
 
@@ -152,6 +156,8 @@ If you increase the clock speed, each core becomes faster.
 But if one of them is too low, it can limit the whole system.
 
 So the real goal is balance.
+
+<cores-clock></cores-clock>
 
 Now let’s step back and look at modern GPUs.
 

@@ -82,6 +82,8 @@ It operates underneath systems such as:
 
 A correct CUDA installation ensures that all these systems function properly.
 
+<install-steps></install-steps>
+
 At this point, your system is ready.
 
 You have:

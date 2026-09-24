@@ -80,6 +80,8 @@ The code will not compile, or it will fail at runtime. There is no gray area her
 
 The practical workflow is always the same: identify your GPU's compute capability first, then choose your CUDA version accordingly, then write your code.
 
+<cc-explorer></cc-explorer>
+
 ## The Low-Level Layer (PTX)
 
 Going deeper: CUDA code does not run directly on the GPU. 

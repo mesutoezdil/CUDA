@@ -142,6 +142,8 @@ And in many cases, GPUs are now the main driver behind modern AI systems.
 
 This is a big shift from where things started.
 
+<gpu-history></gpu-history>
+
 ## Why This Matters Before CUDA
 
 At first, this felt like background knowledge.

@@ -105,6 +105,8 @@ Reminder:
 - Architecture → technical design
 - Generation → usage category
 
+<gpu-compare></gpu-compare>
+
 ## How to Tell Them Apart Visually
 
 Now a practical question: Can we tell the difference just by looking at the GPU?

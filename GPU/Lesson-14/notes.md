@@ -44,6 +44,8 @@ WSL does not require a separate NVIDIA driver installation. Instead, it uses the
 
 Understanding this separation is important for maintaining a stable setup.
 
+<wsl-layers></wsl-layers>
+
 Another point that becomes relevant in practice is how CUDA is installed.
 
 Inside WSL, you install the Linux version of the CUDA Toolkit, not the Windows one. However, even here there is a distinction. The packages used for WSL are designed to work with the shared driver model and avoid conflicts with the host system.

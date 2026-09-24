@@ -172,3 +172,5 @@ customElements.define("sm-scheduler", class extends HTMLElement {
     io.observe(el);
   });
 })();
+
+document.querySelectorAll(".side details").forEach(function(d){ if (matchMedia("(max-width:900px)").matches) { d.open = false; } });

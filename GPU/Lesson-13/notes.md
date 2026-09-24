@@ -48,6 +48,8 @@ And that is exactly why it works well.
 
 You always know what is happening.
 
+<toolchain-stack></toolchain-stack>
+
 There is one detail that can confuse people at first.
 
 Even if you do not plan to use Visual Studio, you may still need parts of it installed on Windows.

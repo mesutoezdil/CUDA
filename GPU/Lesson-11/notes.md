@@ -42,6 +42,8 @@ With Volta, they can run in parallel.
 
 This may sound like a small detail, but it has a big impact. Modern workloads often mix different types of operations, and this change allows better use of the hardware.
 
+<volta-shift></volta-shift>
+
 Another important point is instruction speed.
 
 A new architecture is not only about adding more cores. It is also about making existing operations faster.

@@ -137,6 +137,8 @@ They are only better when the problem can be parallelized.
 
 If your task is sequential, a CPU can easily outperform a GPU.
 
+<cpu-vs-gpu></cpu-vs-gpu>
+
 ## How CPU and GPU Work Together
 
 Another thing I had to understand:
@@ -229,6 +231,8 @@ It is shared across the whole GPU.
 It is larger, but also slower.
 
 Still, it plays a key role in reducing memory access cost.
+
+<gpu-anatomy></gpu-anatomy>
 
 ## What This Changed for Me
 

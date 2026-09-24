@@ -178,6 +178,8 @@ Same architecture.
 
 Different world.
 
+<arch-matrix></arch-matrix>
+
 ## Looking at Real Categories
 
 Once I understood this, I started to see GPU categories more clearly.
