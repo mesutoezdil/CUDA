@@ -61,7 +61,6 @@
     </details>
   </aside>
   <main>
-    <p class="eyebrow"><b>{{ page.title[:2] }}</b> {{ page.parent.title if page.parent }}</p>
     <article class="prose">{{ page.content }}</article>
     <div class="pager">
       {% if page.previous_page %}<a class="card" href="{{ page.previous_page.url|url }}"><span class="tab">← previous</span><b>{{ page.previous_page.title }}</b></a>{% else %}<span></span>{% endif %}
