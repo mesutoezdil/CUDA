@@ -107,6 +107,8 @@ One line, every time. Deterministic because there is only one thread.
 
 ## Visual
 
+<cuda-launch blocks="1" threads="1" fn="printIDs"></cuda-launch>
+
 ```
 printIDs<<<1, 1>>>
               |  |

@@ -1,4 +1,4 @@
-site_name: Systematic CUDA Learning
+site_name: CUDA
 site_description: Learning CUDA properly, from fundamentals to real-world GPU systems.
 repo_url: https://github.com/mesutoezdil/CUDA
 site_url: https://mesutoezdil.github.io/CUDA/
@@ -6,21 +6,10 @@ docs_dir: docs
 site_dir: public
 
 theme:
-  name: material
-  palette:
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: green
-      toggle: { icon: material/weather-night, name: Dark mode }
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: green
-      toggle: { icon: material/weather-sunny, name: Light mode }
-  features:
-    - navigation.tabs
-    - navigation.footer
-    - content.code.copy
-    - search.highlight
+  name: null
+  custom_dir: theme
+
+plugins: []
 
 markdown_extensions:
   - admonition

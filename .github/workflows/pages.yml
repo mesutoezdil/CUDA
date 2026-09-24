@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -q mkdocs-material "mkdocs<2"
+      - run: pip install -q "mkdocs<2" pymdown-extensions
       - run: mkdir docs && cp -r GPU cuda manning.png manning.jpeg docs/ && cp README.md docs/index.md
       - run: mkdocs build --strict
       - uses: actions/upload-pages-artifact@v3

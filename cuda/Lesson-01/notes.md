@@ -62,6 +62,8 @@ Block ID: 0  ===  Thread ID: 1
 
 ## Visual
 
+<cuda-launch blocks="1" threads="4" fn="printIDs"></cuda-launch>
+
 ```
 printIDs<<<1, 4>>>
               |  |

@@ -78,6 +78,10 @@ Block ID: 1  ===  Thread ID: 1
 
 ## Visual
 
+<cuda-launch blocks="2" threads="1024" fn="printIDs"></cuda-launch>
+
+<sm-scheduler blocks="2" sms="2"></sm-scheduler>
+
 ```
 printIDs<<<2, 1024>>>
               |     |

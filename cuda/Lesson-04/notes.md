@@ -87,6 +87,8 @@ gridDim=(2,1,1)  blockDim=(4,1,1)  blockIdx=(0,0,0)  threadIdx=(3,0,0)  warpSize
 
 ## Visual
 
+<cuda-launch blocks="2" threads="4" fn="printBuiltins"></cuda-launch>
+
 ```
 printBuiltins<<<2, 4>>>
                   |  |

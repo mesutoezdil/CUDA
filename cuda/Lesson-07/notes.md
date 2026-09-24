@@ -186,6 +186,10 @@ Block 1 shows warp_id 0 again because warp IDs start from zero in every block. T
 
 ## Visual
 
+<cuda-launch blocks="1" threads="128" fn="test01"></cuda-launch>
+
+<cuda-launch blocks="2" threads="64" fn="test01"></cuda-launch>
+
 ```
 test01<<<1, 128>>>
               |
