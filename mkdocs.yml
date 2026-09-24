@@ -1,0 +1,58 @@
+site_name: Systematic CUDA Learning
+site_description: Learning CUDA properly, from fundamentals to real-world GPU systems.
+repo_url: https://github.com/mesutoezdil/Systematic-CUDA-Learning
+site_url: https://mesutoezdil.github.io/Systematic-CUDA-Learning/
+docs_dir: docs
+site_dir: public
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: green
+      toggle: { icon: material/weather-night, name: Dark mode }
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: green
+      toggle: { icon: material/weather-sunny, name: Light mode }
+  features:
+    - navigation.tabs
+    - navigation.footer
+    - content.code.copy
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - tables
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+nav:
+  - Home: index.md
+  - GPU Fundamentals:
+      - "00 Starting CUDA": GPU/Lesson-00/notes.md
+      - "01 Where GPUs Come From": GPU/Lesson-01/notes.md
+      - "02 Architecture vs Generation": GPU/Lesson-02/notes.md
+      - "03 Identifying a GPU": GPU/Lesson-03/notes.md
+      - "04 GPU vs GPU Chip": GPU/Lesson-04/notes.md
+      - "05 Architecture and Chips": GPU/Lesson-05/notes.md
+      - "06 Nvidia GPU Architectures": GPU/Lesson-06/notes.md
+      - "07 Memory Bandwidth": GPU/Lesson-07/notes.md
+      - "08 Identifying GPUs in Practice": GPU/Lesson-08/notes.md
+      - "09 Compute Capability": GPU/Lesson-09/notes.md
+      - "10 White Papers": GPU/Lesson-10/notes.md
+      - "11 Reading a White Paper": GPU/Lesson-11/notes.md
+      - "12 CUDA Toolkit": GPU/Lesson-12/notes.md
+      - "13 Dev Setup with JetBrains": GPU/Lesson-13/notes.md
+      - "14 Linux on Windows (WSL)": GPU/Lesson-14/notes.md
+      - "15 Installing CUDA on Linux": GPU/Lesson-15/notes.md
+  - CUDA Practice:
+      - "00 One Block, One Thread": cuda/Lesson-00/notes.md
+      - "01 One Block, Four Threads": cuda/Lesson-01/notes.md
+      - "02 Two Blocks, 1024 Threads": cuda/Lesson-02/notes.md
+      - "03 Compute Capability": cuda/Lesson-03/notes.md
+      - "04 Built-in Variables": cuda/Lesson-04/notes.md
+      - "05 The CUDA Platform Stack": cuda/Lesson-05/notes.md
+      - "06 Compiling CUDA on Linux": cuda/Lesson-06/notes.md
+      - "07 Warp IDs": cuda/Lesson-07/notes.md
