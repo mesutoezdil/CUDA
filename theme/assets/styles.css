@@ -677,3 +677,29 @@ footer .sup img{height:22px;padding:3px 5px}
   .hero .termbar{padding:7px 12px}
   .hero .dg-stats span{padding:2px 8px}
 }
+
+/* Top bar: gradient wordmark, numbered track pills, icon buttons. */
+nav{background:linear-gradient(180deg,var(--nav-bg),var(--nav-bg));box-shadow:0 1px 0 var(--accent-wash),0 10px 30px -20px rgba(0,0,0,.6)}
+nav .wrap{height:62px}
+.brand{gap:10px;font-size:1.05rem}
+.brand img{width:28px;height:28px;border-radius:7px;box-shadow:0 0 0 1px var(--border),0 6px 16px -6px var(--accent)}
+.brand .wm{background:linear-gradient(100deg,var(--accent) 0%,var(--accent2) 45%,var(--cool) 120%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  font-weight:800;letter-spacing:.02em}
+.brand .tag{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border:1px solid var(--border);border-radius:999px;padding:2px 7px;font-weight:600}
+.nav-sections{gap:4px;padding:4px;border:1px solid var(--border);border-radius:999px;background:var(--panel)}
+.nav-sections a.link{display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;border:1px solid transparent;
+  transition:color .15s ease,background .15s ease,border-color .15s ease}
+.nav-sections a.link i{font-style:normal;font-size:.68rem;color:var(--dimmer);transition:color .15s ease}
+.nav-sections a.link:hover{background:var(--accent-wash)}
+.nav-sections a.link.on{color:var(--text);background:var(--accent-soft);border-color:var(--accent-line)}
+.nav-sections a.link.on i,.nav-sections a.link:hover i{color:var(--accent)}
+.icon-btn{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--panel);
+  color:var(--dim);cursor:pointer;transition:color .15s ease,border-color .15s ease,transform .15s ease;padding:0}
+.icon-btn:hover{color:var(--text);border-color:var(--accent-line);transform:translateY(-1px)}
+@media (max-width:700px){
+  .brand .tag{display:none}
+  .nav-sections{gap:2px;padding:3px}
+  .nav-sections a.link{padding:5px 10px;gap:6px}
+  nav .gh{display:inline-grid}
+}
+@media (max-width:420px){.nav-sections a.link i{display:none}}
