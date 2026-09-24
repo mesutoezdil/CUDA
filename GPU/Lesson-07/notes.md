@@ -109,3 +109,14 @@ Throughput also depends on many things, such as the type of computation, the pre
 A GPU needs fast memory, enough cores, enough speed, reasonable energy use, and sometimes specialized hardware. Real performance comes only when these are balanced.
 
 GPU performance is not a single number. It is a system where memory, compute power, efficiency and specialized hardware work together. Knowing this makes specifications easier to read and CUDA concepts easier to understand.
+
+## Glossary
+
+- memory bandwidth: how much data can move between memory and the GPU every second.
+- memory bottleneck: when GPU cores wait because memory cannot send data fast enough.
+- HBM: extremely fast memory that sits very close to the GPU chip in data center GPUs.
+- GDDR6: fast memory used in consumer GPUs, but not as fast as HBM.
+- bus width: how much data memory can move at the same time, like the width of a road.
+- clock speed: how quickly each core executes instructions.
+- Tensor Cores: specialized hardware built for specific computations, especially in AI.
+- throughput: how much work the GPU can finish in a given time.

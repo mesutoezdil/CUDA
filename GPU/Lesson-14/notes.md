@@ -47,3 +47,13 @@ WSL is a practical bridge. You stay in Windows and use Linux-based GPU tools in 
 
 > [!NOTE]
 > This was just for general info. The name “windows” will not be used in this repo under any circumstances.
+
+## Glossary
+
+- WSL: Windows Subsystem for Linux. It runs a real Linux environment inside Windows.
+- WSL2: the WSL version that runs a real Linux kernel. It is the base for CUDA on Windows.
+- WSL1: the older WSL version with lower compatibility and no useful GPU acceleration.
+- `wsl --install`: the one command you run in a Windows terminal to install WSL.
+- Linux distribution: a separate Linux environment with its own users, file system and package manager.
+- host driver: the GPU driver on the Windows side. WSL uses it and needs no NVIDIA driver of its own.
+- WSL CUDA packages: special Linux CUDA packages that work with the shared driver and avoid conflicts with the host.

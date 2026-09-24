@@ -50,3 +50,12 @@ When the setup is right, these steps work together smoothly.
 ## Summary
 
 CUDA development is not about choosing an editor. It is about understanding the toolchain. JetBrains tools fit well because they let each part of the system do its own job. This makes the setup cleaner, more stable and closer to production. This repo uses this setup.
+
+## Glossary
+
+- CLion: a JetBrains tool for writing code and organizing projects. It sits on top of the CUDA Toolkit.
+- CMake: a tool that describes how to build a project. It is not tied to one environment.
+- CUDA Toolkit: the base layer with the compiler, the runtime and the libraries that talk to the GPU.
+- toolchain: the chain of tools that builds your code. CLion calls CMake, and CMake calls the CUDA compiler.
+- Visual Studio: a Windows dependency, because the CUDA toolchain uses the Microsoft compiler in the background.
+- GPU driver: CUDA depends on it. If it is too old, code may compile but not run correctly.

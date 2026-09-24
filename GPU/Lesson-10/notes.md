@@ -68,3 +68,13 @@ This consistency is on purpose. It makes the evolution across generations easier
 ## How to Read One
 
 Reading white papers is not about memorizing numbers. It is about understanding change. Look at the SM, find the new hardware units, and compare them with the previous generation.
+
+## Glossary
+
+- white paper: an official technical document that shows how a GPU is actually built, without marketing.
+- Streaming Multiprocessor (SM): the core of the GPU. It brings together CUDA cores, Tensor Cores, scheduling and memory access.
+- Tensor Cores: hardware units that Volta introduced. They made GPUs explicitly optimized for AI workloads.
+- Pascal: a mostly general-purpose compute architecture. It has no Tensor Cores.
+- sparsity support: a feature Ampere added, along with more throughput and better efficiency.
+- FP8: a format Hopper added for large-scale AI systems.
+- NVFP4: a Blackwell format that brings ultra-low precision directly into hardware.

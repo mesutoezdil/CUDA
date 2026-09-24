@@ -50,6 +50,17 @@ document.querySelectorAll(".prose .language-text code").forEach(function(c){
 
 document.querySelectorAll(".prose :not(pre) > code").forEach(function(c){ if (c.textContent.length < 30) { c.classList.add("nw"); } });
 
+// The Glossary list at the end of a lesson becomes a grid of term cards.
+document.querySelectorAll(".prose h2").forEach(function(h){
+  var ul = h.nextElementSibling;
+  if (h.textContent.trim() !== "Glossary" || !ul || ul.tagName !== "UL") { return; }
+  ul.className = "glossary";
+  ul.querySelectorAll("li").forEach(function(li){
+    var i = li.innerHTML.indexOf(": ");
+    if (i > 0) { li.innerHTML = '<b class="g-term">' + li.innerHTML.slice(0, i) + "</b><span>" + li.innerHTML.slice(i + 2) + "</span>"; }
+  });
+});
+
 // GitHub alert syntax (> [!NOTE], > [!TIP], > [!WARNING]) becomes titled callouts.
 // Markdown merges back-to-back quotes, so each marked paragraph starts its own box.
 document.querySelectorAll(".prose blockquote").forEach(function(q){

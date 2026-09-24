@@ -89,3 +89,14 @@ Each environment has different needs, limits and priorities. Nvidia adapts the s
 ## Why This Matters
 
 This rule makes GPU names easier to read. It also prevents a common mistake, which is thinking two GPUs are similar just because they share an architecture. These differences matter a lot once you start programming GPUs with CUDA.
+
+## Glossary
+
+- GPU: a processor built to run many operations at the same time.
+- CUDA: Nvidia's way of programming GPUs for general computation, not just graphics.
+- architecture: the internal design of the GPU chip, like the design of an engine.
+- generation: where a GPU is used, such as gaming or data centers.
+- HPC: High Performance Computing, meaning cloud systems, data centers, AI training and scientific computing.
+- Ampere: an Nvidia architecture used in both the RTX 3090 and the A100.
+- Tegra: Nvidia's product name for GPUs in mobile and embedded systems.
+- Data Center GPU: an Nvidia GPU for servers, such as the A100 or H100.

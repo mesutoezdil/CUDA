@@ -111,3 +111,14 @@ With this view, GPU names make more sense. Performance differences become logica
 ## Summary
 
 GPU architectures show how computing itself is changing. The path goes from graphics, to compute, to AI at scale. Understanding this shift is an important step before going deeper into CUDA.
+
+## Glossary
+
+- architecture: the blueprint of the GPU that defines how everything inside the chip is built.
+- Volta: the architecture where Nvidia started to push AI-specific hardware.
+- Blackwell: a 2024 to 2025 architecture designed around large-scale AI workloads.
+- Rubin: a 2026 architecture now entering real systems, with newer Tensor Core designs.
+- HBM4: a memory type that Rubin supports.
+- TFLOPS: a simple performance number that does not tell the full story.
+- clock speed: another simple number that makes a poor comparison on its own.
+- Tesla: the old label for Nvidia data center GPUs, which are now called Data Center GPUs.

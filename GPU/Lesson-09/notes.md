@@ -89,3 +89,14 @@ The same rule applies to machine learning pipelines, physics simulations and cus
 Know your CC number. Check it against the CUDA documentation. Choose the right toolkit version. Then build. Performance tuning, optimization and feature choice all start from there.
 
 > Compute capability is not just a version number. It is the definition of what your GPU can actually do.
+
+## Glossary
+
+- compute capability (CC): NVIDIA's version number that says what a GPU architecture can and cannot do.
+- major number: the number before the dot. It signals a major architectural change.
+- minor number: the number after the dot. It stands for minor improvements or extensions.
+- Tensor Cores: special units that speed up matrix operations for AI. They appear from CC 7.x onward.
+- FP16: half-precision operations. GPUs at CC 5.0 do not support them.
+- NVFP4: a Blackwell precision format that doubles throughput compared to FP8 for large model inference.
+- PTX: a low-level intermediate language, like assembly for NVIDIA GPUs. CUDA code compiles to it first.
+- warp shuffle: functions that let threads in a warp share data without using shared or global memory.

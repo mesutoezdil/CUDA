@@ -69,3 +69,13 @@ An architecture is a base design. It contains several chips, scaled for differen
 ## Why This Matters
 
 This makes GPU names easier to read. It helps you see why two GPUs behave differently and where a GPU fits. Without it, it is easy to misunderstand performance and hardware behavior when you go deeper into CUDA.
+
+## Glossary
+
+- architecture: a base design shared by a family of chips.
+- prefix: the first letters of a chip name, like AD, which link the chip to its architecture.
+- Ada Lovelace: an Nvidia architecture mostly for consumer GPUs, with chips like AD102.
+- Hopper: an Nvidia architecture for data centers, AI training and large-scale computation.
+- clock speed: a setting a manufacturer can tune, so GPUs with the same chip may behave differently.
+- board partner: a company like ASUS, MSI or Gigabyte that builds its own GPU from an Nvidia chip.
+- vendor-specific implementation: one manufacturer's own version of a GPU built around a chip.

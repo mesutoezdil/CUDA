@@ -123,3 +123,14 @@ Different environments have different cooling needs. Knowing this helps you:
 - avoid common beginner mistakes  
 
 This becomes more important as you go deeper into CUDA.
+
+## Glossary
+
+- TechPowerUp: a website that collects detailed GPU specs from many manufacturers.
+- chip name: the name of the chip inside a GPU, such as GA100 for the A100.
+- core count: the number of cores in the specs, which does not show every kind of core.
+- single-precision cores: cores for standard floating-point math, usually the only ones in the core count.
+- tensor cores: special cores in modern GPUs built for AI.
+- architecture: the technical design of a GPU.
+- generation: the usage category of a GPU, such as GeForce or Data Center GPUs.
+- Ampere: the architecture shared by the RTX 3090 and the A100.

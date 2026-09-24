@@ -53,3 +53,12 @@ You do not need to understand every number. Ask these questions instead:
 - What kind of problem is it designed to solve?  
 
 With these answers, the rest of the specs make more sense. For CUDA and GPU work, knowing the purpose of a GPU is as important as knowing its specs.
+
+## Glossary
+
+- TechPowerUp: a website with GPU specs. Search the GPU name with "TechPowerUp" to find its page.
+- architecture: how the GPU is built. The RTX 3090 and the A100 both use Ampere.
+- category: where the GPU is used, such as consumer use or the data center.
+- GeForce: the NVIDIA GPU family built for consumer use, like gaming or personal workstations.
+- data center GPU: a GPU built for AI, cloud and large systems. Older materials call this category "Tesla".
+- core count: the number of cores, often of only one type. It does not tell the full story.

@@ -92,3 +92,14 @@ If you mix these up, you can misunderstand:
 - even CUDA behavior  
 
 This makes deeper CUDA topics easier to follow.
+
+## Glossary
+
+- GPU chip: the actual silicon where all computation happens, with no cooling or connectors.
+- GPU: the full product built around the chip, with memory, power parts, outputs and cooling.
+- VRAM: the memory attached to the GPU chip.
+- chip name prefix: the first letters of a chip name, which show its architecture, like GA for Ampere.
+- Fermi: an Nvidia architecture whose chips have names like GF100.
+- output interfaces: ports on a GPU such as HDMI or DisplayPort.
+- heatsink: a cooling part that consumer GPUs use to handle their own heat.
+- server rack: where data center GPUs live, with cooling handled at rack level instead of on the GPU.

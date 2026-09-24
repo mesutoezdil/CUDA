@@ -62,3 +62,14 @@ CUDA no longer tries to support everything equally. It aims to use modern hardwa
 ## Summary
 
 The CUDA Toolkit is the complete environment for GPU programming. With it you write code, compile it, run it, analyze it and improve it. As of 2026, you need to understand CUDA to work seriously with GPUs. Everything else is built on it.
+
+## Glossary
+
+- CUDA: NVIDIA's platform for parallel computing. It connects your code to the GPU.
+- CUDA Toolkit: the complete environment to write, compile, run, analyze and improve GPU programs.
+- `nvcc`: the compiler at the center of the toolkit. It turns CUDA code into code the GPU can run.
+- PTX: the intermediate form `nvcc` usually makes first, before machine code for one GPU architecture.
+- compile target: the GPU architecture you compile for. The wrong one can change behavior and speed.
+- runtime API: the calls your program uses to allocate GPU memory, move data and launch kernels.
+- profiling tools: toolkit tools that measure performance, find bottlenecks and find memory problems.
+- FP8 and FP4: low precision data formats that modern AI workloads use on Hopper and Blackwell.

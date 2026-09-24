@@ -106,3 +106,14 @@ CUDA is not only about writing code. It is about understanding the hardware. To 
 - how data moves  
 
 GPU programming means thinking in parallel. This idea is the base for everything that follows in CUDA.
+
+## Glossary
+
+- VRAM: the GPU's own memory, separate from the system RAM the CPU uses.
+- cache: a small, very fast memory close to the processor.
+- shared memory: GPU memory that threads use to work together and share data.
+- clock speed: how fast a single core runs, often several GHz on a CPU.
+- PCIe: a connection the CPU and GPU use to send data to each other.
+- SM (Streaming Multiprocessor): the most important processing unit inside a GPU, and a GPU is many SMs.
+- Tensor Core: a compute unit inside an SM built for matrix math, which is critical for AI.
+- L2 cache: a larger but slower cache for the whole GPU, not tied to one SM.

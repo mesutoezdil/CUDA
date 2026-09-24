@@ -638,3 +638,25 @@ nav .short{display:none}
 .hero h1{max-width:none;white-space:nowrap;font-size:clamp(1.3rem,5.4vw,4.2rem)}
 .hero .lede{max-width:none}
 .hero .cta{margin-bottom:32px}
+
+/* Glossary: one card per term. */
+.prose ul.glossary{list-style:none;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.prose ul.glossary li{margin:0;border:1px solid var(--border);border-radius:10px;padding:12px 14px;background:var(--card);display:grid;gap:4px;align-content:start}
+.prose ul.glossary .g-term{font-family:var(--mono);font-size:.84rem;color:var(--accent)}
+.prose ul.glossary .g-term code{color:var(--accent)}
+.prose ul.glossary span{font-size:.88rem;color:var(--dim);line-height:1.5}
+
+/* Home fits one screen: sponsors sit next to the button, hero and explorer are compact. */
+.hero{padding:28px 0 22px}
+.hero h1{font-size:clamp(1.3rem,4.6vw,3.4rem);margin-bottom:.22em}
+.hero .lede{margin-bottom:1.1rem}
+.hero .cta{margin-bottom:20px;align-items:center;gap:22px}
+.sup{display:flex;align-items:center;gap:10px}
+.sup span{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmer)}
+.sup img{height:30px;width:auto;background:#fff;border-radius:7px;padding:4px 6px;box-sizing:content-box}
+.hero .termbody{padding:12px 16px}
+.hero .dg-head{margin-bottom:8px}
+.hero .dg-stats{margin-bottom:10px}
+.hero .dg-read{min-height:1.7em;margin-top:6px}
+.hero .dg-legend{margin-top:6px}
+footer{padding:16px 0 20px}

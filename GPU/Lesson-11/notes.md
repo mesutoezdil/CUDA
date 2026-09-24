@@ -79,3 +79,14 @@ Reading the V100 white paper helps you understand why GPUs look the way they do 
 
 > [!TIP]
 > An example: https://images.nvidia.com/content/volta-architecture/pdf/volta-architecture-whitepaper.pdf
+
+## Glossary
+
+- V100: the Volta GPU whose white paper this lesson walks through.
+- Key Features: a short white paper section that shows what the architecture is trying to do.
+- Tensor Cores: dedicated hardware for matrix operations. Volta was the first to have them.
+- Streaming Multiprocessor (SM): the core building block of the GPU. Volta has a redesigned SM.
+- HBM2: the memory Volta uses. It has higher memory bandwidth than earlier generations.
+- memory bandwidth: how fast data moves to the compute units. Higher bandwidth means less waiting.
+- NVLink: a high-speed link that connects GPUs to each other. Volta has its second generation.
+- transistor count: how much hardware is inside a GPU. The V100 has around 21 billion transistors.

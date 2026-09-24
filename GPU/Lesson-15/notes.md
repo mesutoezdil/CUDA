@@ -112,3 +112,14 @@ Your system is now ready. You have:
 Now you can write and run real CUDA programs.
 
 https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_network
+
+## Glossary
+
+- `nvidia-smi`: NVIDIA's command line tool that asks the driver for the GPU name, driver version and memory use.
+- NVIDIA repository: NVIDIA's official package source for WSL, with the current toolkit built for the shared driver.
+- `cuda-keyring_1.1-1_all.deb`: a small package with NVIDIA's signing key and repository address, so your system trusts NVIDIA's packages.
+- `sudo`: runs a command with admin rights. Installing packages needs them.
+- `apt-get update`: refreshes the package lists so apt knows about the packages in the new repository.
+- `nvcc`: the CUDA compiler. `nvcc --version` prints its version without compiling anything.
+- PATH: the list of folders where the shell looks for programs.
+- `export`: sets a variable for this shell and for the programs it starts.

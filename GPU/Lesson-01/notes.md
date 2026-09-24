@@ -70,3 +70,14 @@ Knowing how GPUs evolved helps you understand:
 - why modern GPU features exist  
 
 This makes it easier to move on to CUDA.
+
+## Glossary
+
+- data bandwidth: how much data a GPU can move, which was very limited in early hardware.
+- parallelism: doing many things at the same time, which early GPUs almost lacked.
+- core: a unit that does the work, and modern GPUs have thousands of them.
+- frequency: how fast a GPU runs, and modern GPUs run at much higher frequencies.
+- 3D acceleration: GPU support for 3D graphics that made GPUs useful for many more people.
+- GeForce: the Nvidia GPU series that first made GPUs widely available.
+- generation: one step in GPU releases, each improving performance, efficiency or features.
+- compute platform: a device used for general computation, not just graphics.
