@@ -28,7 +28,7 @@ The table covers data center GPUs from Pascal to Blackwell. The specs come from 
 | FP32 Cores / SM        | 64                | 64                | 64                | 128               | 128               |
 | Shared Memory / SM     | 64 KB             | up to 96 KB       | up to 164 KB      | up to 228 KB      | up to 228 KB      |
 
-H100 and B100 have the same per-SM thread and memory limits. Blackwell is faster than Hopper because of more SMs (192 vs 132 for H100 SXM5), 5th generation Tensor Cores, HBM3e bandwidth, and NVLink 5.0. The per-SM thread and register counts did not change.
+H100 and B100 have the same per-SM thread and memory limits. Blackwell is faster than Hopper because of more SMs (148 on B200 vs 132 on H100 SXM5), 5th generation Tensor Cores, HBM3e bandwidth, and NVLink 5.0. The per-SM thread and register counts did not change.
 
 ## Threads per warp
 

@@ -256,7 +256,9 @@ project001.cu(9): error: expected a ";"
 1 error detected in the compilation of "project001.cu".
 ```
 
-The error points to line 9 (the `printf` line), not line 8 where the semicolon is missing. The compiler only sees the problem when it reaches the next word on line 9. So always check the line just before the one the compiler reports. Put the semicolon back, compile again, and check that the build has no errors.
+The error points to the `printf` line, not the line where the semicolon is missing. The compiler only sees the problem when it reaches the next word, which is on the `printf` line. So always check the line just before the one the compiler reports.
+
+This capture was made before the two comment lines were added to the kernel, so it says line 9. With the file shown above, the semicolon is missing on line 10 and the error points to line 11. Put the semicolon back, compile again, and check that the build has no errors.
 
 ## L40S-specific notes
 
