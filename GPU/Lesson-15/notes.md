@@ -10,9 +10,9 @@ A CUDA install must match your platform exactly. On WSL, use the WSL-specific re
 
 Before you install CUDA, make sure your system can see the GPU:
 
-```
+```bash
 nvidia-smi
-````
+```
 
 If this command fails, stop and fix your GPU setup first. CUDA will not work without it.
 
@@ -22,7 +22,7 @@ Use the official NVIDIA repository for WSL. Do not use `apt install nvidia-cuda-
 
 Run these commands:
 
-```
+```bash
 wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.1-1_all.deb
 sudo dpkg -i cuda-keyring_1.1-1_all.deb
 sudo apt-get update
@@ -41,7 +41,7 @@ It does not install a GPU driver.
 
 Check that CUDA works:
 
-```
+```bash
 nvcc --version
 ```
 
@@ -49,7 +49,7 @@ The output should show CUDA 13.x.
 
 If the command is not found, your PATH is not set correctly. PATH is the list of folders where the shell looks for programs.
 
-```
+```bash
 export PATH=/usr/local/cuda/bin:$PATH
 ```
 

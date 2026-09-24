@@ -30,7 +30,7 @@
   draw();
 })();
 
-document.querySelectorAll(".prose .highlight").forEach(function(box){
+document.querySelectorAll(".prose .highlight:not(.language-text)").forEach(function(box){
   var b = box.appendChild(document.createElement("button"));
   b.type = "button"; b.className = "copy"; b.textContent = "copy";
   b.addEventListener("click", function(){
@@ -173,6 +173,61 @@ customElements.define("sm-scheduler", class extends HTMLElement {
       }
       for (var s = 0; s < S; s++) { setTimeout(feed.bind(null, s), Math.random() * 350); }
     });
+  }
+});
+
+// Grid, blocks, (warps) and threads as nested boxes. Click a level on the right to highlight it.
+customElements.define("cuda-hierarchy", class extends HTMLElement {
+  connectedCallback(){
+    if (this.ready) { return; }
+    this.ready = true;
+    var el = this, warps = this.hasAttribute("warps");
+    var levels = [["grid", "Grid", "All blocks of one kernel launch."], ["block", "Block", "A group of threads on one SM. They can share memory."]]
+      .concat(warps ? [["warp", "Warp", "32 threads that always run together."]] : [])
+      .concat([["thread", "Thread", "Runs one copy of the kernel."]]);
+    var blocks = "";
+    for (var b = 0; b < 3; b++) {
+      var inner = "";
+      if (warps) {
+        for (var w = 0; w < 2; w++) {
+          var dots = ""; for (var t = 0; t < 32; t++) { dots += "<i></i>"; }
+          inner += '<div class="hw"><span>warp ' + w + '</span><div class="dots" style="--d:' + (b * 2 + w) * .45 + 's">' + dots + "</div></div>";
+        }
+      } else {
+        for (var t = 0; t < 3; t++) { inner += '<div class="ht">thread ' + t + "</div>"; }
+        inner += '<div class="ht more">…</div>';
+      }
+      blocks += '<div class="hb"><span>block ' + b + "</span>" + inner + "</div>";
+    }
+    el.classList.add("dg");
+    el.innerHTML = '<div class="dg-hier"><div class="hg"><span>grid · one kernel launch</span><div class="hbs">' + blocks + "</div></div>" +
+      '<div class="hl">' + levels.map(function(l){ return '<button type="button" data-k="' + l[0] + '"><b>' + l[1] + "</b><small>" + l[2] + "</small></button>"; }).join("") + "</div></div>";
+    el.querySelector(".hl").addEventListener("click", function(e){
+      var b = e.target.closest("button");
+      if (!b) { return; }
+      var on = !b.classList.contains("on");
+      el.querySelectorAll(".hl button").forEach(function(x){ x.classList.remove("on"); });
+      el.querySelector(".dg-hier").dataset.focus = on ? b.dataset.k : "";
+      if (on) { b.classList.add("on"); }
+    });
+  }
+});
+
+// Compute capability across data center generations: what grew and what stayed the same.
+customElements.define("cc-progress", class extends HTMLElement {
+  connectedCallback(){
+    if (this.ready) { return; }
+    this.ready = true;
+    var gens = [["Pascal", "6.0", 64, 64], ["Volta", "7.0", 64, 96], ["Ampere", "8.0", 64, 164], ["Hopper", "9.0", 128, 228], ["Blackwell", "10.0", 128, 228]];
+    var same = ["32 threads per warp", "64 warps per SM", "2048 threads per SM", "65,536 registers per SM", "1024 threads per block"];
+    this.classList.add("dg");
+    this.innerHTML = '<div class="dg-head"><span class="dg-title">Compute capability over time</span><span class="dg-note">data center GPUs, per SM</span></div>' +
+      '<div class="dg-ccp">' + gens.map(function(g){
+        return '<div><b>' + g[0] + '</b><span class="cc">CC ' + g[1] + "</span>" +
+          '<div class="bar"><small>FP32 cores</small><i style="--w:' + (g[2] / 128 * 100) + '%"></i><em>' + g[2] + "</em></div>" +
+          '<div class="bar sm"><small>shared memory</small><i style="--w:' + (g[3] / 228 * 100) + '%"></i><em>' + g[3] + " KB</em></div></div>";
+      }).join("") + '</div><div class="dg-title sub">Did not change since CC 6.0</div><div class="dg-facts">' +
+      same.map(function(x){ return "<span>" + x + "</span>"; }).join("") + "</div>";
   }
 });
 

@@ -91,23 +91,6 @@ gridDim=(2,1,1)  blockDim=(4,1,1)  blockIdx=(0,0,0)  threadIdx=(3,0,0)  warpSize
 
 <cuda-launch blocks="2" threads="4" fn="printBuiltins"></cuda-launch>
 
-```
-printBuiltins<<<2, 4>>>
-                  |  |
-        blocks ---+  +--- threads per block
-
-        gridDim.x = 2    gridDim.y = 1    gridDim.z = 1
-        blockDim.x = 4   blockDim.y = 1   blockDim.z = 1
-
-GPU Grid
-+-------------------------------+  +-------------------------------+
-|  Block 0  (blockIdx.x=0)      |  |  Block 1  (blockIdx.x=1)      |
-|  threadIdx.x:  0   1   2   3  |  |  threadIdx.x:  0   1   2   3  |
-+-------------------------------+  +-------------------------------+
-
-All 8 threads fit in one warp (warpSize=32, 24 lanes inactive).
-```
-
 ## Glossary
 
 - `gridDim`: number of blocks in each direction (x, y, z). Same for every thread in the launch.

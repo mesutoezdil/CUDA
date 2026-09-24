@@ -59,23 +59,7 @@ More shared memory lets a kernel keep more data on-chip instead of going to glob
 
 ## Visual
 
-```
-Compute Capability progression (data center GPUs):
-
-  Pascal    Volta    Ampere    Hopper   Blackwell
-  CC 6.0   CC 7.0   CC 8.0   CC 9.0   CC 10.0
-    |        |        |        |          |
-    +--------+--------+--------+-----------+
-FP32/SM:   64       64       64      128       128
-Shmem/SM:  64K      96K     164K     228K      228K
-
-Specs that have NOT changed since CC 6.0:
-  - Threads per warp:     32
-  - Max warps per SM:     64
-  - Max threads per SM:   2048
-  - Max registers per SM: 65536
-  - Max thread block size: 1024
-```
+<cc-progress></cc-progress>
 
 ## Glossary
 

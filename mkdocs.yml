@@ -14,7 +14,8 @@ plugins: []
 markdown_extensions:
   - admonition
   - tables
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      pygments_lang_class: true
   - pymdownx.superfences
 
 nav:

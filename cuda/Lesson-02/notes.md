@@ -20,7 +20,7 @@ printIDs<<<2, 1024>>>();
 
 Block 0 has threads 0-1023. Block 1 has its own threads 0-1023. Thread IDs restart at 0 in every block. To get a unique global ID, use this formula:
 
-```
+```c
 global_id = blockIdx.x * blockDim.x + threadIdx.x
 ```
 
@@ -81,28 +81,6 @@ Block ID: 1  ===  Thread ID: 1
 <cuda-launch blocks="2" threads="1024" fn="printIDs"></cuda-launch>
 
 <sm-scheduler blocks="2" sms="2"></sm-scheduler>
-
-```
-printIDs<<<2, 1024>>>
-              |     |
-    blocks ---+     +--- threads per block
-
-GPU Grid
-+-------------------------------+  +-------------------------------+
-|  Block 0  (blockIdx=0)        |  |  Block 1  (blockIdx=1)        |
-|  T0  T1  T2  ...  T1022 T1023 |  |  T0  T1  T2  ...  T1022 T1023 |
-|  threadIdx.x restarts at 0    |  |  threadIdx.x restarts at 0    |
-+-------------------------------+  +-------------------------------+
-         |                                      |
-         v                                      v
-+------------------+                +------------------+
-|  SM 0            |                |  SM 1            |
-|  (Streaming      |                |  (Streaming      |
-|   Multiprocessor)|                |   Multiprocessor)|
-+------------------+                +------------------+
-
-Blocks get assigned to free SMs. Order is not guaranteed.
-```
 
 ## Glossary
 

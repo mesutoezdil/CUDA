@@ -565,3 +565,42 @@ html[data-mode="light"] .term .dg-grid::before{background:var(--panel)}
 .dg-pf .buf div{animation:pop .35s ease-out}
 .dg-ctl .dg-btn{align-self:center}
 @media (max-width:560px){.dg-pf{grid-template-columns:1fr}}
+
+/* Program output reads as a terminal, code and commands keep the panel look. */
+.prose .language-text{position:relative;margin:0 0 1.2rem}
+.prose .language-text pre{background:#0d1117;color:#c9d1d9;border-color:#21262d;padding-top:38px}
+.prose .language-text::before{content:"output";position:absolute;top:0;left:0;right:0;height:28px;padding:0 14px;display:flex;align-items:center;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:#8b949e;background:#161b22;border:1px solid #21262d;border-bottom:0;border-radius:12px 12px 0 0;z-index:1}
+
+.dg-hier{display:grid;grid-template-columns:1fr 220px;gap:16px;align-items:start}
+.dg-hier .hg{border:1.5px dashed var(--accent-line);border-radius:14px;padding:12px;transition:border-color .2s ease,background .2s ease}
+.dg-hier>.hg>span,.dg-hier .hb>span{display:block;font-size:.7rem;letter-spacing:.08em;color:var(--dim);margin-bottom:10px}
+.dg-hier .hbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.dg-hier .hb{border:1px solid var(--border);border-radius:10px;padding:10px;background:var(--bg2);display:grid;gap:6px;transition:border-color .2s ease,background .2s ease}
+.dg-hier .ht{border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:.72rem;color:var(--text);background:var(--panel);transition:border-color .2s ease,background .2s ease}
+.dg-hier .ht.more{color:var(--dimmer);text-align:center}
+.dg-hier .hw{border:1px solid var(--border);border-radius:7px;padding:6px;background:var(--panel);transition:border-color .2s ease}
+.dg-hier .hw span{display:block;font-size:.66rem;color:var(--dim);margin-bottom:5px}
+.dg-hier .dots{display:grid;grid-template-columns:repeat(16,1fr);gap:2px}
+.dg-hier .dots i{aspect-ratio:1;border-radius:2px;background:var(--accent);opacity:.3;animation:warprun 2.7s var(--d) ease-in-out infinite}
+@keyframes warprun{0%,20%,100%{opacity:.3}8%{opacity:1}}
+.dg-hier .hl{display:grid;gap:6px}
+.dg-hier .hl button{text-align:left;display:grid;gap:2px}
+.dg-hier .hl b{color:var(--text);font-size:.8rem}.dg-hier .hl small{font-size:.7rem;color:var(--dimmer);line-height:1.4}
+.dg-hier[data-focus="grid"] .hg{border-color:var(--accent);background:var(--accent-wash)}
+.dg-hier[data-focus="block"] .hb{border-color:var(--accent);background:var(--accent-soft)}
+.dg-hier[data-focus="warp"] .hw{border-color:var(--accent)}
+.dg-hier[data-focus="thread"] .ht:not(.more){border-color:var(--accent);background:var(--accent-soft)}
+.dg-hier[data-focus="thread"] .dots i{opacity:1;animation:none}
+@media (max-width:640px){.dg-hier{grid-template-columns:1fr}.dg-hier .hbs{grid-template-columns:1fr}}
+
+.dg-ccp{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;position:relative;padding-top:4px}
+.dg-ccp>div{border:1px solid var(--border);border-radius:10px;padding:10px;background:var(--bg2);display:grid;gap:6px}
+.dg-ccp b{font-size:.82rem}
+.dg-ccp .cc{justify-self:start;font-size:.7rem;color:var(--accent);border:1px solid var(--accent-line);background:var(--accent-soft);border-radius:999px;padding:2px 8px}
+.dg-ccp .bar{display:grid;gap:3px;font-size:.66rem;color:var(--dimmer)}
+.dg-ccp .bar i{display:block;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--accent-line),var(--accent));width:var(--w);animation:grow 1s ease-out both}
+.dg-ccp .bar.sm i{background:linear-gradient(90deg,var(--cool-line),var(--cool))}
+.dg-ccp .bar em{font-style:normal;color:var(--text);font-size:.72rem}
+@keyframes grow{from{width:0}}
+@media (max-width:640px){.dg-ccp{grid-template-columns:1fr 1fr}}

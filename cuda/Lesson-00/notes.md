@@ -35,20 +35,7 @@ Every kernel launch creates three levels:
 - block: a group of threads on the same physical processor. They can share memory.
 - grid: all blocks of one kernel launch. One launch, one grid.
 
-```
-Grid
-+---------------------------------------------------------------------+
-|                                                                     |
-|   Block 0               Block 1               Block 2              |
-|   +---------------+     +---------------+     +---------------+    |
-|   | Thread 0      |     | Thread 0      |     | Thread 0      |    |
-|   | Thread 1      |     | Thread 1      |     | Thread 1      |    |
-|   | Thread 2      |     | Thread 2      |     | Thread 2      |    |
-|   |    ...        |     |    ...        |     |    ...        |    |
-|   +---------------+     +---------------+     +---------------+    |
-|                                                                     |
-+---------------------------------------------------------------------+
-```
+<cuda-hierarchy></cuda-hierarchy>
 
 ## `blockIdx.x` and `threadIdx.x`
 
@@ -108,21 +95,6 @@ You get one line every time. The output is always the same because there is only
 ## Visual
 
 <cuda-launch blocks="1" threads="1" fn="printIDs"></cuda-launch>
-
-```
-printIDs<<<1, 1>>>
-              |  |
-    blocks ---+  +--- threads per block
-
-GPU Grid
-+-------------------------+
-|  Block 0  (blockIdx=0)  |
-|  +-------------------+  |
-|  |  Thread 0         |  |
-|  |  threadIdx.x = 0  |  |
-|  +-------------------+  |
-+-------------------------+
-```
 
 ## Glossary
 

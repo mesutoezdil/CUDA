@@ -66,23 +66,6 @@ Block ID: 0  ===  Thread ID: 1
 
 <cuda-launch blocks="1" threads="4" fn="printIDs"></cuda-launch>
 
-```
-printIDs<<<1, 4>>>
-              |  |
-    blocks ---+  +--- threads per block
-
-GPU Grid
-+-------------------------------------------------------------+
-|  Block 0  (blockIdx=0)                                      |
-|  +----------+ +----------+ +----------+ +----------+        |
-|  | Thread 0 | | Thread 1 | | Thread 2 | | Thread 3 |        |
-|  | tIdx=0   | | tIdx=1   | | tIdx=2   | | tIdx=3   |        |
-|  +----------+ +----------+ +----------+ +----------+        |
-|                                                             |
-|  all 4 fit in one warp (warp size = 32)                     |
-+-------------------------------------------------------------+
-```
-
 ## Glossary
 
 - warp: a group of 32 threads the GPU runs together as one unit. The GPU schedules warps, not single threads.

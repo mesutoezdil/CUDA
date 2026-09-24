@@ -6,12 +6,7 @@ This lesson covers warps, the third level of the CUDA hierarchy. Lesson-01 and L
 
 The software levels in CUDA are:
 
-```
-Grid
-  └── Blocks
-        └── Warps  (exactly 32 threads each)
-              └── Threads
-```
+<cuda-hierarchy warps></cuda-hierarchy>
 
 You choose the number of blocks and threads per block with `<<<num_blocks, threads_per_block>>>` (see Lesson-01, Lesson-02). The warp size is always 32 on NVIDIA GPUs. It is fixed in the hardware and cannot be changed. The warp is the real scheduling unit on the GPU. The GPU does not run threads one by one. It runs them in groups of 32.
 
@@ -196,29 +191,6 @@ Block 1 shows warp_id 0 again because warp IDs start at zero in every block. The
 <cuda-launch blocks="1" threads="128" fn="test01"></cuda-launch>
 
 <cuda-launch blocks="2" threads="64" fn="test01"></cuda-launch>
-
-```
-test01<<<1, 128>>>
-              |
-    1 block --+-- 128 threads/block
-
-Block 0
-+-------------------------------------------------------+
-|  Warp 0: threads   0 -  31  (0/32 = 0)               |
-|  Warp 1: threads  32 -  63  (32/32 = 1)              |
-|  Warp 2: threads  64 -  95  (64/32 = 2)              |
-|  Warp 3: threads  96 - 127  (96/32 = 3)              |
-+-------------------------------------------------------+
-
-test01<<<2, 64>>>
-
-Block 0                          Block 1
-+---------------------------+   +---------------------------+
-|  Warp 0: threads  0 - 31 |   |  Warp 0: threads  0 - 31 |
-|  Warp 1: threads 32 - 63 |   |  Warp 1: threads 32 - 63 |
-+---------------------------+   +---------------------------+
-  warp_id: 0, 1                   warp_id: 0, 1  (resets)
-```
 
 ## Glossary
 
