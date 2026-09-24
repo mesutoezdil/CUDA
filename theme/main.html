@@ -9,7 +9,7 @@
 <meta name="color-scheme" content="dark light">
 {% if page.canonical_url %}<link rel="canonical" href="{{ page.canonical_url }}">{% endif %}
 <link rel="icon" type="image/svg+xml" href="{{ 'assets/logo.svg'|url }}">
-<link rel="stylesheet" href="{{ 'assets/styles.css'|url }}">
+<link rel="stylesheet" href="{{ 'assets/styles.css'|url }}?v={{ build_date_utc.strftime('%s') }}">
 <script>try{if((localStorage.getItem("cuda-mode")||(matchMedia("(prefers-color-scheme: light)").matches?"light":""))==="light")document.documentElement.setAttribute("data-mode","light")}catch(e){}</script>
 </head>
 <body>
@@ -105,7 +105,7 @@
     <a href="{{ config.repo_url }}">Source on GitHub ↗</a>
   </div>
 </footer>
-<script src="{{ 'assets/site.js'|url }}"></script>
-<script src="{{ 'assets/gpu.js'|url }}"></script>
+<script src="{{ 'assets/site.js'|url }}?v={{ build_date_utc.strftime('%s') }}"></script>
+<script src="{{ 'assets/gpu.js'|url }}?v={{ build_date_utc.strftime('%s') }}"></script>
 </body>
 </html>
