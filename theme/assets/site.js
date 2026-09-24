@@ -41,6 +41,13 @@ document.querySelectorAll(".prose .highlight:not(.language-text)").forEach(funct
   });
 });
 
+document.querySelectorAll(".prose .language-text code").forEach(function(c){
+  c.innerHTML = c.innerHTML.split("\n").map(function(l){
+    return /^\s*\.\.\.\s*$/.test(l) ? '<span class="o-dim">' + l + "</span>"
+      : l.replace(/(&lt;-.*)$/, '<span class="o-note">$1</span>').replace(/\b\d+\b(?![^<]*>)/g, '<span class="o-num">$&</span>');
+  }).join("\n");
+});
+
 // Every block is drawn as rows of 32 lanes, one row per warp, so a launch that
 // is not a multiple of 32 shows the lanes the hardware still pays for.
 var STEPS = [1, 2, 4, 8, 16, 32, 48, 64, 96, 128, 192, 256, 384, 512, 768, 1024, 1536, 2048];

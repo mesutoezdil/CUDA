@@ -558,11 +558,19 @@ html[data-mode="light"] .term .dg-grid::before{background:var(--panel)}
 .dg-ctl .dg-btn{align-self:center}
 @media (max-width:560px){.dg-pf{grid-template-columns:1fr}}
 
-/* Program output reads as a terminal, code and commands keep the panel look. */
-.prose .language-text{position:relative;margin:0 0 1.2rem}
-.prose .language-text pre{background:#0d1117;color:#c9d1d9;border-color:#21262d;padding-top:38px}
-.prose .language-text::before{content:"output";position:absolute;top:0;left:0;right:0;height:28px;padding:0 14px;display:flex;align-items:center;
-  font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:#8b949e;background:#161b22;border:1px solid #21262d;border-bottom:0;border-radius:12px 12px 0 0;z-index:1}
+/* Every code block is a small window: a title bar naming what it is, the body under it. Output is a dark terminal. */
+.prose .highlight{position:relative;margin:0 0 1.2rem}
+.prose .highlight pre{padding-top:40px}
+.prose .highlight::before{content:"code";position:absolute;top:0;left:0;right:0;height:28px;display:flex;align-items:center;padding:0 14px 0 62px;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+  background-color:var(--panel);border:1px solid var(--border);border-bottom-color:var(--divider);border-radius:12px 12px 0 0;z-index:1;
+  background-image:radial-gradient(circle at 18px 14px,#ff5f57 4.5px,transparent 5px),radial-gradient(circle at 33px 14px,#febc2e 4.5px,transparent 5px),radial-gradient(circle at 48px 14px,#28c840 4.5px,transparent 5px);
+  background-repeat:no-repeat}
+.prose .language-c::before,.prose .language-cpp::before,.prose .language-cuda::before{content:"cuda c"}
+.prose .language-bash::before,.prose .language-sh::before,.prose .language-shell::before{content:"shell"}
+.prose .language-text::before{content:"output";color:#8b949e;background-color:#161b22;border-color:#21262d}
+.prose .language-text pre{background:#0d1117;color:#c9d1d9;border-color:#21262d}
+.prose .highlight .copy{top:3px;right:8px;opacity:.8;z-index:2}
 
 .dg-hier{display:grid;grid-template-columns:1fr 220px;gap:16px;align-items:start}
 .dg-hier .hg{border:1.5px dashed var(--accent-line);border-radius:14px;padding:12px;transition:border-color .2s ease,background .2s ease}
@@ -596,3 +604,4 @@ html[data-mode="light"] .term .dg-grid::before{background:var(--panel)}
 .dg-ccp .bar em{font-style:normal;color:var(--text);font-size:.72rem}
 @keyframes grow{from{width:0}}
 @media (max-width:640px){.dg-ccp{grid-template-columns:1fr 1fr}}
+.o-num{color:#56d364}.o-dim{color:#586069}.o-note{color:#e3b341}
