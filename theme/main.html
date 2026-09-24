@@ -36,19 +36,16 @@
 <section class="hero">
   <div class="cores" aria-hidden="true">{% for i in range(64) %}<i></i>{% endfor %}</div>
   <div class="wrap">
-    <p class="tagline"><span class="dot"></span><span>Open notes · real L40S output · MIT</span></p>
-    <h1>Learn <span class="accent">CUDA</span> from the silicon up</h1>
-    <p class="lede">How GPUs actually work, before and while you write kernels. Architecture first, then code you can compile and run, with every idea drawn out so you can poke at it.</p>
+    <h1>Learn <span class="accent">CUDA</span> step by step</h1>
+    <p class="lede">First learn how a GPU works. Then write CUDA code. Short lessons in plain English, with pictures you can play with.</p>
     <div class="cta">
-      <a class="btn primary" href="{{ nav.items[1].children[0].url|url }}">Start with the GPU →</a>
-      <a class="btn ghost" href="{{ nav.items[2].children[0].url|url }}">Jump to kernels</a>
+      <a class="btn primary" href="{{ nav.items[1].children[0].url|url }}">Start learning →</a>
     </div>
     <ul class="facts">
-      {% for sec in nav if sec.children %}<li><b>{{ sec.children|length }}</b> {{ sec.title|lower }} lessons</li>{% endfor %}
-      <li><b>sm_89</b> tested on L40S</li>
+      {% for sec in nav if sec.children %}<li><b>{{ sec.children|length }}</b> {{ sec.title }} lessons</li>{% endfor %}
     </ul>
     <div class="frame term">
-      <div class="termbar"><i></i><i></i><i></i><span class="mono">launch explorer · drag the sliders, hover a thread</span></div>
+      <div class="termbar"><i></i><i></i><i></i><span class="mono">try it · move the sliders</span></div>
       <div class="termbody"><cuda-launch blocks="2" threads="96" fn="printIDs"></cuda-launch></div>
     </div>
   </div>
@@ -57,9 +54,9 @@
 {% for sec in nav if sec.children %}
 <section{% if loop.index is even %} class="band"{% endif %}>
   <div class="wrap">
-    <p class="eyebrow"><b>0{{ loop.index }}</b> Track</p>
+    <p class="eyebrow"><b>Step {{ loop.index }}</b></p>
     <h2>{{ sec.title }}</h2>
-    <p class="lede">{% if loop.first %}What a GPU is, where it came from, how to read its specs and white papers, and how to set up a machine that can run CUDA.{% else %}Kernels, launch configurations, built-in variables, warps and the toolchain, one small change per lesson.{% endif %}</p>
+    <p class="lede">{% if loop.first %}What a GPU is and how to set up a machine for CUDA.{% else %}Write, compile and run your first CUDA programs.{% endif %}</p>
     <div class="lessons">
       {% for p in sec.children %}
       <a class="lesson" href="{{ p.url|url }}"><span class="num">{{ p.title[:2] }}</span><b>{{ p.title[3:] }}</b></a>
@@ -69,23 +66,13 @@
 </section>
 {% endfor %}
 
-<section>
+<section class="sponsors">
   <div class="wrap">
-    <p class="eyebrow"><b>03</b> Scheduling</p>
-    <h2>Blocks land wherever an SM is free</h2>
-    <p class="lede">The driver hands each block to the next free streaming multiprocessor. Run it a few times and watch the finishing order change, which is why kernel <code>printf</code> output never comes back in the same order twice.</p>
-    <sm-scheduler blocks="6" sms="3"></sm-scheduler>
-  </div>
-</section>
-
-<section class="band sponsors">
-  <div class="wrap">
-    <p class="eyebrow"><b>04</b> Supported by</p>
+    <p class="eyebrow">Supported by</p>
     <div class="logos">
       <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg" alt="JetBrains" width="72">
       <img src="{{ 'manning.png'|url }}" alt="Manning Publications" width="120">
     </div>
-    <p class="note">JetBrains provides the tools used for CUDA development here. Manning provided <em>CUDA for Deep Learning</em> by Elliot Arledge.</p>
   </div>
 </section>
 

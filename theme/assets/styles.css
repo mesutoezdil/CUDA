@@ -217,7 +217,7 @@ pre code,.term code{background:none;border:0;padding:0}
 .lesson b{font-family:var(--mono);font-size:.9rem;letter-spacing:-.01em;font-weight:600}
 .sponsors .logos{display:flex;gap:34px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
 .sponsors img{height:auto}
-html:not([data-mode="light"]) .sponsors img{filter:grayscale(1) invert(1) brightness(1.6);opacity:.8}
+.sponsors img{background:#fff;border-radius:10px;padding:10px 14px;box-sizing:content-box}
 
 /* Lesson pages: the track's lessons on the left, the reading column on the right. */
 .doc{display:grid;grid-template-columns:230px minmax(0,1fr);gap:48px;padding-top:40px;padding-bottom:64px}
