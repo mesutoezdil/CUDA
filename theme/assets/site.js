@@ -56,7 +56,7 @@ customElements.define("cuda-launch", class extends HTMLElement {
       '<div class="dg-head"><code class="dg-call"></code><div class="dg-ctl">' +
       '<label>blocks <input type="range" min="1" max="8" value="' + B + '"></label>' +
       '<label>threads / block <input type="range" min="0" max="' + (steps.length - 1) + '" value="' + steps.indexOf(T) + '"></label>' +
-      '</div></div><div class="dg-stats"></div><div class="dg-grid"></div>' +
+      '<button class="dg-btn" type="button">run</button></div></div><div class="dg-stats"></div><div class="dg-grid"></div>' +
       '<div class="dg-legend"><span><i style="background:var(--accent)"></i><i style="background:var(--cool)"></i><i style="background:#e3b341"></i><i style="background:#bc8cff"></i>warps 0 1 2 3, repeating</span><span><i style="background:var(--border)"></i>idle lane</span><span>one row = one warp = 32 lanes</span></div>' +
       '<div class="dg-read"></div>';
     var ins = el.querySelectorAll("input"), grid = el.querySelector(".dg-grid"), read = el.querySelector(".dg-read");
@@ -106,7 +106,27 @@ customElements.define("cuda-launch", class extends HTMLElement {
     grid.addEventListener("mouseover", point);
     grid.addEventListener("click", point);
     grid.addEventListener("mouseleave", function(){ clear(); read.innerHTML = idle; });
-    ins.forEach(function(i){ i.addEventListener("input", draw); });
+    var timer = 0, btn = el.querySelector(".dg-btn");
+    // Warps light up one at a time: all 32 lanes of a warp run together, blocks take turns in any order.
+    btn.addEventListener("click", function(){
+      clearInterval(timer);
+      var rows = [];
+      el.querySelectorAll(".dg-cells").forEach(function(cells){
+        cells.querySelectorAll("i.ran").forEach(function(c){ c.classList.remove("ran"); });
+        for (var w = 0; w < cells.children.length / 32; w++) { rows.push([cells, w]); }
+      });
+      if (!rows.length) { return; }
+      rows.sort(function(){ return Math.random() - .5; });
+      grid.classList.add("running");
+      var i = 0, step = Math.max(12, 2400 / rows.length);
+      timer = setInterval(function(){
+        var r = rows[i++];
+        for (var k = r[1] * 32; k < r[1] * 32 + 32; k++) { r[0].children[k].classList.add("ran"); }
+        read.innerHTML = "block <b>" + r[0].dataset.b + "</b> · warp <b>" + r[1] + "</b> runs. All 32 lanes of a warp run together.";
+        if (i === rows.length) { clearInterval(timer); setTimeout(function(){ grid.classList.remove("running"); read.innerHTML = idle; }, 900); }
+      }, step);
+    });
+    ins.forEach(function(i){ i.addEventListener("input", function(){ clearInterval(timer); grid.classList.remove("running"); draw(); }); });
     draw();
   }
 });
@@ -152,6 +172,89 @@ customElements.define("sm-scheduler", class extends HTMLElement {
         }, d);
       }
       for (var s = 0; s < S; s++) { setTimeout(feed.bind(null, s), Math.random() * 350); }
+    });
+  }
+});
+
+// The CPU does not wait for a kernel. Without cudaDeviceSynchronize() the program can end before the GPU prints.
+customElements.define("kernel-sync", class extends HTMLElement {
+  connectedCallback(){
+    if (this.ready) { return; }
+    this.ready = true;
+    var el = this, cmd = el.getAttribute("cmd") || "./first_kernel", out = (el.getAttribute("out") || "Block ID: 0  ===  Thread ID: 0").split("|");
+    var sync = 0, timers = [];
+    el.classList.add("dg");
+    el.innerHTML = '<div class="dg-head"><span class="dg-title">Who waits for whom?</span><div class="dg-tabs"><button type="button" data-i="0" class="on">without sync</button><button type="button" data-i="1">with cudaDeviceSynchronize()</button></div></div>' +
+      '<div class="dg-sync"></div><div class="dg-term"></div><div class="dg-head"><button class="dg-btn" type="button">run</button><span class="dg-note"></span></div>';
+    var lanes = el.querySelector(".dg-sync"), term = el.querySelector(".dg-term"), note = el.querySelector(".dg-note");
+    function steps(){
+      return sync
+        ? [["cpu", "launch kernel"], ["gpu", "kernel starts"], ["cpu", "cudaDeviceSynchronize() waits", "wait"], ["gpu", "threads call printf"], ["gpu", "kernel ends, output flushed"], ["out"], ["cpu", "return 0"]]
+        : [["cpu", "launch kernel"], ["gpu", "kernel starts"], ["cpu", "return 0, program ends"], ["gpu", "cut off before printing", "dead"]];
+    }
+    function reset(){
+      timers.forEach(clearTimeout); timers = [];
+      var st = steps();
+      lanes.innerHTML = ["cpu", "gpu"].map(function(l){
+        return '<div><span>' + l.toUpperCase() + '</span>' + st.map(function(x, i){ return x[0] === l ? '<i data-i="' + i + '" class="' + (x[2] || "") + '">' + x[1] + "</i>" : ""; }).join("") + "</div>";
+      }).join("");
+      term.innerHTML = "$ " + cmd;
+      note.textContent = "";
+    }
+    function run(){
+      reset();
+      steps().forEach(function(x, i){
+        timers.push(setTimeout(function(){
+          var seg = lanes.querySelector('[data-i="' + i + '"]');
+          if (seg) { seg.classList.add("on"); }
+          if (x[0] === "out") { term.innerHTML += out.map(function(l){ return "<br>" + l; }).join(""); }
+        }, 250 + i * 650));
+      });
+      timers.push(setTimeout(function(){
+        term.innerHTML += "<br>$";
+        note.textContent = sync ? "The CPU waited, so every line arrived." : "The CPU did not wait. The program ended before the GPU could print.";
+      }, 400 + steps().length * 650));
+    }
+    el.querySelectorAll(".dg-tabs button").forEach(function(b){
+      b.addEventListener("click", function(){
+        el.querySelectorAll(".dg-tabs button").forEach(function(x){ x.classList.toggle("on", x === b); });
+        sync = +b.dataset.i; run();
+      });
+    });
+    el.querySelector(".dg-btn").addEventListener("click", run);
+    reset();
+  }
+});
+
+// Each thread writes its line into a buffer when it finishes. The buffer prints in that order, which changes every run.
+customElements.define("printf-order", class extends HTMLElement {
+  connectedCallback(){
+    if (this.ready) { return; }
+    this.ready = true;
+    var el = this, N = +el.getAttribute("threads") || 4, runs = 0;
+    el.classList.add("dg");
+    var th = "";
+    for (var t = 0; t < N; t++) { th += '<span class="dg-chip" data-t="' + t + '">thread ' + t + "</span>"; }
+    el.innerHTML = '<div class="dg-head"><span class="dg-title">printf order is not fixed</span><button class="dg-btn" type="button">run</button></div>' +
+      '<div class="dg-pf"><div><span class="dg-lbl">threads</span><div class="th">' + th + '</div></div><div><span class="dg-lbl">printf buffer</span><div class="buf"></div></div></div>' +
+      '<div class="dg-term">$ ./first_kernel</div>';
+    var btn = el.querySelector(".dg-btn"), buf = el.querySelector(".buf"), term = el.querySelector(".dg-term");
+    btn.addEventListener("click", function(){
+      runs++; btn.disabled = true; buf.innerHTML = ""; term.innerHTML = "$ ./first_kernel";
+      el.querySelectorAll(".th .dg-chip").forEach(function(c){ c.classList.remove("done"); });
+      var order = [];
+      for (var t = 0; t < N; t++) { order.push(t); }
+      order.sort(function(){ return Math.random() - .5; });
+      order.forEach(function(t, i){
+        setTimeout(function(){
+          el.querySelector('.th [data-t="' + t + '"]').classList.add("done");
+          buf.innerHTML += "<div>Thread ID: " + t + "</div>";
+        }, 300 + i * 450);
+      });
+      setTimeout(function(){
+        term.innerHTML += order.map(function(t){ return "<br>Block ID: 0  ===  Thread ID: " + t; }).join("") + "<br>$ <span class='dg-note'>run " + runs + ", order " + order.join(" ") + "</span>";
+        btn.disabled = false; btn.textContent = "run again";
+      }, 500 + N * 450);
     });
   }
 });

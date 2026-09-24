@@ -1,197 +1,111 @@
-## How I Started Making Sense of Nvidia GPU Architectures
+# Nvidia GPU Architectures
 
-Before going deeper into CUDA, I realized I was missing something important.
+This lesson explains what Nvidia GPU architecture names like Fermi, Ampere and Hopper mean. It shows how GPUs evolved and why they look the way they do today.
 
-I kept seeing names like Fermi, Ampere, Hopper… but they felt like just labels.
+## Why Architectures Matter
 
-So I stopped for a moment and asked myself:
+Names like Fermi, Ampere and Hopper are more than labels. The goal is not to memorize them. The goal is to understand how GPUs changed over time.
 
-What do these architectures actually mean?
+## What "Architecture" Means
 
-And why should I even care?
+A GPU architecture is the blueprint of the GPU. It defines how everything inside the chip is built.
 
-At first, I thought this was just history.
-
-But the more I looked into it, the more I understood: This is not about memorizing names.
-
-It is about understanding how GPUs evolved, and why they look the way they do today.
-
-## What “Architecture” Really Means (From My Perspective)
-
-When people say “GPU architecture”, it sounds very abstract.
-
-But in simple terms, I started thinking about it like this: It is the blueprint of the GPU.
-
-It defines how everything is built inside the chip.
-
-Not just cores, but also:
+It covers more than the cores. It also defines:
 
 - how data flows  
 - how memory is accessed  
 - what kind of operations are fast  
-- what the GPU is actually optimized for  
+- what the GPU is optimized for  
 
-And once I understood this, something clicked.
+A new architecture is usually not a small upgrade. It is often a shift in design priorities.
 
-Every new architecture is not just a small upgrade.
+## The Early Modern Era
 
-It is usually a shift in design priorities.
+It helps to read the timeline like a story. Early modern GPUs focused on general compute and graphics.
 
-## Looking Back: How Things Evolved
-
-Instead of trying to memorize everything, I started looking at the timeline like a story.
-
-In the early modern era, GPUs were still very focused on general compute and graphics.
-
-Architectures like:
+These architectures improved performance and efficiency step by step:
 
 - Fermi  
 - Kepler  
 - Maxwell  
 - Pascal  
 
-were all improving performance and efficiency step by step.
+The goal in this period was to make GPUs faster and more efficient for general workloads.
 
-At that stage, the goal was still clear:
+## AI Becomes Central
 
-Make GPUs faster and more efficient for general workloads.
-
-Then something changed.
-
-## The Turning Point: AI Becomes Central
-
-When I reached Volta, I noticed a clear shift.
-
-This was not just another upgrade.
-
-This was where Nvidia really started to push AI-specific hardware.
+Volta marks a clear shift. With Volta, Nvidia started to push AI-specific hardware.
 
 After that:
 
 - Ampere scaled this idea further  
 - Hopper optimized heavily for AI workloads (especially transformers)  
 
-At this point, GPUs stopped being “just graphics hardware”.
+From here, GPUs were no longer just graphics hardware. They became full compute platforms.
 
-They became full compute platforms.
-
-## What Changed in New Architectures
-
-When I moved to more recent architectures, the direction became even clearer.
+## Recent Architectures
 
 ### Blackwell (2024–2025)
 
-With Blackwell, the focus is very obvious.
+Blackwell is designed around large-scale AI workloads. It brings more compute, more bandwidth and more density.
 
-Everything is designed around large-scale AI workloads.
-
-More compute, more bandwidth, more density.
-
-But what I found interesting is this: The real performance gains are not universal.
-
-They depend heavily on:
+The real performance gains are not the same for every case. They depend on:
 
 - the workload  
 - the precision  
 - the system setup  
 
-So “faster GPU” is not always a simple statement.
+So "faster GPU" is not always a simple statement.
 
 ### Rubin (2026, Now Entering Deployment)
 
-Rubin is where things start to feel very different.
+Rubin goes beyond scaling. It pushes AI systems even further.
 
-It is not just about scaling anymore.
-
-It is about pushing AI systems even further.
-
-From what is known so far:
+From what is known so far, Rubin brings:
 
 - newer Tensor Core designs  
 - support for HBM4 memory  
 - very high SM counts  
 - higher overall compute density  
 
-And something important: Rubin is not just a concept anymore.
+Rubin is not just a concept. It is already entering real systems and cloud environments.
 
-It is already entering real systems and cloud environments.
+### Rubin Ultra and Beyond
 
-### Looking Ahead: Rubin Ultra and Beyond
+Nvidia's roadmap continues. Rubin Ultra is expected to push things further. After that, Feynman is on the roadmap.
 
-When I looked further into the roadmap, I realized Nvidia is not slowing down.
-
-Rubin Ultra is expected to push things even further.
-
-And then there is Feynman on the roadmap.
-
-At this point, it is clear: The direction is not changing.
-
-Everything is moving toward larger, more specialized AI systems.
+The direction stays the same. Everything moves toward larger, more specialized AI systems.
 
 <arch-timeline focus="Volta"></arch-timeline>
 
-## What I Learned About Performance
+## Performance Depends on Context
 
-At the beginning, I tried to compare GPUs using simple numbers.
-
-Things like:
+Simple numbers make a poor comparison. Examples are:
 
 - TFLOPS  
 - clock speed  
 
-But that quickly became confusing.
-
-Because those numbers do not tell the full story.
-
-A better way to think about it is this: Performance depends on context.
-
-It depends on:
+These numbers do not tell the full story. Performance depends on:
 
 - what kind of workload you run  
 - what precision you use  
 - how memory behaves  
 - how the architecture is designed  
 
-For example: A GPU can look very powerful on paper, but perform poorly for a specific task.
+A GPU can look very powerful on paper but perform poorly on a specific task. Another GPU with lower raw numbers can do better in real use.
 
-And another GPU with lower “raw numbers” can outperform it in real scenarios.
+## Naming Changed Too
 
-## Naming Also Changed (And That Matters)
+Older data center GPUs were often labeled "Tesla". Newer ones are called Data Center GPUs.
 
-Another thing that confused me at the beginning was naming.
+This shows a change in focus, from generic compute to AI and cloud systems.
 
-Older GPUs were often labeled as “Tesla”.
+## Architectures Are Design Decisions
 
-But in newer architectures, this shifted to: Data Center GPUs.
+It is better to see architectures as design decisions, not versions. Each architecture answers one question. What kind of problems do we want to solve now?
 
-This reflects something deeper.
+With this view, GPU names make more sense. Performance differences become logical. CUDA concepts connect more easily.
 
-The focus moved from: generic compute → AI and cloud systems
+## Summary
 
-## What Finally Made It Clear for Me
-
-After going through all of this, I stopped looking at architectures as versions.
-
-Instead, I started seeing them as design decisions.
-
-Each architecture answers a question:
-
-What kind of problems are we trying to solve now?
-
-And once I looked at it this way, everything became easier.
-
-GPU names made more sense.
-
-Performance differences became more logical.
-
-And CUDA concepts started to connect naturally.
-
-## Final
-
-GPU architectures are not just technical updates.
-
-They reflect how computing itself is evolving.
-
-From graphics → to compute → to AI at scale.
-
-And understanding this shift is probably one of the most important steps before going deeper into CUDA.
+GPU architectures show how computing itself is changing. The path goes from graphics, to compute, to AI at scale. Understanding this shift is an important step before going deeper into CUDA.

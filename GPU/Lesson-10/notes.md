@@ -1,110 +1,69 @@
-At some point, if you go deeper into GPUs, you will run into something called a “white paper”.
+# Reading GPU White Papers
 
-At first, it feels heavy. Too detailed. Maybe even unnecessary.
+This lesson explains what GPU white papers are, how to find them, and how to read them.
 
-But over time, you realize something important.
+## What a White Paper Is
 
-White papers are the closest thing to the truth about a GPU.
+A white paper is an official technical document about a GPU. It can feel heavy and too detailed at first. It is the most accurate source about a GPU. It has no marketing and no simplification. It shows how the hardware is actually built.
 
-No marketing. No simplification. Just how the hardware is actually built.
+## Finding a White Paper
 
-If you want to understand what a GPU really is, this is where you look.
+Take the chip name and add "white paper". For example: `GA100 white paper` or `H100 white paper`
 
-Finding a white paper is simple.
+Not every result is useful. Blog posts, summaries and comparisons can help, but they are not enough. Always look for the official PDF.
 
-Take the chip name. Add “white paper”.
+## A Consistent Structure
 
-For example: `GA100 white paper` or `H100 white paper`
+NVIDIA white papers follow a consistent structure. Each new architecture is usually explained against the previous one. So a white paper shows both what is new and what changed. This is why the same tables appear in different white papers.
 
-But there is one detail that matters.
+Once you understand one white paper well, the others become much easier to read.
 
-Not every result is useful.
+## The Direction of GPU Architectures
 
-You will find blog posts, summaries, comparisons. Those can help, but they are not enough.
+As of 2026, GPU architectures show a clear direction:
 
-What you want is always the official PDF.
+- Pascal was still mostly a general-purpose compute architecture.
+- Volta introduced Tensor Cores. GPUs became explicitly optimized for AI workloads.
+- Ampere expanded this with more throughput, better efficiency, and features like sparsity support.
+- Hopper added FP8 and new execution models for large-scale AI systems.
+- Blackwell adds new formats like NVFP4, which bring ultra-low precision directly into hardware. This changes how large models are deployed and scaled.
 
-That is where the real information lives.
-
-After reading a few of them, you start noticing a pattern.
-
-NVIDIA white papers are not random documents. They follow a consistent structure.
-
-Each new architecture is usually explained in relation to the previous one.
-
-So it is not just “what is new”, but also “what changed”.
-
-That is why you often see the same tables across different white papers.
-
-At first, it feels repetitive.
-
-Later, you understand why it is useful.
-
-Once you understand one white paper properly, the others become much easier to read.
-
-Looking at GPU architectures as of 2026, there is a very clear direction.
-
-Pascal was still mostly a general-purpose compute architecture.
-
-With Volta, things changed. Tensor Cores were introduced, and GPUs became explicitly optimized for AI workloads.
-
-Ampere expanded that idea. More throughput, better efficiency, and features like sparsity support.
-
-Hopper pushed things further with FP8 and new execution models designed for large-scale AI systems.
-
-And now with Blackwell, the shift is even more obvious.
-
-New formats like NVFP4 bring ultra-low precision directly into hardware. 
-
-This is not a small step. It changes how large models are deployed and scaled.
-
-At this point, GPUs are no longer just compute devices.
-
-They are infrastructure for AI systems.
+GPUs are no longer just compute devices. They are infrastructure for AI systems.
 
 <arch-timeline focus="Pascal"></arch-timeline>
 
-When reading a white paper, one section matters more than anything else:
+## The Streaming Multiprocessor (SM)
 
-The Streaming Multiprocessor (SM).
-
-This is the core of the GPU.
-
-Everything comes together here:
+The most important section in a white paper is the Streaming Multiprocessor (SM). The SM is the core of the GPU. It brings together:
 
 * CUDA cores
 * Tensor cores
 * Scheduling
 * Memory access
 
-If you want to understand what really changed in an architecture, this is where you look.
+To see what really changed in an architecture, look at the SM. The evolution is clear:
 
-You can see the evolution clearly:
-
-Pascal has no Tensor Cores. Volta introduces them. Ampere improves and scales them. Hopper optimizes them for transformer workloads. Blackwell extends them with new precision formats and instructions.
-
-These are not small improvements.
+- Pascal has no Tensor Cores.
+- Volta introduces them.
+- Ampere improves and scales them.
+- Hopper optimizes them for transformer workloads.
+- Blackwell extends them with new precision formats and instructions.
 
 Each step changes what the GPU is designed to do.
 
-Another thing you notice over time:
+## The Order of Sections
 
-Even though architectures change, the way they are documented does not.
+Architectures change, but the way they are documented stays the same. The order is:
 
-The structure stays consistent.
+1. New features
+2. SM design
+3. Performance comparisons
+4. Technical specifications
 
-First, new features are introduced. Then the SM design is explained. Then performance comparisons are shown. Finally, the technical specifications are listed.
-
-This consistency is intentional.
-
-It makes it easier to follow the evolution across generations.
+This consistency is on purpose. It makes the evolution across generations easier to follow.
 
 <whitepaper-map></whitepaper-map>
 
-In practice, reading white papers is not about memorizing numbers.
+## How to Read One
 
-It is about understanding change.
-
-Look at the SM, identify new hardware units and compare with the previous generation.
-
-That is where the real story is.
+Reading white papers is not about memorizing numbers. It is about understanding change. Look at the SM, find the new hardware units, and compare them with the previous generation.

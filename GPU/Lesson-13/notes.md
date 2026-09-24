@@ -1,89 +1,46 @@
 # Setting Up CUDA Development (A Modern Workflow with JetBrains)
 
-Before writing any CUDA code, there is one step you cannot skip.
+This lesson explains how to set up a CUDA work environment. It uses JetBrains tools, mainly CLion, on top of the CUDA Toolkit.
 
-You need a working env.
+## Why JetBrains and CLion
 
-Not just sth that compiles code, but something you can actually work in every day without fighting the tools.
+You need a setup you can use every day without fighting the tools. This repo builds that setup around CLion.
 
-A more natural setup is built around JetBrains tools, especially CLion.
+The reason is how modern development works. GPU architectures and toolkits change faster now. Projects are no longer tied to one platform. You might develop on Linux, test on a remote GPU and deploy somewhere else. A tightly coupled IDE like Visual Studio limits this kind of work.
 
-The reason for this is not about preference. It is about how modern development works.
+JetBrains tools are built around CMake. CMake is a tool that describes how to build a project. A CMake project is not tied to one environment. You can build it on different systems with different compilers and keep the same structure. Real GPU systems are built this way.
 
-CUDA itself has evolved. GPU architectures change faster now. Toolkits change more often. Projects are no longer tied to a single platform. You might develop on Linux, test on a remote GPU, and deploy somewhere else.
+## The CUDA Toolkit comes first
 
-In that kind of workflow, a tightly coupled IDE like Visual Studio becomes limiting.
+The CUDA Toolkit is the base of everything. Nothing runs without it. It gives you the compiler, the runtime and the libraries that talk to the GPU. It is not an editor. It is the layer that makes GPU execution possible.
 
-JetBrains tools take a different approach.
+As of 2026, this layer depends more on the hardware. Hopper and Blackwell bring new instructions, new precision formats and new execution behavior. You need a recent CUDA version to use them. Older versions may still work, but they will not use what the hardware can do. So the CUDA version you choose defines what your code can do.
 
-They are built around CMake. That matters more than it sounds.
+## Where CLion fits
 
-Because once your project is defined through CMake, it stops being tied to one environment. You can build it on different systems, use different compilers, and still keep the same structure.
-
-This is much closer to how real GPU systems are built.
-
-The CUDA Toolkit is still the foundation of everything.
-
-Nothing runs without it.
-
-It provides the compiler, the runtime, and the libraries that actually talk to the GPU. When you install it, you are not installing an editor. You are installing the layer that makes GPU execution possible.
-
-As of 2026, this layer has become more sensitive to the underlying hardware.
-
-New architectures like Hopper and Blackwell introduce new instructions, new precision formats, and new execution behavior. To access these features, you need a recent CUDA version. Older versions may still work, but they will not reflect what the hardware is capable of.
-
-So choosing the CUDA version is no longer a minor detail. It defines what your code can do.
-
-CLion sits on top of this.
-
-It does not try to replace the CUDA Toolkit. It does not hide it either.
-
-Instead, it gives you a clean place to work.
-
-You write your code there. You organize your project there. And when you build, CLion simply calls CMake, which then calls the CUDA compiler.
-
-Nothing magical happens behind the scenes.
-
-And that is exactly why it works well.
-
-You always know what is happening.
+CLion sits on top of the toolkit. It does not replace or hide it. It gives you a clean place to write code and organize your project. When you build, CLion calls CMake, and CMake calls the CUDA compiler. Nothing hidden happens, so you always know what is going on.
 
 <toolchain-stack></toolchain-stack>
 
-There is one detail that can confuse people at first.
+## Visual Studio on Windows
 
-Even if you do not plan to use Visual Studio, you may still need parts of it installed on Windows.
+On Windows, you may still need parts of Visual Studio installed, even if you do not use it. The CUDA toolchain uses the Microsoft compiler in the background. So Visual Studio is a dependency, not your workspace. You install it once and then forget it. All your real work happens in CLion.
 
-This is not because you will use it directly, but because the CUDA toolchain depends on the Microsoft compiler in the background.
+## The GPU driver
 
-In practice, this means Visual Studio becomes a dependency, not your workspace.
+CUDA depends on the GPU driver. If the driver is too old, you can get problems that are hard to explain. Code may compile but not run correctly. Some features may not be available. In 2026, architectures change fast, so keeping the driver up to date is part of the setup.
 
-You install it once, and then you forget about it.
+## The workflow
 
-All your actual work happens in CLion.
+With everything in place, the workflow is simple:
 
-Another thing that becomes important very quickly is the driver.
+- You open CLion and write your code.
+- You build with CMake.
+- The CUDA Toolkit compiles it.
+- The GPU runs it.
 
-CUDA does not work in isolation. It depends on the GPU driver.
+When the setup is right, these steps work together smoothly.
 
-If your driver is too old, you may run into problems that are hard to explain at first. Code may compile but not run correctly. Or certain features may simply not be available.
+## Summary
 
-In 2026, where architectures are evolving fast, keeping the driver up to date is not optional. It is part of the setup.
-
-Once everything is in place, the workflow becomes simple.
-
-You open CLion. You write your code. You build with CMake. The CUDA Toolkit compiles it. The GPU runs it.
-
-There is no friction between these steps when the setup is done right.
-
-At this point, the important shift becomes clear.
-
-CUDA development is not about choosing an editor anymore.
-
-It is about understanding the toolchain.
-
-JetBrains tools fit naturally into this because they do not try to control everything. They let each part of the system do its job.
-
-And that is why, in a modern setup, this approach feels cleaner, more stable, and closer to how things actually work in production.
-
-That’s exactly what I’m going to do in this repo.
+CUDA development is not about choosing an editor. It is about understanding the toolchain. JetBrains tools fit well because they let each part of the system do its own job. This makes the setup cleaner, more stable and closer to production. This repo uses this setup.

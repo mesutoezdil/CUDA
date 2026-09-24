@@ -1,32 +1,26 @@
 # Installing CUDA Toolkit on Linux
 
-Once your Linux env is ready, the next step is to install the CUDA Toolkit.
+This lesson shows how to install the CUDA Toolkit on Linux in WSL. After this, your system can compile and run code on the GPU.
 
-This is the point where your system becomes capable of compiling and running code on the GPU. 
+## Match your platform
 
-Without CUDA, your code cannot interact with the GPU in a meaningful way.
+A CUDA install must match your platform exactly. On WSL, use the WSL-specific repository. Standard Ubuntu repositories will fail or install old versions that do not support modern GPU architectures.
 
-CUDA installation is not generic.
+## Check the GPU first
 
-It must match your platform exactly.
-
-If you are using WSL, you must use the WSL-specific repository. 
-
-Standard Ubuntu repositories will either fail or install outdated versions that do not support modern GPU architectures.
-
-Before installing CUDA, make sure your system can see the GPU:
+Before you install CUDA, make sure your system can see the GPU:
 
 ```
 nvidia-smi
 ````
 
-If this command fails, stop here and fix your GPU setup first. CUDA will not work otherwise.
+If this command fails, stop and fix your GPU setup first. CUDA will not work without it.
 
-Use the official NVIDIA repository for WSL.
+## Install from the NVIDIA repository
 
-Do not use `apt install nvidia-cuda-toolkit`. That package is outdated and not suitable for modern development.
+Use the official NVIDIA repository for WSL. Do not use `apt install nvidia-cuda-toolkit`. That package is old and not good for modern development.
 
-Run the following commands:
+Run these commands:
 
 ```
 wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.1-1_all.deb
@@ -35,9 +29,7 @@ sudo apt-get update
 sudo apt-get -y install cuda-toolkit-13-2
 ```
 
-This installs CUDA Toolkit 13.2, which is aligned with modern GPU architectures.
-
-This installation includes:
+This installs CUDA Toolkit 13.2, which fits modern GPU architectures. It includes:
 
 * CUDA compiler (nvcc)
 * CUDA runtime
@@ -45,55 +37,56 @@ This installation includes:
 
 It does not install a GPU driver.
 
-After installation, verify that CUDA is working:
+## Verify the install
+
+Check that CUDA works:
 
 ```
 nvcc --version
 ```
 
-You should see output showing CUDA 13.x.
+The output should show CUDA 13.x.
 
-If the command is not found, your PATH is not configured correctly.
+If the command is not found, your PATH is not set correctly. PATH is the list of folders where the shell looks for programs.
 
 ```
 export PATH=/usr/local/cuda/bin:$PATH
 ```
 
-To make this permanent, add it to your `.bashrc` or `.zshrc`.
+To keep this setting, add it to your `.bashrc` or `.zshrc`.
 
-CUDA is tightly coupled with GPU architecture.
+## Why the version matters
 
-Modern GPUs such as Hopper and Blackwell introduce new capabilities:
+CUDA is closely tied to GPU architecture. Hopper and Blackwell bring new features:
 
 * FP8 execution paths
 * FP4 support (Blackwell)
 * improved scheduling and memory behavior
 
-If your CUDA version does not support these features, your code will run but will not utilize the hardware efficiently.
+If your CUDA version does not support them, your code still runs but does not use the hardware well.
 
-CUDA is rarely used alone.
+## CUDA under other tools
 
-It operates underneath systems such as:
+CUDA is rarely used alone. It runs under systems such as:
 
 * PyTorch
 * TensorFlow
 * Triton
 * custom CUDA kernels
 
-A correct CUDA installation ensures that all these systems function properly.
+A correct CUDA install makes all of them work properly.
 
 <install-steps></install-steps>
 
-At this point, your system is ready.
+## Ready
 
-You have:
+Your system is now ready. You have:
 
 * a Linux environment (WSL)
 * GPU access
 * CUDA Toolkit 13.2
 * a working CUDA compiler
 
-From here on, you can start writing and running real CUDA programs.
+Now you can write and run real CUDA programs.
 
 https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=WSL-Ubuntu&target_version=2.0&target_type=deb_network
-

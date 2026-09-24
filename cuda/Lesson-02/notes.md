@@ -1,14 +1,14 @@
 # Lesson 02: Two Blocks, 1024 Threads Each
 
-The thread count per block hits the hardware maximum. To go beyond 1024 threads, blocks must be added. This lesson launches 2 blocks x 1024 threads = 2048 threads total.
+A block can hold at most 1024 threads. To run more threads, you add more blocks. This lesson launches 2 blocks x 1024 threads = 2048 threads.
 
 ## The 1024-thread limit
 
-Every block must fit entirely on one streaming multiprocessor (SM). An SM has a fixed number of registers, a fixed amount of shared memory, and a fixed warp scheduler capacity. If a block requests more than 1024 threads, the SM cannot hold it and the CUDA driver rejects the launch.
+A block must fit on one streaming multiprocessor (SM). An SM has a fixed number of registers, a fixed amount of shared memory, and a fixed warp scheduler capacity. If a block asks for more than 1024 threads, the SM cannot hold it. The CUDA driver then rejects the launch.
 
 ## Streaming Multiprocessors (SMs)
 
-A streaming multiprocessor is the physical processing unit inside the GPU. Each SM contains multiple CUDA cores, a register file, shared memory, L1 cache, and warp schedulers. A mid-range GPU like the RTX 3080 has 68 SMs. When a kernel launches, the driver distributes blocks across available SMs. Each SM runs one or more blocks depending on how many resources each block needs.
+An SM is the physical processing unit inside the GPU. Each SM has CUDA cores, a register file, shared memory, L1 cache, and warp schedulers. A mid-range GPU like the RTX 3080 has 68 SMs. At launch, the driver spreads blocks across the free SMs. One SM can run one or more blocks, depending on how many resources each block needs.
 
 ## Thread IDs with multiple blocks
 
@@ -18,13 +18,13 @@ printIDs<<<2, 1024>>>();
 //  blocks -+     +- threads per block
 ```
 
-Block 0 gets threads 0-1023, block 1 gets its own threads 0-1023. Thread IDs are local to the block and restart at 0 in every block. To get a unique global ID:
+Block 0 has threads 0-1023. Block 1 has its own threads 0-1023. Thread IDs restart at 0 in every block. To get a unique global ID, use this formula:
 
 ```
 global_id = blockIdx.x * blockDim.x + threadIdx.x
 ```
 
-`blockDim.x` is a built-in variable holding the number of threads per block as set at launch. Here it is always 1024. Array-processing kernels use this formula to assign each thread to one element.
+`blockDim.x` is a built-in variable. It holds the number of threads per block set at launch. Here it is 1024. Kernels that work on arrays use this formula to give each thread one element.
 
 ## The silent failure: `<<<1, 2048>>>`
 
@@ -32,11 +32,11 @@ global_id = blockIdx.x * blockDim.x + threadIdx.x
 // printIDs<<<1, 2048>>>();  exceeds 1024 thread-per-block limit
 ```
 
-This compiles without error. The 1024 limit is enforced at runtime by the driver, not by the compiler. At launch the driver finds the config invalid and drops the entire kernel call with no output, no crash, and no error message. Call `cudaGetLastError()` after the kernel to detect it. Uncomment the line, run it, and compare the output.
+This line compiles without error. The driver checks the 1024 limit at runtime, not the compiler. At launch, the driver sees the invalid config and drops the whole kernel call. There is no output, no crash, and no error message. Call `cudaGetLastError()` after the kernel to catch it. Uncomment the line, run it, and compare the output.
 
 ## Block scheduling
 
-Block scheduling across SMs is non-deterministic. The driver assigns blocks to whichever SM becomes free first. Block 0 and Block 1 can run simultaneously on different SMs, so their output lines interleave in a different pattern every run.
+The order in which blocks run on SMs is non-deterministic. The driver gives each block to whichever SM is free first. Block 0 and Block 1 can run at the same time on different SMs. So their output lines mix in a different order on every run.
 
 ## Code
 
@@ -66,7 +66,7 @@ nvcc first_kernel.cu -o first_kernel
 ./first_kernel
 ```
 
-Output (2048 lines, `blockIdx.x` as 0 or 1, `threadIdx.x` from 0 to 1023, interleaved in any order):
+The output has 2048 lines. `blockIdx.x` is 0 or 1. `threadIdx.x` goes from 0 to 1023. Lines appear in any order.
 
 ```
 Block ID: 0  ===  Thread ID: 0
@@ -106,8 +106,8 @@ Blocks get assigned to free SMs. Order is not guaranteed.
 
 ## Glossary
 
-- SM (Streaming Multiprocessor): the physical processor inside the GPU. Blocks run on SMs. One SM can run multiple blocks at the same time if it has enough resources.
-- `blockDim.x`: built-in variable. Holds the number of threads per block. Set by the second number in `<<<blocks, threads>>>`.
-- global thread ID: a unique ID for each thread across the entire grid. Computed as `blockIdx.x * blockDim.x + threadIdx.x`. Thread IDs inside blocks repeat, global IDs do not.
-- `cudaGetLastError()`: returns the last CUDA error as an error code. Useful for catching silent failures like an invalid launch config that the driver drops without printing anything.
-- non-deterministic: the result or order cannot be predicted. Block scheduling is non-deterministic because it depends on which SM happens to be free at launch time.
+- SM (Streaming Multiprocessor): the physical processor inside the GPU. Blocks run on SMs. One SM can run several blocks at once if it has enough resources.
+- `blockDim.x`: built-in variable with the number of threads per block. It is the second number in `<<<blocks, threads>>>`.
+- global thread ID: a unique ID for each thread in the whole grid. It is `blockIdx.x * blockDim.x + threadIdx.x`. Thread IDs repeat across blocks. Global IDs do not.
+- `cudaGetLastError()`: returns the last CUDA error code. It catches silent failures, such as an invalid launch config that the driver drops without a message.
+- non-deterministic: the result or order cannot be predicted. Block scheduling depends on which SM is free at launch time.

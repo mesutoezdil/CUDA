@@ -50,13 +50,13 @@ function timeline(el, title, items, focus, card){
 
 def("gpu-history", function(el){
   var items = [
-    { n: "Founded", y: "1993", era: "graphics", t: "NVIDIA is founded, one of many tech companies started in the early 90s." },
-    { n: "NV1", y: "1995", era: "graphics", t: "The first product. Tiny memory, little bandwidth, almost no parallelism by today's standards." },
-    { n: "RIVA 128", y: "1997", era: "graphics", t: "Real 3D acceleration for a wide audience, not just specialists. Adoption takes off." },
-    { n: "GeForce 256", y: "1999", era: "graphics", t: "The GeForce line begins, sold as the first GPU. GPUs become widely accessible." },
-    { n: "CUDA", y: "2007", era: "compute", t: "CUDA 1.0 ships. GPUs can now be programmed for general computation, not only graphics." },
-    { n: "AlexNet", y: "2012", era: "AI", t: "A neural network trained on two GeForce GTX 580 cards wins ImageNet. Deep learning moves to GPUs." },
-    { n: "Today", y: "2020s", era: "AI", t: "Gaming, AI infrastructure, cloud and HPC. GPUs are compute platforms and drive modern AI systems." }
+    { n: "Founded", y: "1993", era: "graphics", t: "NVIDIA is founded." },
+    { n: "NV1", y: "1995", era: "graphics", t: "The first product. Very small memory and almost no parallel work." },
+    { n: "RIVA 128", y: "1997", era: "graphics", t: "3D graphics become fast for everyone, not only experts." },
+    { n: "GeForce 256", y: "1999", era: "graphics", t: "The GeForce line starts. Many people can now buy a GPU." },
+    { n: "CUDA", y: "2007", era: "compute", t: "CUDA arrives. You can now program a GPU for any math, not only graphics." },
+    { n: "AlexNet", y: "2012", era: "AI", t: "A neural network trained on two GeForce cards wins a big contest. AI moves to GPUs." },
+    { n: "Today", y: "2020s", era: "AI", t: "GPUs run games, AI, cloud and science. They are compute machines now." }
   ];
   timeline(el, "From graphics card to compute platform", items, "GeForce 256", function(it){
     return "<b>" + it.n + " · " + it.y + "</b><br>" + it.t;
@@ -64,29 +64,23 @@ def("gpu-history", function(el){
 });
 
 var ARCHS = [
-  { n: "Fermi", y: "2010", era: "graphics & general compute", cc: "2.x", tc: 0, chip: "GF100", tr: 3.0, t: "Graphics and general compute in one design, with a real L1/L2 cache hierarchy." },
-  { n: "Kepler", y: "2012", era: "graphics & general compute", cc: "3.x", tc: 0, chip: "GK110", tr: 7.1, t: "More cores per SM and better performance per watt. Warp shuffle arrives." },
-  { n: "Maxwell", y: "2014", era: "graphics & general compute", cc: "5.x", tc: 0, chip: "GM200", tr: 8.0, t: "Efficiency first: a redesigned SM for performance per watt." },
-  { n: "Pascal", y: "2016", era: "graphics & general compute", cc: "6.x", tc: 0, chip: "GP100", tr: 15.3, t: "HBM2 and NVLink on P100, but still a general-purpose compute design." },
-  { n: "Volta", y: "2017", era: "AI becomes central", cc: "7.0", tc: 1, chip: "GV100", tr: 21.1, t: "Tensor Cores arrive. INT and FP run in parallel. NVLink 2. The point where GPUs turn toward AI." },
-  { n: "Turing", y: "2018", era: "AI becomes central", cc: "7.5", tc: 2, chip: "TU102", tr: 18.6, t: "RT cores for ray tracing, and Tensor Cores reach GeForce.", dim: true },
-  { n: "Ampere", y: "2020", era: "AI becomes central", cc: "8.x", tc: 3, chip: "GA100", tr: 54.2, t: "Stronger Tensor Cores, TF32, structured sparsity and more memory bandwidth." },
-  { n: "Ada", y: "2022", era: "AI becomes central", cc: "8.9", tc: 4, chip: "AD102", tr: 76.3, t: "Ada Lovelace: the consumer and workstation line, with FP8 Tensor Cores.", dim: true },
-  { n: "Hopper", y: "2022", era: "AI becomes central", cc: "9.0", tc: 4, chip: "GH100", tr: 80, t: "Transformer Engine with FP8. Built for training large models in data centers." },
-  { n: "Blackwell", y: "2024", era: "AI becomes central", cc: "10.0 · 12.0", tc: 5, chip: "B200", tr: 208, t: "5th-gen Tensor Cores and NVFP4. Two dies act as one GPU. Gains depend on workload and precision." },
-  { n: "Rubin", y: "2026", era: "next", cc: "·", t: "Entering deployment: newer Tensor Cores, HBM4, very high SM counts." },
-  { n: "Rubin Ultra", y: "2027", era: "next", cc: "·", t: "On the roadmap: pushes Rubin further." },
-  { n: "Feynman", y: "2028", era: "next", cc: "·", t: "On the roadmap. The direction stays the same: larger, more specialised AI systems." }
+  { n: "Fermi", y: "2010", era: "graphics & general compute", cc: "2.x", tc: 0, chip: "GF100", tr: 3.0, t: "Graphics and general compute in one design." },
+  { n: "Kepler", y: "2012", era: "graphics & general compute", cc: "3.x", tc: 0, chip: "GK110", tr: 7.1, t: "More cores, less power per job." },
+  { n: "Maxwell", y: "2014", era: "graphics & general compute", cc: "5.x", tc: 0, chip: "GM200", tr: 8.0, t: "Even more work per watt." },
+  { n: "Pascal", y: "2016", era: "graphics & general compute", cc: "6.x", tc: 0, chip: "GP100", tr: 15.3, t: "Faster memory. Still a general-purpose design." },
+  { n: "Volta", y: "2017", era: "AI becomes central", cc: "7.0", tc: 1, chip: "GV100", tr: 21.1, t: "Tensor Cores arrive. GPUs turn toward AI." },
+  { n: "Ampere", y: "2020", era: "AI becomes central", cc: "8.x", tc: 3, chip: "GA100", tr: 54.2, t: "Stronger Tensor Cores and more memory speed." },
+  { n: "Hopper", y: "2022", era: "AI becomes central", cc: "9.0", tc: 4, chip: "GH100", tr: 80, t: "Built for large AI models. Adds FP8." },
+  { n: "Blackwell", y: "2024", era: "AI becomes central", cc: "10.0 · 12.0", tc: 5, chip: "B200", tr: 208, t: "Adds NVFP4, an even smaller number format for AI." },
+  { n: "Rubin", y: "2026", era: "next", cc: "·", t: "Now arriving. New Tensor Cores and HBM4 memory." },
+  { n: "Rubin Ultra", y: "2027", era: "next", cc: "·", t: "Planned. A bigger Rubin." },
+  { n: "Feynman", y: "2028", era: "next", cc: "·", t: "Planned. Still more AI." }
 ];
 ARCHS.forEach(function(a){ if (a.tr) { a.bar = Math.sqrt(a.tr / 208).toFixed(3); } });
 
 def("arch-timeline", function(el){
   timeline(el, "NVIDIA architectures, and what each one changed", ARCHS, el.getAttribute("focus") || "Volta", function(a){
-    var dots = "";
-    for (var i = 1; i <= 5; i++) { dots += '<i class="' + (i <= a.tc ? "on" : "") + '"></i>'; }
-    return "<b>" + a.n + " · " + a.y + "</b>" + (a.cc !== "·" ? " · compute capability <b>" + a.cc + "</b>" : "") + "<br>" + a.t +
-      (a.chip ? '<div class="dg-facts"><span>flagship chip <b>' + a.chip + "</b></span><span>transistors <b>" + a.tr + " B</b></span>" +
-        '<span>Tensor Core gen <b class="dg-dots">' + dots + "</b> " + (a.tc || "none") + "</span></div>" : "");
+    return "<b>" + a.n + " · " + a.y + "</b>" + (a.cc !== "·" ? " · compute capability <b>" + a.cc + "</b>" : "") + "<br>" + a.t;
   });
 });
 
@@ -120,8 +114,8 @@ def("cpu-vs-gpu", function(el){
       frame(now);
       if (now < end) { raf = requestAnimationFrame(step); return; }
       var c = total(devs[0]), g = total(devs[1]);
-      note.textContent = g < c ? "GPU wins, " + g + " vs " + c + " ticks: many slow cores beat a few fast ones when the work splits."
-        : "CPU wins, " + c + " vs " + g + " ticks: when each step waits on the last, only core speed matters.";
+      note.textContent = g < c ? "GPU wins, " + g + " vs " + c + " ticks. Many slow cores beat a few fast ones when work can be split."
+        : "CPU wins, " + c + " vs " + g + " ticks. When each step waits for the last one, only speed matters.";
     })(t0);
   }
   onTabs(el.querySelector(".dg-tabs"), function(i){ task = tasks[i]; run(); });
@@ -131,19 +125,19 @@ def("cpu-vs-gpu", function(el){
 
 def("gpu-anatomy", function(el){
   var P = {
-    cpu: ["CPU and system RAM", "Runs the program and decides what the GPU does. Its memory is separate from the GPU's, so data has to be copied over."],
-    pcie: ["PCIe", "The link between CPU and GPU. Data goes to the GPU, gets processed, results come back. If that flow is handled badly, it becomes the bottleneck."],
-    sm: ["Streaming Multiprocessor (SM)", "A small processing unit inside the GPU. The GPU is many SMs working together, and every block of threads runs on one SM."],
-    l2: ["L2 cache", "Shared by every SM on the chip. Larger but slower than L1 and shared memory, and it saves trips out to VRAM."],
-    vram: ["VRAM", "The GPU's own memory: GDDR on consumer cards, HBM on data center parts. The largest and slowest level the GPU reads."],
-    sched: ["Warp schedulers", "Control units that decide which warp of 32 threads runs next, and when."],
-    reg: ["Registers", "The fastest storage there is, private to each thread."],
-    fp: ["FP32 units", "Floating-point math, the bulk of graphics and AI work."],
-    int: ["INT32 units", "Integer math: array indexes, addresses, loop counters."],
-    tc: ["Tensor Cores", "Specialised for matrix math, the heart of AI workloads."],
-    sfu: ["Special function units", "Harder math such as sin, cos, exp and reciprocal square root."],
-    ldst: ["Load / store units", "Move data between memory and the compute units."],
-    smem: ["Shared memory and L1", "Fast memory inside the SM. Shared memory lets the threads of a block cooperate, and is one of the main optimisation tools."]
+    cpu: ["CPU and system RAM", "Runs your program and tells the GPU what to do. It has its own memory."],
+    pcie: ["PCIe", "The link between CPU and GPU. Data goes over, results come back. Too much copying makes it slow."],
+    sm: ["Streaming Multiprocessor (SM)", "A small processor inside the GPU. A GPU is many SMs working together."],
+    l2: ["L2 cache", "A cache shared by all SMs. Bigger but slower than memory inside an SM."],
+    vram: ["VRAM", "The GPU's own big memory. The slowest level."],
+    sched: ["Warp schedulers", "Pick which group of 32 threads runs next."],
+    reg: ["Registers", "The fastest storage. Each thread has its own."],
+    fp: ["FP32 units", "Math with decimal numbers."],
+    int: ["INT32 units", "Math with whole numbers, like counters and indexes."],
+    tc: ["Tensor Cores", "Fast matrix math for AI."],
+    sfu: ["Special function units", "Harder math like sin, cos and square roots."],
+    ldst: ["Load / store units", "Move data between memory and the math units."],
+    smem: ["Shared memory and L1", "Fast memory inside the SM. Threads in a block use it to share data."]
   };
   var sms = ""; for (var i = 0; i < 12; i++) { sms += '<button type="button" data-k="sm">SM ' + i + "</button>"; }
   el.innerHTML = '<div class="dg-head"><span class="dg-title">What sits where</span><span class="dg-note">click any part</span></div>' +
@@ -177,23 +171,21 @@ def("arch-matrix", function(el){
     el.querySelectorAll(".dg-mx tr")[ij[0] + 1].querySelectorAll("td").forEach(function(c){ c.classList.add("row"); });
     el.querySelectorAll(".dg-mx tr").forEach(function(tr, i){ if (i) { tr.children[ij[1] + 1].classList.add("col"); } });
     var mates = r[1].filter(function(g){ return g && g !== name; });
-    info.innerHTML = "<b>" + name + "</b>: architecture <em>" + r[0] + "</em> (how it is built) · generation <em>" + cols[ij[1]][0] + "</em> (where it is used)." +
-      (mates.length ? "<br>Same design, other worlds: " + mates.join(", ") + "." : "<br>" + r[0] + " only ships in this one world.");
+    info.innerHTML = "<b>" + name + "</b>: architecture <em>" + r[0] + "</em> (how it is built). Generation <em>" + cols[ij[1]][0] + "</em> (where it is used)." +
+      (mates.length ? "<br>Same design, other uses: " + mates.join(", ") + "." : "<br>" + r[0] + " is only made for this use.");
   });
   el.querySelector('[data-k="0,1"]').click();
 });
 
 def("gpu-compare", function(el){
   var rows = [["Chip", "GA102", "GA100"], ["Architecture", "Ampere", "Ampere"], ["Generation", "GeForce", "Data Center"],
-    ["FP32 CUDA cores", "10,496", "6,912"], ["Tensor Cores", "328, 3rd gen", "432, 3rd gen"], ["FP64 speed", "1/64 of FP32", "1/2 of FP32"],
-    ["Memory", "24 GB GDDR6X", "40 GB HBM2"], ["Bandwidth", "936 GB/s", "1,555 GB/s"], ["Display outputs", "HDMI, DisplayPort", "none"],
-    ["Cooling", "fans on the card", "passive, server airflow"]];
+    ["FP32 CUDA cores", "10,496", "6,912"], ["Tensor Cores", "328, 3rd gen", "432, 3rd gen"], ["Memory", "24 GB GDDR6X", "40 GB HBM2"], ["Bandwidth", "936 GB/s", "1,555 GB/s"], ["Cooling", "fans on the card", "passive, server airflow"]];
   el.innerHTML = '<div class="dg-head"><span class="dg-title">RTX 3090 vs A100</span>' + tabs(["everything", "what is the same", "what differs"], 0) + "</div>" +
     '<table class="dg-cmp"><tr><th></th><th>RTX 3090</th><th>A100 40 GB</th></tr>' + rows.map(function(r){
       return '<tr class="' + (r[1] === r[2] ? "same" : "diff") + '"><th>' + r[0] + "</th><td>" + r[1] + "</td><td>" + r[2] + "</td></tr>";
     }).join("") + "</table>" +
     '<div class="dg-bars"><div><span>RTX 3090</span><i style="width:100%"></i><b>10,496</b></div><div><span>A100</span><i style="width:65.9%"></i><b>6,912</b></div></div>' +
-    '<p class="dg-note">The headline core count is FP32 cores only. The A100 has fewer of them, yet more Tensor Cores, far faster FP64 and 66% more bandwidth. Same architecture is not the same purpose.</p>';
+    '<p class="dg-note">The big core number counts only one kind of core. The A100 has fewer of them but more Tensor Cores and faster memory. Same architecture, different job.</p>';
   var cmp = el.querySelector(".dg-cmp");
   onTabs(el.querySelector(".dg-tabs"), function(i){ cmp.className = "dg-cmp" + ["", " only-same", " only-diff"][i]; });
 });
@@ -217,9 +209,9 @@ def("chip-vs-gpu", function(el){
       p.innerHTML = s === 0 ? "<b>GPU chip</b><small>" + k.chip + "</small>" : "<small>" + k[key] + "</small>";
     });
     el.querySelector(".dg-info").innerHTML = step === 0
-      ? "<b>The chip alone:</b> the silicon where every computation happens. No memory, no power, no cooling. Architecture describes this part."
+      ? "<b>The chip alone.</b> The silicon that does the math. No memory, no power, no cooling."
       : "<b>The GPU:</b> " + ["the chip", "VRAM", "power delivery", "outputs", "cooling"].slice(0, step + 1).join(" + ") + "." +
-        (kind === 1 && step >= 3 ? " A data center module skips the fans and the display outputs, because the server rack handles cooling and nobody plugs in a monitor." : "");
+        (kind === 1 && step >= 3 ? " A data center module has no fans and no screen outputs. The server cools it." : "");
   }
   onTabs(tb[0], function(i){ kind = i; draw(); });
   onTabs(tb[1], function(i){ step = i; draw(); });
@@ -249,11 +241,11 @@ def("arch-family", function(el){
   pick(tree, function(k){
     var ij = k.split(",").map(Number), f = fams[fam], c = f.chips[ij[0]], p = c.p[ij[1]], cells = "";
     for (var s = 0; s < c.full; s++) { cells += '<i class="' + (s < p[1] ? "a" : "") + '"></i>'; }
-    info.innerHTML = "<b>" + p[0] + "</b> uses <b>" + c.c + "</b> with <em>" + p[1] + " of " + c.full + "</em> SMs enabled" +
-      (p[1] < c.full ? ". Same chip, some units switched off, so it behaves differently from other " + c.c + " products." : ", the full die.") +
+    info.innerHTML = "<b>" + p[0] + "</b> uses <b>" + c.c + "</b> with <em>" + p[1] + " of " + c.full + "</em> SMs turned on" +
+      (p[1] < c.full ? ". Same chip, some parts turned off." : ", the full die.") +
       '<div class="dg-smgrid">' + cells + "</div>" +
-      (p[2] === "GeForce" ? "Board partners such as ASUS, MSI and Gigabyte then build their own cards around it, with their own cooling, power limits and boost clocks." :
-        "Data center parts ship as modules for servers, so there is no vendor cooler layer on top.");
+      (p[2] === "GeForce" ? "Companies like ASUS and MSI then build their own cards with it." :
+        "Data center parts go straight into servers.");
   });
   onTabs(el.querySelector(".dg-tabs"), function(i){ fam = i; draw(); });
   draw();
@@ -261,7 +253,7 @@ def("arch-family", function(el){
 
 def("bandwidth-sim", function(el){
   var CORES = 4, JOBS = 3, WORK = 1;
-  el.innerHTML = '<div class="dg-head"><span class="dg-title">4 cores, one memory</span><div class="dg-ctl"><label>memory feeds <b class="n">4</b> core(s) per tick <input type="range" min="1" max="4" value="1"></label></div></div>' +
+  el.innerHTML = '<div class="dg-head"><span class="dg-title">4 cores, one memory</span><div class="dg-ctl"><label>memory feeds <b class="n">4</b> core(s) per tick <input type="range" min="1" max="4" value="1"></label><button class="dg-btn" type="button">play</button></div></div>' +
     '<div class="dg-gantt"></div><div class="dg-legend"><span><i class="L"></i>receiving data</span><span><i class="C"></i>computing</span><span><i class="W"></i>waiting for memory</span></div><div class="dg-info"></div>';
   var input = el.querySelector("input");
   function sim(N){
@@ -284,14 +276,25 @@ def("bandwidth-sim", function(el){
     el.querySelector(".n").textContent = N;
     r.rows.forEach(function(row, c){
       html += "<div><span>core " + c + "</span>";
-      for (var t = 0; t < 14; t++) { html += '<i class="' + (row[t] || "") + '"></i>'; if (row[t] === "C") { busy++; } }
+      for (var t = 0; t < 14; t++) { html += '<i data-t="' + t + '" class="' + (row[t] || "") + '"></i>'; if (row[t] === "C") { busy++; } }
       html += "</div>";
     });
     el.querySelector(".dg-gantt").innerHTML = html;
     el.querySelector(".dg-info").innerHTML = "Done after <b>" + r.T + " ticks</b>. Cores spent <em>" + Math.round(busy / (CORES * r.T) * 100) + "%</em> of the time computing." +
-      (N === 1 ? " Memory serves one core at a time, so the other three mostly wait: a memory bottleneck." : N === 4 ? " Every core is fed at once. No waiting, all four run in parallel." : "");
+      (N === 1 ? " Memory feeds one core at a time. The others wait. This is a memory bottleneck." : N === 4 ? " Memory feeds all four at once. Nobody waits." : "");
   }
-  input.addEventListener("input", draw);
+  var timer = 0;
+  el.querySelector(".dg-btn").addEventListener("click", function(){
+    clearInterval(timer);
+    var cells = el.querySelectorAll(".dg-gantt i"), now = -1;
+    cells.forEach(function(c){ c.style.opacity = .1; });
+    timer = setInterval(function(){
+      now++;
+      cells.forEach(function(c){ if (+c.dataset.t === now) { c.style.opacity = 1; } });
+      if (now >= 13) { clearInterval(timer); }
+    }, 280);
+  });
+  input.addEventListener("input", function(){ clearInterval(timer); draw(); });
   draw();
 });
 
@@ -344,7 +347,7 @@ def("cores-clock", function(el){
     });
     var a = res[0].r * res[0].t, b = res[1].r * res[1].t;
     el.querySelector(".dg-info").innerHTML = a === b ? "A tie." : "GPU <b>" + (a < b ? "A" : "B") + "</b> finishes first. " +
-      "Cores set how many operations run per round, clock speed sets how long a round takes. Either one can hold the other back.";
+      "More cores means fewer rounds. A faster clock means shorter rounds. You need both.";
   }
   el.querySelectorAll("input").forEach(function(i){ i.addEventListener("input", draw); });
   draw();
@@ -381,7 +384,7 @@ def("cc-explorer", function(el){
   ];
   var feats = ["FP16 math", "Tensor Cores", "FP8", "NVFP4"];
   el.innerHTML = '<div class="dg-head"><span class="dg-title">What does my GPU support?</span>' + tabs(cc.map(function(c){ return c[0] + " " + c[1]; }), 3) + "</div>" +
-    '<div class="dg-ccnum"></div><div class="dg-feats"></div><p class="dg-note">* CC 5.0 and 5.2 have no FP16 math. Missing hardware has no workaround: the unit is either on the chip or not.</p>';
+    '<div class="dg-ccnum"></div><div class="dg-feats"></div><p class="dg-note">* Only CC 5.3 has FP16 here. If the hardware is missing, software cannot add it.</p>';
   function draw(i){
     var c = cc[i], v = c[1].split(" ")[0].split(".");
     el.querySelector(".dg-ccnum").innerHTML = "<span><b>" + v[0] + "</b><small>major: the architecture</small></span><span class='dot'>.</span><span><b>" + v[1] + "</b><small>minor: a revision of it</small></span>" +
@@ -397,10 +400,10 @@ def("cc-explorer", function(el){
 
 def("whitepaper-map", function(el){
   var parts = [
-    ["Key features", "Start here. Short, and it tells you what the architecture is trying to do. Volta's says: built for AI."],
-    ["SM design", "The section that matters most. CUDA cores, Tensor Cores, scheduling and memory access all meet in the SM. Compare it with the previous generation."],
-    ["Performance", "Comparisons against the previous architecture. Useful, but read them as 'what changed', not as a benchmark for your workload."],
-    ["Specifications", "The tables: SM counts, memory, bandwidth, transistors. The same tables return in every white paper, so generations line up side by side."]
+    ["Key features", "Start here. It says what the new design is for."],
+    ["SM design", "The most important part. Compare the SM with the one before it."],
+    ["Performance", "How much faster it is than the last one."],
+    ["Specifications", "The number tables. They look the same in every paper, so they are easy to compare."]
   ];
   el.innerHTML = '<div class="dg-head"><span class="dg-title">How every NVIDIA white paper is laid out</span><span class="dg-note">search: chip name + "white paper", open the official PDF</span></div>' +
     '<div class="dg-steps">' + parts.map(function(p, i){ return '<button type="button" data-k="' + i + '"><span>' + (i + 1) + "</span>" + p[0] + (i === 1 ? " ★" : "") + "</button>"; }).join("") +
@@ -412,20 +415,32 @@ def("whitepaper-map", function(el){
 
 def("volta-shift", function(el){
   var stream = ["FP", "INT", "FP", "FP", "INT", "FP", "INT", "INT", "FP", "FP"];
-  el.innerHTML = '<div class="dg-head"><span class="dg-title">Mixed FP and INT work, cycle by cycle</span>' + tabs(["Pascal", "Volta"], 0) + '</div><div class="dg-lanes"></div><div class="dg-info"></div>' +
+  el.innerHTML = '<div class="dg-head"><span class="dg-title">Mixed FP and INT work, cycle by cycle</span>' + tabs(["Pascal", "Volta"], 0) + '<button class="dg-btn" type="button">play</button></div><div class="dg-lanes"></div><div class="dg-info"></div>' +
     '<div class="dg-title sub">Transistors per flagship chip</div><div class="dg-bars tr">' +
     [["GP100 · Pascal", 15.3], ["GV100 · Volta", 21.1], ["GA100 · Ampere", 54.2], ["GH100 · Hopper", 80], ["B200 · Blackwell", 208]].map(function(b){
       return "<div><span>" + b[0] + '</span><i style="width:' + (b[1] / 208 * 100) + '%"></i><b>' + b[1] + " B</b></div>";
     }).join("") + "</div>";
-  function lane(name, ops){ return "<div><span>" + name + "</span>" + ops.map(function(o){ return '<i class="' + o + '">' + o + "</i>"; }).join("") + "</div>"; }
+  function lane(name, ops){ return "<div><span>" + name + "</span>" + ops.map(function(o, c){ return '<i data-c="' + c + '" class="' + o + '">' + o + "</i>"; }).join("") + "</div>"; }
   function draw(v){
     var fp = stream.filter(function(o){ return o === "FP"; }), it = stream.filter(function(o){ return o === "INT"; });
     el.querySelector(".dg-lanes").innerHTML = v ? lane("FP32 path", fp) + lane("INT32 path", it) : lane("shared path", stream);
     el.querySelector(".dg-info").innerHTML = v
-      ? "<b>" + Math.max(fp.length, it.length) + " cycles.</b> Volta gives integer and floating-point work separate paths, so they issue side by side. Tensor Cores also arrive here."
-      : "<b>" + stream.length + " cycles.</b> On Pascal, integer and floating-point instructions share one path and take turns.";
+      ? "<b>" + Math.max(fp.length, it.length) + " cycles.</b> Volta has two paths, so FP and INT run at the same time."
+      : "<b>" + stream.length + " cycles.</b> Pascal has one path, so FP and INT take turns.";
   }
-  onTabs(el.querySelector(".dg-tabs"), draw);
+  var timer = 0;
+  function play(){
+    clearInterval(timer);
+    var cells = el.querySelectorAll(".dg-lanes i"), c = -1;
+    cells.forEach(function(x){ x.style.opacity = .12; });
+    timer = setInterval(function(){
+      c++;
+      cells.forEach(function(x){ if (+x.dataset.c === c) { x.style.opacity = 1; } });
+      if (c >= 10) { clearInterval(timer); }
+    }, 380);
+  }
+  el.querySelector(".dg-btn").addEventListener("click", play);
+  onTabs(el.querySelector(".dg-tabs"), function(v){ clearInterval(timer); draw(v); play(); });
   draw(0);
 });
 
@@ -440,8 +455,8 @@ def("nvcc-pipeline", function(el){
     f.classList.toggle("jit", i === 1);
     f.querySelector(".drv small").textContent = i ? "JIT-compiles PTX for the new GPU" : "loads the matching SASS";
     el.querySelector(".dg-info").innerHTML = i
-      ? "No SASS matches the new GPU, so the driver compiles the stored <b>PTX</b> on first launch. The program still runs, which is why PTX is kept. It will not use the new hardware's features."
-      : "The binary already holds <b>SASS for sm_89</b>, so the driver loads it directly. Compiling for the right architecture is what gets you its instructions and data types.";
+      ? "The binary has no SASS for this GPU. The driver turns the stored <b>PTX</b> into SASS. The program still runs."
+      : "The binary already has <b>SASS for sm_89</b>. The driver loads it and runs it.";
   }
   onTabs(el.querySelector(".dg-tabs"), draw);
   draw(0);
@@ -458,12 +473,12 @@ function stack(el, title, layers, first){
 
 def("toolchain-stack", function(el){
   stack(el, "You write code at the top, the GPU runs it at the bottom", [
-    ["CLion", "where you work", "Write and organise the project. Building just calls CMake. Nothing hidden."],
-    ["CMake", "the project definition", "Describes the build without tying it to one machine or IDE, so the same project builds anywhere."],
-    ["nvcc · CUDA Toolkit", "compiler, runtime, libraries", "The foundation. The toolkit version decides which architectures, instructions and precisions your code can use."],
-    ["host compiler", "g++ on Linux, MSVC on Windows", "nvcc hands host code to it. That is why Visual Studio must be installed on Windows even if you never open it."],
-    ["NVIDIA driver", "must be new enough", "CUDA runs on top of the driver. An old one can compile fine and then fail at runtime in confusing ways."],
-    ["GPU", "runs the kernels", "The hardware. Its compute capability sets what the layers above can use.", "hw"]
+    ["CLion", "where you work", "You write code here. Build runs CMake."],
+    ["CMake", "the project definition", "Describes how to build. Works on any machine."],
+    ["nvcc · CUDA Toolkit", "compiler, runtime, libraries", "The compiler and libraries. Its version decides which GPUs you can target."],
+    ["host compiler", "g++ on Linux, MSVC on Windows", "Compiles the CPU part. On Windows this is why Visual Studio must be installed."],
+    ["NVIDIA driver", "must be new enough", "CUDA needs it. Too old a driver breaks things."],
+    ["GPU", "runs the kernels", "The hardware that runs your kernel.", "hw"]
   ], 2);
 });
 
@@ -476,8 +491,8 @@ def("wsl-layers", function(el){
       '<div class="arrow">' + (v1 ? "✕ no GPU path" : "↓ uses the host driver") + "</div>" +
       '<div class="box win"><span class="dg-lbl">Windows host</span><div class="ok">✓ NVIDIA driver installed here, once</div></div><div class="arrow">↓</div><div class="box gpu">GPU</div>';
     el.querySelector(".dg-info").innerHTML = v1
-      ? "WSL1 translates Linux calls instead of running a real kernel, and has no meaningful GPU acceleration. Use WSL2."
-      : "WSL2 runs a real Linux kernel in a lightweight VM and reaches the GPU through the Windows driver. Installing a Linux driver inside WSL breaks this.";
+      ? "WSL1 cannot really use the GPU. Use WSL2."
+      : "WSL2 reaches the GPU through the Windows driver. Do not install a driver inside Linux.";
   }
   onTabs(el.querySelector(".dg-tabs"), draw);
   draw(0);

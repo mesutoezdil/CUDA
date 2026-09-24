@@ -1,6 +1,6 @@
 # Lesson 01: One Block, Four Threads
 
-One change from Lesson 00: the thread count goes from 1 to 4. The block count stays at 1. Four threads run the same kernel simultaneously, each with a different `threadIdx.x`.
+This lesson makes one change to Lesson 00. The thread count goes from 1 to 4, and the block count stays 1. Four threads run the same kernel at the same time, each with a different `threadIdx.x`.
 
 ## What changes
 
@@ -10,19 +10,21 @@ printIDs<<<1, 4>>>();
 //  blocks -+  +- threads per block (was 1, now 4)
 ```
 
-The GPU creates 4 copies of `printIDs` and runs them at the same time. Each copy gets a unique `threadIdx.x`: 0, 1, 2, or 3. `blockIdx.x` stays 0 for all of them because there is still only one block.
+The GPU runs 4 copies of `printIDs` at the same time. Each copy gets its own `threadIdx.x` of 0, 1, 2 or 3. `blockIdx.x` is 0 for all of them, because there is still only one block.
 
-## SIMT: Single Instruction, Multiple Threads
+## SIMT (Single Instruction, Multiple Threads)
 
-Each thread is an independent execution unit. They do not wait for each other and do not coordinate. They all execute the exact same instructions at the same time, but with different ID values. The execution model is called SIMT: Single Instruction, Multiple Threads.
+Each thread runs on its own. Threads do not wait for each other or work together. They all run the same instructions at the same time, but with different ID values. This model is called SIMT (Single Instruction, Multiple Threads).
 
 ## Warps
 
-The GPU processes threads in groups of 32 called warps. A warp is the actual scheduling unit at the hardware level, not a block. When you launch 4 threads, the GPU creates a full warp of 32 lanes but activates only 4 of them. If threads in a warp take different branches in an if/else, the GPU serializes the diverging paths, which is called warp divergence. With 4 identical threads here there is no divergence.
+The GPU runs threads in groups of 32 called warps. The hardware schedules warps, not blocks. When you launch 4 threads, the GPU makes a full warp of 32 lanes but uses only 4 of them. If threads in a warp take different sides of an if/else, the GPU runs the paths one after the other. This is called warp divergence. Here the 4 threads do the same thing, so there is no divergence.
 
-## Why output order changes every run
+## Why the output order changes
 
-`printf` inside a kernel does not print immediately. Each thread writes into a shared circular buffer in GPU memory. The buffer flushes when `cudaDeviceSynchronize()` is called. The order in which threads write to the buffer is not guaranteed, even within a single warp. Output order changes between runs.
+`printf` in a kernel does not print right away. Each thread writes into a shared circular buffer in GPU memory. The buffer is printed when `cudaDeviceSynchronize()` is called. The order in which threads write is not fixed, even inside one warp. So the output order changes between runs.
+
+<printf-order threads="4"></printf-order>
 
 ## Code
 
@@ -83,7 +85,7 @@ GPU Grid
 
 ## Glossary
 
-- warp: a group of 32 threads the GPU processes together as one unit. The GPU does not schedule individual threads, it schedules warps.
-- SIMT (Single Instruction, Multiple Threads): every active thread in a warp executes the same instruction at the same clock cycle, but each thread has its own data and its own ID.
-- warp divergence: when threads in the same warp take different paths (if thread 0 goes into an if-branch and thread 1 does not), the GPU has to run both paths one after the other. This is slower. It is called divergence.
-- printf buffer: GPU printf does not write to the screen directly. It writes to a buffer in GPU memory. The buffer is only flushed to screen when you call `cudaDeviceSynchronize()`.
+- warp: a group of 32 threads the GPU runs together as one unit. The GPU schedules warps, not single threads.
+- SIMT (Single Instruction, Multiple Threads): every active thread in a warp runs the same instruction in the same clock cycle. Each thread has its own data and its own ID.
+- warp divergence: threads in one warp take different paths. For example, thread 0 enters an if-branch and thread 1 does not. The GPU then runs both paths one after the other, which is slower.
+- printf buffer: GPU printf does not write to the screen directly. It writes to a buffer in GPU memory. The buffer goes to the screen only when you call `cudaDeviceSynchronize()`.

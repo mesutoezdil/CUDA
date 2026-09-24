@@ -536,3 +536,32 @@ html[data-mode="light"] .term .dg-grid::before{background:var(--panel)}
 .dg-check pre{margin:6px 0;padding:10px 12px;font-size:.76rem}
 .dg-check li>div{min-width:0}
 .dg-check small{color:var(--dim);font-size:.74rem}
+
+/* Animations. A running launch dims every lane, then lights each warp as it runs. */
+.dg-grid.running .dg-cells i.a{opacity:.18}
+.dg-grid.running .dg-cells i.a.ran{opacity:1;animation:pop .35s ease-out}
+@keyframes pop{from{transform:scale(1.5);filter:brightness(1.6)}to{transform:none;filter:none}}
+.dg-gantt i{transition:opacity .2s ease}
+.dg-lanes i{transition:opacity .2s ease}
+
+.dg-sync{display:grid;gap:8px;margin-bottom:12px}
+.dg-sync div{display:flex;gap:6px;align-items:center;min-height:38px;flex-wrap:wrap}
+.dg-sync span{width:44px;flex:none;font-size:.74rem;color:var(--dim)}
+.dg-sync i{font-style:normal;font-size:.74rem;padding:8px 11px;border-radius:8px;border:1px dashed var(--border);color:var(--dimmer);
+  transition:all .3s ease}
+.dg-sync i.on{border-style:solid;border-color:var(--accent);color:var(--text);background:var(--accent-soft)}
+.dg-sync i.wait.on{border-color:var(--cool);background:repeating-linear-gradient(135deg,rgba(88,166,255,.14) 0 8px,transparent 8px 16px);
+  background-size:200% 100%;animation:waiting 1s linear infinite}
+@keyframes waiting{to{background-position:-22px 0}}
+.dg-sync i.dead.on{border-color:#f85149;color:#f85149;background:rgba(248,81,73,.08);text-decoration:line-through}
+.dg-term{font-family:var(--mono);font-size:.78rem;line-height:1.7;background:#0d1117;color:#c9d1d9;border:1px solid var(--border);
+  border-radius:10px;padding:10px 14px;min-height:5.6em;margin-bottom:12px;overflow-x:auto;white-space:nowrap}
+.dg-term .dg-note{color:#8b949e}
+.dg-pf{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.dg-pf .th{display:flex;flex-wrap:wrap;gap:6px}
+.dg-pf .dg-chip{opacity:.45;transition:opacity .3s ease}
+.dg-pf .dg-chip.done{opacity:1;border-color:var(--accent)}
+.dg-pf .buf{min-height:7em;border:1px dashed var(--border);border-radius:10px;padding:8px 10px;font-size:.76rem;color:var(--text)}
+.dg-pf .buf div{animation:pop .35s ease-out}
+.dg-ctl .dg-btn{align-self:center}
+@media (max-width:560px){.dg-pf{grid-template-columns:1fr}}
