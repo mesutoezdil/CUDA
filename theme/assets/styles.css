@@ -661,3 +661,19 @@ nav .short{display:none}
 .hero .dg-legend{margin-top:6px}
 footer{padding:16px 0 20px}
 footer .sup img{height:22px;padding:3px 5px}
+@media (max-width:560px){
+  .hero{padding:18px 0 12px}
+  .hero .lede{font-size:.95rem;margin-bottom:.9rem}
+  .hero .cta{margin-bottom:14px}
+  .hero .dg-legend,.hero .dg-read{display:none}
+  .hero .dg-ctl{gap:6px 16px}
+  footer{padding:12px 0 14px}
+  footer .row{gap:8px 16px}
+}
+@media (max-width:560px){
+  .hero .dg-grid{grid-template-columns:1fr 1fr;gap:6px;padding:8px}
+  .hero .dg-block{padding:6px}
+  .hero .dg-bh span{display:none}
+  .hero .termbar{padding:7px 12px}
+  .hero .dg-stats span{padding:2px 8px}
+}
