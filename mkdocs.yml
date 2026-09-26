@@ -1,7 +1,7 @@
 site_name: CUDA
 site_description: Learning CUDA properly, from fundamentals to real-world GPU systems.
-repo_url: https://github.com/mesutoezdil/CUDA
-site_url: https://mesutoezdil.github.io/CUDA/
+repo_url: https://github.com/moezdil/CUDA
+site_url: https://moezdil.github.io/CUDA/
 docs_dir: docs
 site_dir: public
 

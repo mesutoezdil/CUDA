@@ -65,7 +65,7 @@ resource "nebius_compute_v1_instance" "cuda_lab" {
         ssh_authorized_keys:
           - ${var.ssh_public_key}
     runcmd:
-      - git clone https://github.com/mesutoezdil/Systematic-CUDA-Learning.git /home/ubuntu/Systematic-CUDA-Learning
+      - git clone https://github.com/moezdil/Systematic-CUDA-Learning.git /home/ubuntu/Systematic-CUDA-Learning
       - chown -R ubuntu:ubuntu /home/ubuntu/Systematic-CUDA-Learning
       - echo 'export PATH=/usr/local/cuda-13.0/bin:$PATH' >> /home/ubuntu/.bashrc
       - echo 'export LD_LIBRARY_PATH=/usr/local/cuda-13.0/lib64:$LD_LIBRARY_PATH' >> /home/ubuntu/.bashrc

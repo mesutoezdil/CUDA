@@ -1,11 +1,11 @@
 ![Supported by JetBrains](https://img.shields.io/badge/Supported%20by-JetBrains-000000?logo=jetbrains&logoColor=white)
 ![Supported by Manning Publications](https://img.shields.io/badge/Supported%20by-Manning%20Publications-8B0000)
 ![Pull Shark](https://img.shields.io/badge/Pull%20Shark-x2-0075ca)
-[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-db61a2?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/mesutoezdil)
+[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-db61a2?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/moezdil)
 
 # CUDA, step by step
 
-**Read it as a website → [mesutoezdil.github.io/CUDA](https://mesutoezdil.github.io/CUDA/)**
+**Read it as a website → [moezdil.github.io/CUDA](https://moezdil.github.io/CUDA/)**
 
 Learn how a GPU works, then write CUDA code. Short lessons in plain English, with interactive diagrams you can play with.
 
@@ -72,7 +72,7 @@ Inside a lesson you can use:
 
 ## Support this project
 
-These lessons and diagrams are free. If they helped you, you can support the work on **[GitHub Sponsors](https://github.com/sponsors/mesutoezdil)**. Every sponsorship, even a small one, keeps new lessons coming.
+These lessons and diagrams are free. If they helped you, you can support the work on **[GitHub Sponsors](https://github.com/sponsors/moezdil)**. Every sponsorship, even a small one, keeps new lessons coming.
 
 ## Sponsorship
 
